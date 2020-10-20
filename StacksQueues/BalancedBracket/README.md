@@ -1,0 +1,1 @@
+![](https://github.com/ShikharSundriyal/DataStructureAlgorithms/blob/main/StacksQueues/BalancedBracket/BalancedBracketQuestion.png)
