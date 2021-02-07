@@ -2,7 +2,25 @@ import java.io.*;
 import java.util.*;
 
 public class Main {
-    
+    public static int minJumps(int[] arr, int n,int[] dp){
+        if(n > arr.length){
+            return Integer.MAX_VALUE-1;
+        }
+        if(n == arr.length){
+            return 0;
+        }
+        if(dp[n] != -1){
+            return dp[n];
+        }
+        int min = Integer.MAX_VALUE-1;
+        for(int i =1;i<=arr[n];i++){
+            int intermediate = minJumps(arr,n+i,dp);
+            min = Math.min(min,intermediate);
+        }
+        dp[n] = min+1;
+        return min+1;
+        
+    }
     public static int getMinMovesTabulation(int[] arr){
         int n = arr.length;
 		/** each element of dp represents minimum number of steps required to move from
