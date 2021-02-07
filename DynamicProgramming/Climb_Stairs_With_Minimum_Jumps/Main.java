@@ -2,6 +2,33 @@ import java.io.*;
 import java.util.*;
 
 public class Main {
+	 public static int Greedy(int[] arr) {
+		/** O(N) **/
+        int steps = 0;
+        int i = 0;
+        while (true) {
+            if (arr[i] == 0) {
+                break;
+            }
+            int max = -1;
+            int maxidx = i;
+            for (int j = 1; j <= arr[i]; j++) {
+                if (i + j >= arr.length - 1) {
+                    steps++;
+                    return steps;
+                }
+                if (i + j + arr[i + j] > max) {
+                    max = i + j + arr[i + j];
+                    maxidx = i + j;
+                }
+            }
+            i = maxidx;
+            steps++;
+        }
+        return Integer.MAX_VALUE;
+
+    }
+	
     public static int minJumps(int[] arr, int n,int[] dp){
         if(n > arr.length){
             return Integer.MAX_VALUE-1;
