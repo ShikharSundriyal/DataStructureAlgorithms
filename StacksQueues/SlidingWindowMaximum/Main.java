@@ -2,7 +2,30 @@ import java.io.*;
 import java.util.*;
 
 public class Main{
-  
+  public static int[] DequeueApproach(int[] arr, k){
+      Deque<Integer> dq = new ArrayDeque<>();
+      for(int i=0;i<k;i++){
+          // pop all smaller elements
+          while(dq.size()>0 && arr[dq.getLast()] < arr[i]){
+              dq.removeLast();
+          }
+          dq.addLast(i);
+      }
+    System.out.println(arr[dq.peek()]); // max of 1st interval
+      for(int i = k;i<arr.length;i++){
+          // pop all smaller elements
+          while(dq.size()>0 && arr[dq.getLast()] < arr[i]){
+            dq.removeLast();
+        }
+        dq.addLast(i);
+
+        if(dq.peek() <= i-k){
+            dq.removeFirst();
+            
+        }
+        System.out.println(arr[dq.peek()]);
+      }
+  }
 
 public static void main(String[] args) throws Exception {
     BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
@@ -37,9 +60,11 @@ public static void main(String[] args) throws Exception {
     int j = 0;
     int[] ans = new int[n-k+1];
     for(int i =0;i<ans.length;i++){
+        // check if j is behind the current interval, if yes move j back to ith idx
         if(j < i){
             j = i;
         }
+        // to go next greater 
         while(ngeR[j] < i + k){
             j = ngeR[j];
         }
