@@ -1,7 +1,7 @@
 import java.io.*;
 import java.util.*;
 
-public class LongestAreaHistogram{
+public class Main{
   
 
 public static void main(String[] args) throws Exception {
@@ -12,51 +12,69 @@ public static void main(String[] args) throws Exception {
     for(int i = 0; i < n; i++){
        a[i] = Integer.parseInt(br.readLine());
     }
-    int res = getLargestArea(a);
-    System.out.println(res);
+    // get next smallest element on the right
+    int[] nseRight = getNextSmallestInRight(a);
     
-    // code
+    // get next smallest element on the left
+    int[] nseLeft = getNextSmallestInLeft(a);
+    
+    
+    int max = Integer.MIN_VALUE;
+    //O(N)
+    for(int i = 0;i< a.length;i++){
+        // width = nseRight[i] - nseLeft[i] -1)
+        //length = a[i]
+       max = Math.max(max, a[i] * (nseRight[i] - nseLeft[i] -1));
+    }
+    System.out.println(max);
+    
  }
  
-	public static int getLargestArea(int[] arr){
-		Stack<Integer> st = new Stack<>();
-		int[] leftboundary = new int[arr.length];
-		st.push(0);
-		leftboundary[0] = -1;
-		for( int i = 1;i < arr.length; i++){
-			while(st.size()>0 && arr[i] < arr[st.peek()]){
-				st.pop();
-			}
-			if(st.size() == 0){
-				leftboundary[i] = -1;
-			}else{
-				leftboundary[i] = st.peek();
-			}
-			st.push(i);
-		}
-		Stack<Integer> st1 = new Stack<>();
-		int[] rightboundary = new int[arr.length];
-		st1.push(arr.length-1);
-		rightboundary[arr.length-1] = arr.length;
-		for( int i = arr.length-2;i >= 0; i--){
-			while(st1.size()>0 && arr[i] < arr[st1.peek()]){
-				st1.pop();
-			}
-			if(st1.size() == 0){
-				rightboundary[i] = arr.length;
-			}else{
-				rightboundary[i] = st1.peek();
-			}
-			st1.push(i);
-		}
-		int max = 0;
-		for( int i = 0;i < arr.length; i++){
-			int width = rightboundary[i] - leftboundary[i] -1;
-			int area = width * arr[i];
-			if( area>max){
-				max=area;
-			}
-		}
-		return max;
-	}
+ //O(N)
+ public static int[] getNextSmallestInLeft(int[] arr){
+     Stack<Integer> st = new Stack<>();
+     st.push(0);
+     int[] res = new int[arr.length];
+     // -1 if no next smaller element on the left
+     res[0] = -1;
+     for(int i =1;i<arr.length;i++){
+         // pop all larger elements
+         while(st.size()>0 && arr[st.peek()] >= arr[i]){
+             st.pop();
+         }
+         // make your answer
+         if(st.size() == 0){
+             res[i] = -1;
+         }else{
+             res[i] = st.peek();
+         }
+         // push the element to the stack
+         st.push(i);
+     }
+     return res;
+ }
+ //O(N)
+  public static int[] getNextSmallestInRight(int[] arr){
+     Stack<Integer> st = new Stack<>();
+     st.push(arr.length-1);
+     int[] res = new int[arr.length];
+     // arr.length if there is no next smallest element on the right as we have to calculate the area so we have to use arr.length
+     res[arr.length-1] = arr.length;
+     for(int i =arr.length-2;i>=0;i--){
+         // pop all larger elements
+         while(st.size()>0 && arr[st.peek()] >= arr[i]){
+             st.pop();
+         }
+         // make your answer
+         if(st.size() == 0){
+             res[i] = arr.length;
+         }else{
+             res[i] = st.peek();
+         }
+         //push the idx to stack
+         st.push(i);
+     }
+     return res;
+ }
+ 
 }
