@@ -131,12 +131,15 @@ public class Main {
   }
 
   public static void removeLeaves(Node node) {
-    // write your code here
     
+    // work has to be done in Pre order as in PostOrder even additional nodes will be removed 
     for(int i=0;i<node.children.size();i++){
         Node childNode = node.children.get(i);
         if(childNode.children.size() == 0){
             node.children.remove(childNode);
+            // this i-- is required because once we remove the element from ArrayList, the size of the Arraylist also decreases
+            // but i is always increasing and some of the elements will be missed from processing
+            // so to accomodate the increase in i we have to decrement i so that no element is missed
             i--;
         }
     }
