@@ -150,6 +150,21 @@ public class Main {
         return node;
     }
 
+  public static Node linearize2(Node node){
+
+        if(node.children.size() == 0){
+            return node;
+        }
+
+        Node overAlltail = linearize2(node.children.get(node.children.size()-1));
+        for(int i = node.children.size()-2;i>=0;i--){
+            Node secondLastNodeTail = linearize2(node.children.get(i));
+            secondLastNodeTail.children.add(node.children.get(i+1));
+            node.children.remove(i+1);
+        }
+        return overAlltail;
+
+  }  
    //O(n2) 
   public static void linearize(Node node){
     // write your code here
