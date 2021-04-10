@@ -150,6 +150,7 @@ public class Main {
         return node;
     }
 
+   //O(n2) 
   public static void linearize(Node node){
     // write your code here
     for(Node child:node.children){
