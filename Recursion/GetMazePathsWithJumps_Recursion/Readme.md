@@ -2,7 +2,7 @@ Recursion on the way down approach
 
 Exceptation : We are at 0,0 we can take any number of jumps horizontally , vertically and diagnally . We weed to print all the possible paths from 0,0 to dr,dc.
 
-Faith : <br/>
+Faith :  (Total choices from each point will decide the number of recursive call)<br/> 
 1.) Horizontal moves : </br>
 If we are at 0,0 then we can move to 0,1 with h1 move, 0,2 with h2 move, 0,3 with h3 move and so on .<br/>
 From 0,1 to dr,dc we will get the solution thats our faith.<br/>
