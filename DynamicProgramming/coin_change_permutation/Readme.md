@@ -1,4 +1,4 @@
-Given n coins of certain denomination , find the 
+Given n coins of certain denomination , find all permutations to pay a amount using n denominations 
 
 Recursion : </br>
 Faith :</br>
