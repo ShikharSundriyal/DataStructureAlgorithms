@@ -5,6 +5,6 @@ Problem Groups :</br>
 Group 1 :(DP) </br> 
 Target Sum Subset </br>
 Coin Change Combination </br>
-Coin Change Permutation </br> [a link](https://github.com/ShikharSundriyal/DataStructureAlgorithms/tree/main/DynamicProgramming/coin_change_permutation)
+Coin Change Permutation [a link](https://github.com/ShikharSundriyal/DataStructureAlgorithms/tree/main/DynamicProgramming/coin_change_permutation)</br> 
 Knapsack </br>
 Fractional Knapsack </br>
