@@ -26,4 +26,36 @@ public class Main {
         int n = getCombiRecursive(arr, idx+1, amt);
         return y + n;
     }
+    
+    public static int getCombiTabulation2d(int[] arr, int amt){
+        
+        int[][] dp = new int[arr.length][amt+1];
+        
+        for(int i = 0 ; i < dp.length; i++){
+            for(int j = 0; j < dp[0].length; j++){
+                
+                if(j == 0){
+                    dp[i][j] = 1;
+                }else if(i == 0 && j == arr[i]){
+                    dp[i][j] = 1;
+                }else if(i == 0 && j < arr[i]){
+                    dp[i][j] = 0;
+                }else if(i == 0 && j > arr[i]){
+                    dp[i][j] = dp[i][j - arr[i]];
+                }else{
+                    int no = dp[i-1][j];
+                    int yes = j - arr[i] >= 0 ? dp[i][j - arr[i]]:0;
+                    dp[i][j] = no + yes;
+                }
+            }
+        }
+        // for(int i = 0 ; i < dp.length; i++){
+        //     for(int j = 0; j < dp[0].length; j++){
+        //         System.out.print(dp[i][j]);
+        //     }
+        //     System.out.println();
+        // }
+        return dp[arr.length-1][amt];
+        
+    }
 }
