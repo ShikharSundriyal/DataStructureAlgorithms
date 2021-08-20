@@ -18,5 +18,7 @@ Group 1 :(DP) </br>
     Tabulation : 1D dp required as from the recursive code we can see only amount is varying at each level. 
                  dp[i] indicates total number of ways to pay i amount using all avialable coins.
     
-6. Knapsack </br>
-7. Fractional Knapsack </br>
+6. Zero one Knapsack (Can be related to target sum subset)</br>
+    Recursive :
+    tabulation : 2d dp required, dp[i][j] -> using items from [0 to i] having max profit generated for capacity of 'J'.
+8. Fractional Knapsack </br>
