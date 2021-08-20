@@ -23,7 +23,7 @@ Group 1 :(DP) </br>
     tabulation : 2d dp required, dp[i][j] -> using items from [0 to i] having max profit generated for capacity of 'J'.
 
 7. Unbounded knapsack : (can be related to coin change combination or coin change permutation doesnt matter)</br>
-    Recursive : similar to coin change permutation , only capacity changing. level correponds to capacity and at each Level we have arr.length choices.
+    Recursive : similar to coin change permutation , only capacity changing. level correponds to capacity and at each Level we have arr.length choices.</br>
     Tabulation : using 1d dp , dp[i] -> max profit that can be created for capacity i. At each index we will have arr.length choices select max one.
    
 8. Fractional Knapsack </br>
