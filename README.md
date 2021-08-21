@@ -31,5 +31,10 @@ Group 1 :(DP) </br>
 
 Group 2 :(DP) </br> 
 
-Count Binary String :</br>
-Recursive : 1st call count of length n-1 strings ending with 0, 2nd call count of length n-1 strings ending with 1</br>
+1. Count Binary String :</br>
+        Recursive : 
+            1. Approach 1 : 1st call count of length n-1 strings ending with 0, 2nd call count of length n-1 strings ending with 1</br>
+            2. Approach 2 : (will return an array containing strings ending with 0 and engind with 1 wihout consecutive 0)</br>
+                    faith count of binary string of length n-1 without consecutive 0.</br>
+                    function : int[] getcbs(int n)</br>
+        Tabulation : dp requires only 4 variables , variable one-> dp[i] -> strings of length 'i' ending with 0 , another variable strings of length 'i' ending with 1 
