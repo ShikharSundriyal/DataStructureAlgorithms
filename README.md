@@ -2,7 +2,7 @@
 Basic concepts and questions of some DataStructures that are most commonly used.
 
 Problem Groups :</br>
-Group 1 :(DP) </br> 
+## Group 1 :(DP) </br> 
 1. Target Sum Subset </br>
     Recursive : at level keep the element of the array , at each level we can either select an element from the level or reject the element from the level to form the target. At next level we will decide for next element of the array . So at each level we have two choices the element will contribute to form the target or the elemnent will not contribute to form the target.</br>
     Tabulation : Here 2d DP is required as at each level the index and amount are varying.</br>
@@ -29,12 +29,12 @@ Group 1 :(DP) </br>
 8. Fractional Knapsack </br>
 
 
-Group 2 :(DP) </br> 
+## Group 2 :(DP) </br> 
 
-1. Count Binary String :</br>
-        Recursive : 
+1. Count Binary String : [Code](https://github.com/ShikharSundriyal/DataStructureAlgorithms/blob/main/DynamicProgramming/Count%20binary%20string/solution.java)</br> 
+        1. Recursive : </br>
             1. Approach 1 : 1st call count of length n-1 strings ending with 0, 2nd call count of length n-1 strings ending with 1</br>
             2. Approach 2 : (will return an array containing strings ending with 0 and engind with 1 wihout consecutive 0)</br>
                     faith count of binary string of length n-1 without consecutive 0.</br>
                     function : int[] getcbs(int n)</br>
-        Tabulation : dp requires only 4 variables , variable one-> dp[i] -> strings of length 'i' ending with 0 , another variable strings of length 'i' ending with 1 
+        2. Tabulation : dp requires only 4 variables , variable one-> dp[i] -> strings of length 'i' ending with 0 , another variable strings of length 'i' ending with 1 
