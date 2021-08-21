@@ -39,7 +39,7 @@ Problem Groups :</br>
                     function : int[] getcbs(int n)</br>
 Tabulation : dp requires only 4 variables , variable one-> dp[i] -> strings of length 'i' ending with 0 , another variable strings of length 'i' ending with 1 </br>
 
-2. Arrange Building : very similar to Count Binary String only change is here you have to multiply the answer with itself </br>
+2. Arrange Building : [Code](https://github.com/ShikharSundriyal/DataStructureAlgorithms/blob/main/DynamicProgramming/Arrange%20Buildings/solution.java) very similar to Count Binary String only change is here you have to multiply the answer with itself </br>
 Recursive : 
 </br>faith get all the possible combination for n-1 plots such that no 2 buildings are together -> returns an array a[]
 </br> from faith to expectation myans[0] = total ways ending with building a[1], myans[1] = total ways ending with space a[0]+a[1]
