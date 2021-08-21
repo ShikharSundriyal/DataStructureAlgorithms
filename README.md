@@ -27,3 +27,9 @@ Group 1 :(DP) </br>
     Tabulation : using 1d dp , dp[i] -> max profit that can be created for capacity i. At each index we will have arr.length choices select max one.
    
 8. Fractional Knapsack </br>
+
+
+Group 2 :(DP) </br> 
+
+Count Binary String :</br>
+Recursive : 1st call count of length n-1 strings ending with 0, 2nd call count of length n-1 strings ending with 1</br>
