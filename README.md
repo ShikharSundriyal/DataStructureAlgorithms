@@ -37,4 +37,9 @@ Problem Groups :</br>
              Approach 2 : (will return an array containing strings ending with 0 and engind with 1 wihout consecutive 0)</br>
                     faith count of binary string of length n-1 without consecutive 0.</br>
                     function : int[] getcbs(int n)</br>
-Tabulation : dp requires only 4 variables , variable one-> dp[i] -> strings of length 'i' ending with 0 , another variable strings of length 'i' ending with 1 
+Tabulation : dp requires only 4 variables , variable one-> dp[i] -> strings of length 'i' ending with 0 , another variable strings of length 'i' ending with 1 </br>
+
+2. Arrange Building : very similar to Count Binary String only change is here you have to multiply the answer with itself </br>
+Recursive : 
+</br>faith get all the possible combination for n-1 plots such that no 2 buildings are together -> returns an array a[]
+</br> from faith to expectation myans[0] = total ways ending with building, myans[1] = total ways ending with space 
