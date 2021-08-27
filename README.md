@@ -68,7 +68,7 @@ Tabulation :  dp[i] will store count of all possible encodings of string from 0 
          Tabulation 2:</br>
             dp[i] stores the max sum of non adjacent element ending with ith element.
                
-4. paint house
+4. paint house </br>
     Tabulation : </br>
         2d dp reequired, i  corresponds to the house number , j corresponds to the colour.</br>
         dp[i][j] stores -> min cost to paint all houses from [0 i] where ith house is painted with jth colour. </br>
