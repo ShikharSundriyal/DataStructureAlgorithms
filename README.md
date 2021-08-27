@@ -77,5 +77,10 @@ Tabulation :  dp[i] will store count of all possible encodings of string from 0 
                 get the minimum cost of idx+1 if we paint 0th index with colour 1</br>
                 get the minimum cost of idx+1 if we paint 0th index with colour 2</br>
         Faith to expectation : Minimum of all faiths. 
-6. paint house many colours
-7. paint fence
+6. paint house many colours </br>
+       Tabulation : </br>
+       2d dp required, i corresponds to house number , j corresponds to the colour </br>
+       dp[i][j] stores -> min cost to paint all houses from [0 to i ] where ith house is paisnted by jth colour</br>
+       Note : We have to keep min and second min for each row 
+       
+8. paint fence
