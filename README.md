@@ -69,5 +69,13 @@ Tabulation :  dp[i] will store count of all possible encodings of string from 0 
             dp[i] stores the max sum of non adjacent element ending with ith element.
                
 4. paint house
-5. paint house many colours
-6. paint fence
+    Tabulation : </br>
+        2d dp reequired, i  corresponds to the house number , j corresponds to the colour.</br>
+        dp[i][j] stores -> min cost to paint all houses from [0 i] where ith house is painted with jth colour. </br>
+    Recursive : </br>
+        Faith : get the minimum cost of idx+1 if we paint 0th index with colour 0</br>
+                get the minimum cost of idx+1 if we paint 0th index with colour 1</br>
+                get the minimum cost of idx+1 if we paint 0th index with colour 2</br>
+        Faith to expectation : Minimum of all faiths. 
+6. paint house many colours
+7. paint fence
