@@ -46,3 +46,11 @@ Recursive :
 
 3. Count Posssible encodings : [Code](https://github.com/ShikharSundriyal/DataStructureAlgorithms/blob/main/DynamicProgramming/Count%20Encoding/solution.java)</br>
 Tabulation :  dp[i] will store count of all possible encodings of string from 0 to i characters. base case = dp[0] and dp[1]. from i = 2 onwards we can have contribution from dp[i-1] + dp[i-2] based on the condition that the encoding formed is correct .
+
+
+
+## Group 3 :(DP) </br> 
+maximum sum non adjacent elements
+paint house
+paint house many colours
+paint fence
