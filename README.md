@@ -50,7 +50,24 @@ Tabulation :  dp[i] will store count of all possible encodings of string from 0 
 
 
 ## Group 3 :(DP) </br> 
-maximum sum non adjacent elements
-paint house
-paint house many colours
-paint fence
+1. count of subsequence of type a+b+c+
+        Recursive : </br>
+            Faith : we will get an array filled with count of subsequence of type arr[0] -> a+, arr[1] -> a+b+ and arr[2] -> a+b+c+
+            From faith to expectation : if last char == a or char == b or char == c , make adjustments to the value of appropriate arr[0] or arr[1] or arr[2]
+3. maximum sum non adjacent elements 
+       Recursive : </br>
+            Faith : call1 -> we have the maximum sum of non adjacent elements for idx+1 if we include </br>
+                    call2 -> we have the maximum sum of non adjacent elements for idx+1 if we exclude current idx </br>
+            Faith to expectation : return the max from call1 and call2. </br>
+        Tabulation 1: </br> 
+            dp[i] -> stores the maximum sum if we include the element at i and the maximum sum that we have if we dont include the ith element.</br>
+            only 4 variables required , oldexclude, oldinclude , newinclude and newexclude
+            at each ith position if we include the ith element newinlude = oldexclude + arr[i] </br>
+            at each ith position if we exclude the ith element newexclude =  + math.max(oldexclude, oldinclude) </br>
+            after that reset the oldexlude = newexclude and oldinclude = newinclude</br>
+         Tabulation 2:</br>
+            dp[i] stores the max sum of non adjacent element ending with ith element.
+               
+4. paint house
+5. paint house many colours
+6. paint fence
