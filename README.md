@@ -94,6 +94,23 @@ call2 -> place one tile vertically (solve for 2,n-1)</br>
 Tabulation : </br>
 dp[i] -> stores no of ways to floor the tile of breadth i.
 dp[i] = dp[i-1]+dp[i-2]
-2. floor tiling
-3. friends pairing
-4. partition into subsets
+2. Tiling With M * 1 Tiles </br>
+Recursive : from source to destination</br>
+call 1 -> place one tile horizontally solve for (m,n-m) </br>
+call2 -> palce one tile vertically , solve for (m,n-1)</br>
+here also only second parameter is changing in both calls so 1d dp will suffice.</br>
+Tabulation : dp[i]-> no of ways to tile up m * i area</br>
+dp[i] = dp[i-1]+dp[i-m]
+4. friends pairing : ([Code](https://github.com/ShikharSundriyal/DataStructureAlgorithms/blob/main/DynamicProgramming/Friends_Pairing/Main.java))</br>
+Recursion : </br>
+call1 : 1st person decides to go as a sigle then find the total ways for n-1 persons </br>
+call2 : 1st person decides to go as a pair, a person can pair up with remaining n-1 persons but the count of total ways if a pairs with b or a pairs with c will be same. so 2nd call (n-1) * total no. of ways for n-2 </br>
+Tabulation :</br>
+dp[i] stores -> total number of ways to pair n friends</br>
+dp[i] = dp[i-1](if going as a single) + (i-1) dp[i-2] (if we ith person decides to go as a pair, then remaining people will be i-2 but ith person can pair i-1 ways so we have to multiply with i-1)
+6. partition into subsets : ([Code](https://github.com/ShikharSundriyal/DataStructureAlgorithms/blob/main/DynamicProgramming/Partition%20Into%20Subsets/solution.java)) </br>
+Recursion : </br>
+f(n,k) -> count of ways to partition n elements into k subsets</br>
+f(n,k) = f(n-1,k-1) + k * f(n-1,k)
+f(n-1,k-1) -> 1st element chooses that it will come alone into a subset so the remaining problem is arrange n-1 element into k-1 subsets
+k * f(n-1,k). -> 1st element chooses that get all the count of subsets by arranging n-1 elements into k subsets so 1 st element can come into each way in k ways.
