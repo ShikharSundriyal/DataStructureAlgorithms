@@ -83,4 +83,17 @@ Tabulation :  dp[i] will store count of all possible encodings of string from 0 
        dp[i][j] stores -> min cost to paint all houses from [0 to i ] where ith house is paisnted by jth colour</br>
        Note : We have to keep min and second min for each row 
        
-8. paint fence
+7. paint fence</br>
+
+
+## Group 4 :(DP) </br> 
+1. Tiling With 2 * 1 Tiles :</br>
+Recursive : from source(floor not tiled at all) to destination(floor completely tiled)</br>
+call 1 -> place one tile horizontally (solve for 2,n-2)</br>
+call2 -> place one tile vertically (solve for 2,n-1)</br>
+Tabulation : </br>
+dp[i] -> stores no of ways to floor the tile of breadth i.
+dp[i] = dp[i-1]+dp[i-2]
+2. floor tiling
+3. friends pairing
+4. partition into subsets
