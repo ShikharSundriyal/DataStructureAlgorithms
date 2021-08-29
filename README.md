@@ -114,3 +114,14 @@ f(n,k) -> count of ways to partition n elements into k subsets</br>
 f(n,k) = f(n-1,k-1) + k * f(n-1,k)
 f(n-1,k-1) -> 1st element chooses that it will come alone into a subset so the remaining problem is arrange n-1 element into k-1 subsets
 k * f(n-1,k). -> 1st element chooses that get all the count of subsets by arranging n-1 elements into k subsets so 1 st element can come into each way in k ways.
+
+## Group 5 :(DP) </br> 
+
+1. Buy And Sell Stocks - One Transaction Allowed : </br>
+At each point consider that you have to sell the stock but before selling you have to buy but to make the profit most you have to buy at the lowest price . </br>
+maintain a minimum so far and overall profit </br>
+then update the value of min.</br>
+calculate todays profit by subtracting current price - minimum so far</br>
+
+2. Buy And Sell Stocks - Infinite Transactions Allowed </br>
+Calculate profit if there is a peak ahead , if there is a dip dont do anything as dip means the next day has less value so we should not buy at that day and sell at next day.
