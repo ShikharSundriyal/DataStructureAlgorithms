@@ -117,11 +117,11 @@ k * f(n-1,k). -> 1st element chooses that get all the count of subsets by arrang
 
 ## Group 5 :(DP) </br> 
 
-1. Buy And Sell Stocks - One Transaction Allowed : </br>
+1. Buy And Sell Stocks - One Transaction Allowed : (Not a dp problem , simple array based) ([Code](https://github.com/ShikharSundriyal/DataStructureAlgorithms/blob/main/DynamicProgramming/Buy%20And%20Sell%20Stocks%20-%20One%20Transaction%20Allowed/solution.java))</br>
 At each point consider that you have to sell the stock but before selling you have to buy but to make the profit most you have to buy at the lowest price . </br>
 maintain a minimum so far and overall profit </br>
 then update the value of min.</br>
 calculate todays profit by subtracting current price - minimum so far</br>
 
-2. Buy And Sell Stocks - Infinite Transactions Allowed </br>
+2. Buy And Sell Stocks - Infinite Transactions Allowed (Not a dp problem , simple array based) ([Code](https://github.com/ShikharSundriyal/DataStructureAlgorithms/blob/main/DynamicProgramming/Buy%20And%20Sell%20Stocks%20-%20Infinite%20Transactions%20Allowed/solution.java))</br>
 Calculate profit if there is a peak ahead , if there is a dip dont do anything as dip means the next day has less value so we should not buy at that day and sell at next day.
