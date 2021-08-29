@@ -125,3 +125,9 @@ calculate todays profit by subtracting current price - minimum so far</br>
 
 2. Buy And Sell Stocks - Infinite Transactions Allowed (Not a dp problem , simple array based) ([Code](https://github.com/ShikharSundriyal/DataStructureAlgorithms/blob/main/DynamicProgramming/Buy%20And%20Sell%20Stocks%20-%20Infinite%20Transactions%20Allowed/solution.java))</br>
 Calculate profit if there is a peak ahead , if there is a dip dont do anything as dip means the next day has less value so we should not buy at that day and sell at next day.
+
+3. Buy And Sell Stocks With Transaction Fee - Infinite Transactions Allowed </br>
+Recursion : same as inclusion exclusion problems , at each state we need to get the buying state and selling state
+Tabulation : keep two states </br>
+maximum profit if at buy state (if the last transaction is a buy) -> Max(previous buy or previous sell - todays buy value)</br>
+maximum profit if we are at sell state (the last transaction should be sell) -> Max (previous sell and sell today on previous buy + transaction fees) </br>
