@@ -131,3 +131,9 @@ Recursion : same as inclusion exclusion problems , at each state we need to get 
 Tabulation : keep two states </br>
 maximum profit if at buy state (if the last transaction is a buy) -> Max(previous buy or previous sell - todays buy value)</br>
 maximum profit if we are at sell state (the last transaction should be sell) -> Max (previous sell and sell today on previous buy + transaction fees) </br>
+
+4. Buy And Sell Stocks With Cooldown - Infinite Transaction Allowed ([Code](https://github.com/ShikharSundriyal/DataStructureAlgorithms/blob/main/DynamicProgramming/Buy%20And%20Sell%20Stocks%20With%20Cooldown%20-%20Infinite%20Transaction%20Allowed/solution.java))</br>
+Tabulation : keep 3 states </br>
+maximum profit if at buy state (buy can be done after cooldown) -> Max(oldbuyingstate , oldcooldown - todaysbuyvalue)</br>
+maximum profit if at sell state -> Max( previousbuy + todayssellprice, previoussellstate)</br>
+maximum profit if at cooldown state -> Max( oldcooldown, previoussell)</br>
