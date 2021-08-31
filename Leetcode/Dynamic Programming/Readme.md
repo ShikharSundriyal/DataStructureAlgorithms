@@ -1,0 +1,1 @@
+1. 494 Target Sum (https://leetcode.com/problems/target-sum/) </br> Solution ([Code](https://github.com/ShikharSundriyal/DataStructureAlgorithms/blob/main/Leetcode/Dynamic%20Programming/494.%20Target%20Sum/solution.java))
