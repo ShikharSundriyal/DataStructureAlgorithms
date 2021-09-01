@@ -1,1 +1,2 @@
 1. 494 Target Sum (https://leetcode.com/problems/target-sum/) </br> Solution ([Code](https://github.com/ShikharSundriyal/DataStructureAlgorithms/blob/main/Leetcode/Dynamic%20Programming/494.%20Target%20Sum/solution.java))
+2. 416 Partition Equal Subset Sum (variation of target sum subset, just divide the total sum of elements / 2 then same as target sum subset) </br> Solution ([Code](https://github.com/ShikharSundriyal/DataStructureAlgorithms/blob/main/Leetcode/Dynamic%20Programming/416.%20Partition%20Equal%20Subset%20Sum/solution.java))
