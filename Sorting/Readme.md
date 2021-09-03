@@ -32,6 +32,6 @@ we have two areas sorted area and unsorted array, at any given moment we have to
 iterations loop from itr = 1 to itr <= arr.length-1. (iteration starts from 1 as an array of length 1 is already sorted)</br>
 inner loop for j = itr to j >=1 j-- , if arr[j-1] > arr[j] swap else break</br>
 
-6. Sort 01 : (In linear time, without using extra space, in sinle parse) </br>
+6. Sort 01 : (In linear time, without using extra space, in sinle parse) ([Code](https://github.com/ShikharSundriyal/DataStructureAlgorithms/blob/main/Sorting/Sort%2001/solution.java))</br>
 If two parse, in first parse count the number of zeroes , now traverse again and fill the starting total_number_of_zeroes with 0 and remaining elements with 1.</br>
 define regions , 0's region : 0 to j-1 , 1's region j to i-1 , unknown region -> i to end</br>
