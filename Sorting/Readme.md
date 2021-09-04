@@ -35,3 +35,26 @@ inner loop for j = itr to j >=1 j-- , if arr[j-1] > arr[j] swap else break</br>
 6. Sort 01 : (In linear time, without using extra space, in sinle parse) ([Code](https://github.com/ShikharSundriyal/DataStructureAlgorithms/blob/main/Sorting/Sort%2001/solution.java))</br>
 If two parse, in first parse count the number of zeroes , now traverse again and fill the starting total_number_of_zeroes with 0 and remaining elements with 1.</br>
 define regions , 0's region : 0 to j-1 , 1's region j to i-1 , unknown region -> i to end</br>
+
+7. Sort 012 : </br>
+Approach1 : define regions , 0's region 0 ti j-1, 1's region j to i-1 , 2's region i to k-1, k to end unknown</br>
+In approach 1 there is a edge case here if we have only 2 regions and one region is missing. Solution to handle edge case -> before swapping check if i,j or j,k are different</br>
+Approach2 : define regions , 0's region 0 ti j-1, 1's region j to i-1 , 2's region k+1 to end, i to k unknown</br>
+i=0,j=0,k=arr.length-1</br>
+
+8. Partition an array : </br>
+Similar to sort 01 
+define region -> all elements less than or equal to pivot place in 0 to j-1, if element greater than pivot then j to i-1, i to end unknown
+
+9. Quick sort (complexity varies from nlogn to n2)</br>
+Based on partition an array</br>
+treat last element as pivot and call partition an array function which will place the pivot index at correct position, make sure the partition an array returns the index of the pivot element</br> 
+now call quicksort on lo to pi-1 and quicksort on pi+1 to hi </br>
+base case will be when lo > hi return (meaning no elements remaining in the array )</br>
+
+10. Quick select (Kth smallest , based on quick sort ) :</br>
+partition an array returns the pivot index and also places the correct element at that pivot index .</br>
+we have to find when k == pi i.e. element at pi index is kth smallest element.</br>
+3 cases when pi == k then return arr[pi]</br>
+if(pi < k) i.e. we have to find 4th smallest and pi is 2 , then we have to call quick select on right hand side i.e quickselect(lo = pi+1,hi = hi,k = k)</br>
+else (pi > k) i.e we have to find 4 th smallest and pi is 5 , then we have to call qucick select on left hand side i.e. quickselect(lo = lo, hi = pi-1, k=k)</br>
