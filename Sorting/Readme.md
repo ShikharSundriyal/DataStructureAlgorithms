@@ -58,3 +58,14 @@ we have to find when k == pi i.e. element at pi index is kth smallest element.</
 3 cases when pi == k then return arr[pi]</br>
 if(pi < k) i.e. we have to find 4th smallest and pi is 2 , then we have to call quick select on right hand side i.e quickselect(lo = pi+1,hi = hi,k = k)</br>
 else (pi > k) i.e we have to find 4 th smallest and pi is 5 , then we have to call qucick select on left hand side i.e. quickselect(lo = lo, hi = pi-1, k=k)</br>
+
+11. Count Sort :(Iterative) ([Code](https://github.com/ShikharSundriyal/DataStructureAlgorithms/blob/main/Sorting/count-sort/solution.java))</br>
+It is used when number of elements are high and the values are in a fixed range. example n = 10,000 and 0 <= arr[i] <= 350</br>
+Find min and max from the array</br>
+create a frequency array of size (max-min+1) { farr[arr[i] - min] +=1; }</br>
+craete a prefix sum array, size same as frequency array (this step is needed to achieve stable sorting, this array contains the last position at which the element will appear) { arr[i] = arr[i-1]+arr[i] }</br>
+for filling the answer array, travel from right to left in the original array</br>
+
+
+12. Radix Sort : (based on count sort variation, on each digit we apply modified count sort)</br>
+It is used where there are large integer values like telephone numbers
