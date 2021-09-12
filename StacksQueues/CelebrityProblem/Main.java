@@ -53,5 +53,30 @@ public class Main {
         System.out.println(st.peek());
      
     }
+     public static void findCelebrity(int[][] arr) {
+        // find possible celebrity  
+        int celebrity = 0;
+        for(int i = 1;i<arr.length;i++){
+            if(arr[i][celebrity] == 1){
+                celebrity = celebrity;
+            }else{
+                celebrity = i;
+            }
+        } 
+        
+       for(int row = 0; row<arr.length;row++){
+            if(celebrity!= row && arr[row][celebrity] == 0) {
+                System.out.println("none");
+                return;
+            }
+       }
+       for(int col = 0; col<arr.length;col++){
+            if(celebrity!= col && arr[celebrity][col] == 1) {
+                System.out.println("none");
+                return;
+            }
+       }
+       System.out.println(celebrity);
+     }
 
 }
