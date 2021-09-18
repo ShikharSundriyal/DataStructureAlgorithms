@@ -22,4 +22,18 @@ class Solution {
          }
         return k;
     }
+    public int removeDuplicates(int[] arr) {
+          // divide regions
+         // 0 to idx unique numbers
+        // i to arr.length unknows
+         int idx = 0;
+         for(int i = 1;i<arr.length;i++){
+            if(arr[i] != arr[i-1]){
+                // unique element
+                idx++;
+                arr[idx] = arr[i];
+            }            
+         }
+        return idx+1;
+    }
 }
