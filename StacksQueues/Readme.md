@@ -9,3 +9,4 @@ example ( a+b )* b , example 2 a*(b+c) (relate the preorder, postorder of recurs
 3. When working with infix expression we need two stack , operator and operand stack.
 4. order of operator in Prefix exp is opposite order in which they have to be solved. +a-bc (+ will be solved 2nd), first b-c is solved
 5. order of operator in Postfix exp is same order in which they have to be solved. 
+6. Whenever you have to traverse a recursion tree level by level then we should think of using Queue. (count binary string problem can be solved using queue)
