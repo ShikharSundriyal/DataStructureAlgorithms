@@ -18,7 +18,7 @@ Approach 3 : Constant Time without Additional Space ()</br>
 Maintain a min variable , 
 First push first element to the data stack and update min with the first element
 On second element if the element > min then simply push the element to the data stack
-if the element < min then , encode the value with = val+ (val-min) and min with element.(here you will push a smaller element than the minimum element which indicates it is a fake value)
+if the element < min then , encode the value with **val + (val-min)** and min with element.(here you will push a smaller element than the minimum element which indicates it is a fake value)
 Now while popping the element , 
 if data.peek() < min this means it is a fake value, so return the min that is the original element, find old min to udpate the minimum variable.
 
@@ -26,5 +26,4 @@ if data.peek() < min this means it is a fake value, so return the min that is th
 Approach 1 (incorrect): assume two stacks one on top of another, example 
 push1(1),push1(2),push1(3),push1(4)
 push2(1),push2(2),push2(3),push2(4) but if we perform a pop on stack1 then releaased space can only be used by 1st stack and 2nd stack cannot use that space.
-
-Approach 2 : Assume stack 1 to grow from below and assume stack 2 to grom from top of the array so the released memory either bt stack1 or stack2 can be used by any of the stacks.
+Approach 2: Assume stack 1 to grow from below and assume stack 2 to grom from top of the array so the released memory either bt stack1 or stack2 can be used by any of the stacks.
