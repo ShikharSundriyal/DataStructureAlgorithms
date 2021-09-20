@@ -10,4 +10,12 @@
          - after for loop even if we havent returned that means if we have a array like 999.. , so answer has to be 1000.. i.e. a new array of length arr.length+1
     - Approach 2 : More traditional approach : 
 	    - maintain a carry, start from end of array carry = arr[i]+k+carry / 10, arr[i] = arr[i]+k+carry %10,i--,k=0.
-       - if carry == 0 return arr else same case as 1.2
+       	    - if carry == 0 return arr else same case as 1.2</br>
+ 
+ 4. 283 Move Zeroes Time 0(n) Space 0(1)
+	- Approach 1 : Similar to partition an array, divide the array into regions
+		- from k to arr.length unsolved region
+		- from 0 to i-1 non zeroes
+		- from i to k-1 zeroes
+		- If we encounter an nonzero grow o to i-1 region, swap arr[k] and arr[i] and i++ and k++
+		- If we encounter an 0 grow i to k-1 region, k++	 
