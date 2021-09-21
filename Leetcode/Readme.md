@@ -18,4 +18,9 @@
 		- from 0 to i-1 non zeroes
 		- from i to k-1 zeroes
 		- If we encounter an nonzero grow o to i-1 region, swap arr[k] and arr[i] and i++ and k++
-		- If we encounter an 0 grow i to k-1 region, k++	 
+		- If we encounter an 0 grow i to k-1 region, k++
+			 
+5. 485 Max Consecutive Ones : Time 0(n), Space 0(1)
+	- Approach 1 : keep two pointer i = arr.length-1 and j=arr.length-1, 
+		- if arr[i] == 1 move  i = i -1
+		- if arr[i] == 0 calculate the total number of ones, those will be = j-(i+1) + 1 store them in a variable and compare it with other occurences, then decrease i i.e. i-- and j = i
