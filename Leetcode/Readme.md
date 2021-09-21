@@ -38,3 +38,15 @@
 		- Maintain a hashmap for the smaller array, element along with its count 
 		- iterate over other array and check if the element is present in the hashmap and count>0 
 			- If yes , push the element to the output and decrease count in the hashmap for the element	 
+
+7. 1 Two Sum : 
+	- Approach 1 : Brute Force (Time 0(n2) , Space 0(1))
+		- choose each element one by one and iterate over i+1 to arr.length and check if arr[i] + arr[j] == target
+	- Approach 2 ( Complement ): Time( 0(n) , Space 0(n)) -- 2 parse approach
+		- create a hashmap and put each element to the hashmap along with its index, {nums[idx]:idx}
+		- Now iterate over the array and calculate complement i.e. tar - arr[i] 
+			- check if complement is present in the set and also the value of complement should not be equal to i itself Sample test case (3,2,4) target 6 
+	- Approach 3 (Complement ) : Time( 0(n) , Space 0(n)) -- 1 parse approach
+		- iterate over each element and calculate complement
+			-  if complement present in hashset we have the answer as (hm,get(complement) , i)
+			-  if complement is not present than add the current nums[i] and i to the hashmap. 
