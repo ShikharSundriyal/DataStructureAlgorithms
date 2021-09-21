@@ -24,3 +24,17 @@
 	- Approach 1 : keep two pointer i = arr.length-1 and j=arr.length-1, 
 		- if arr[i] == 1 move  i = i -1
 		- if arr[i] == 0 calculate the total number of ones, those will be = j-(i+1) + 1 store them in a variable and compare it with other occurences, then decrease i i.e. i-- and j = i
+
+6. 349 Intersection of Two Arrays : (The result shot have unique values)
+	- Approach 1 : Brute force 0(n * m)
+		- Find the smaller array, iterate over all elements of smaller array one by one and check if they are present in the second array if yes push to output array.
+	- Approach 2 : Two pointer approach (Time complexity 0( nlogn + mlogm) , Space 0(1) )
+		- Sort both the arrays
+		- place i = arr1.length-1, j = arr2.length-1
+			- if arr1[i] == arr2[j] then push element to output and i--,j--
+			- else if arr1[i] > arr2[j] then i--
+			- else if arr2[j]>arr1[i] j--
+	- Approach 3 : Using a Hashmap (Time Complexity : 0(n+m) , Space Complexity : 0(min(n,m)))
+		- Maintain a hashmap for the smaller array, element along with its count 
+		- iterate over other array and check if the element is present in the hashmap and count>0 
+			- If yes , push the element to the output and decrease count in the hashmap for the element	 
