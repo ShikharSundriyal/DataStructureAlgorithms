@@ -50,3 +50,12 @@
 		- iterate over each element and calculate complement
 			-  if complement present in hashset we have the answer as (hm,get(complement) , i)
 			-  if complement is not present than add the current nums[i] and i to the hashmap. 
+
+8.  Valid Sudoku : Time 0(n * m) space 0(1)
+	- Approach 1 Using Hashset :
+		- Iterate over each cell, and determine the boxnumber, row number and column number 
+			- box number = (i/3)* 3 + j/3 , row = i , col = j
+			- form  encoded value corresponding to box =  nums[i][j]+ "box-"+ box_number 
+			- form  encoded value corresponding to row =  nums[i][j]+ "row-" + row 
+			- form  encoded value corresponding to col =  nums[i][j]+ "col-" + col 
+			- Check if any of these values are already present in hashset if yes return false else push all 3 values to hashset
