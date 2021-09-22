@@ -59,3 +59,18 @@
 			- form  encoded value corresponding to row =  nums[i][j]+ "row-" + row 
 			- form  encoded value corresponding to col =  nums[i][j]+ "col-" + col 
 			- Check if any of these values are already present in hashset if yes return false else push all 3 values to hashset
+
+9. 242 Valid Anagram :
+	- Approach 1 : Time 0(nlogn) Space 0(n) {taken by toCharArray}
+		-  check the length of both strings, should be equal else return false
+		-  convert both string to char array (str.toCharArray())
+		-  sort both the char arrays
+		-  now check if both the arrays are identical 
+	- Approach 2 : Using a HashMap Time 0(n) , Space 0(1) as at anytime max elements in hashmap will be 26
+		-  check the length of both strings, should be equal else return false
+		-  iterate over both the strings in same for loop and add the count of each element to the respective hashmap
+		-  now iterate over 2nd string and check if first hashmap contains the character from 2nd string if yes match should also match
+	- Approach 3 : Using a HashSet Time 0(n) , Space 0(1) as at anytime max elements in hashset/array will be 26
+		- create two int array of length 26
+		- fill the two array with count of each charaacter in a string to a char array arr[ch-'a'] = arr[ch-'a']++
+		- now check if both the arrays are equal using Arrays.equals or normal iterate and check. 
