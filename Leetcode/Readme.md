@@ -88,3 +88,14 @@
 			- this means in either case we should consider only half the length of the string 
 				- replace the first non 'a' character with 'a' and return new string
 			- if all the characters were a in the half string we should change the last character to 'b' and return	  
+
+11. 125 Valid Palindrome : 
+	- Approach 1 : Time 0(n), Space 0(n)
+		- create a string builder and add only alpha numeric chars to string builder and make them lowercase while inserting
+		- now check if sb.reverse().toString().equals(sb.toString())
+	- Approach 2 : Two pointer Time 0(n), Space 0(1)
+		- keep two pointer left at 0 right at s.length-1
+		- while l < r 
+			- if s.charAt(left) and s.charAt(right) are both alphanumeric compare if both are equal , if yes left++, right-- else return false
+			- else if s.charAt(left) is not alphanumeric then left++
+			- else if  s.charAt(right) is not alphanumeric then right--
