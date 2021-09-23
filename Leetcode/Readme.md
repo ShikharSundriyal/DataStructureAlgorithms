@@ -74,3 +74,17 @@
 		- create two int array of length 26
 		- fill the two array with count of each charaacter in a string to a char array arr[ch-'a'] = arr[ch-'a']++
 		- now check if both the arrays are equal using Arrays.equals or normal iterate and check. 
+
+10. 1328 Break a Palindrome :
+	- Approach 1 : Time 0(n) , space 0(N)
+		- Create a hashmap and store character and there count , convert the string to a charArray
+		- check if frequency of a == str.length  which means all are 'a', so change the last character to b
+		- check if frequency of 'a' == str.length-1 which means all are a except middle character , so change the last character to b as if we try to change first non 'a' character to a it will result into 'aaaaa' type string which will be palindronic.
+		- else replace first non 'a' character to 'a'
+	- Approach 2 : Time 0(n) , space 0(N) (Greedy)
+		-  As the given string is plaindronic we have two cases if length of string is even or odd
+			- if even then we will have excatly same two halves of string where half 2 will be reverse of half 1
+			- if odd then we will have two halves having above property along with additional character which will not play and role as even if we change it to any character it will still give a palindrone.
+			- this means in either case we should consider only half the length of the string 
+				- replace the first non 'a' character with 'a' and return new string
+			- if all the characters were a in the half string we should change the last character to 'b' and return	  
