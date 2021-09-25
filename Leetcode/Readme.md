@@ -108,3 +108,4 @@
 	- Approach 2 : Time 0(1) , space 0(1)
 		- copy the value of next node to the node that needs to be deleted
 		- now , point the current node that is the node to be deleted to , node.next.next  
+		- (node.val = node.next.val; node.next = node.next.next;)
