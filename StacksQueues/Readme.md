@@ -30,18 +30,18 @@ Approach 2: Assume stack 1 to grow from below and assume stack 2 to grom from to
 
 9. Merge Overlapping Interval : (Not a exactly a stack question but stack can also be used)
    - Approach 1 : Time 0(nLogn), space 0(N)
-    - Create a class interval which has starting and ending time as data members.
-    - Not create a array of Interval objects
-    - sort the array using Arrays.sort based on the starting time (implement Comparable and implement function compareTo)
-    - Once the array is sorted 
-      - Iterate over the array and check if arr[i].ending_time >= arr[i+1].starting_time if yes then merge and put the values in arr[i+1]
-      - if not mergeable then print the current starting time and ending time
-      - in the end do not forget to print the last index from the array as our initial for loop would have iterated only till second last element
+      - Create a class interval which has starting and ending time as data members.
+      - Not create a array of Interval objects
+      - sort the array using Arrays.sort based on the starting time (implement Comparable and implement function compareTo)
+      - Once the array is sorted 
+         - Iterate over the array and check if arr[i].ending_time >= arr[i+1].starting_time if yes then merge and put the values in arr[i+1]
+         - if not mergeable then print the current starting time and ending time
+         - in the end do not forget to print the last index from the array as our initial for loop would have iterated only till second last element
    - Approach 2 : Time 0(nLogn), space 0(N)
-    - Create a class interval which has starting and ending time as data members.
-    - Not create a array of Interval objects
-    - sort the array using Arrays.sort based on the starting time (implement Comparable and implement function compareTo)
-    - Once the array is sorted 
-      - create a stack and push the forst element to stack and now check if next element is mergeable or not
-      - if mergeable, pop the element from stack , merge two intervals and push the resultant interval
-      - at the end print the values in the stack 
+      - Create a class interval which has starting and ending time as data members.
+      - Not create a array of Interval objects
+      - sort the array using Arrays.sort based on the starting time (implement Comparable and implement function compareTo)
+      - Once the array is sorted 
+         - create a stack and push the forst element to stack and now check if next element is mergeable or not
+         - if mergeable, pop the element from stack , merge two intervals and push the resultant interval
+         - at the end print the values in the stack 
