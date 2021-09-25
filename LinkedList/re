@@ -1,0 +1,4 @@
+# LinkedList : 
+Used where continuous memory is not available
+Head pointer is used to store the address of first node
+A node contains a data field and pointer to next node
