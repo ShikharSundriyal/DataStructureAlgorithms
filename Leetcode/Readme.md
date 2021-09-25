@@ -99,3 +99,12 @@
 			- if s.charAt(left) and s.charAt(right) are both alphanumeric compare if both are equal , if yes left++, right-- else return false
 			- else if s.charAt(left) is not alphanumeric then left++
 			- else if  s.charAt(right) is not alphanumeric then right--
+
+
+## Linked List 
+12. 237 Delete Node in a Linked List :
+	- Approach : Time 0(N), Space 0(1)
+		- As we are given only the node that needs to be deleted, we shift the values of all the nodes after the node to be deleted to one left and on the second last node we make it point it to null to reduce the overall size of the linked list.
+	- Approach 2 : Time 0(1) , space 0(1)
+		- copy the value of next node to the node that needs to be deleted
+		- now , point the current node that is the node to be deleted to , node.next.next  
