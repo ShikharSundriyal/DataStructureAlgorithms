@@ -30,3 +30,13 @@
   - Approach 2 space 0(1) time 0(n^2)
     - left from head swap with right (right we will get from getNodeAt(x))
     - while(l<=r)
+
+5. Odd Even Linked List :
+  - Approacch 1 : Space 0(1) , Time 0(N)
+    - Create two linked list, even and odd
+    - one by one remove each element from the main linked list and add that element as a new node to either even or odd (as one node is removed from Main Linked list and one node is being created , so overall space is constant at any time and does not cross N)
+    - Once the main Linked list is empty , manage the head , tail and size of the final linked list by merging the odd and even linked list
+  - Approach 2 : Space 0(1) , Time 0(N) (Here we are not using new node, and same node is being used)
+    - Here traverse over main linked list, make the next of current node as null and based on data add the node (addLast) to either even or odd list
+    - then join odd and even linked list
+    - Adjust head and tail 
