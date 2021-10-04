@@ -109,3 +109,17 @@
 		- copy the value of next node to the node that needs to be deleted
 		- now , point the current node that is the node to be deleted to , node.next.next  
 		- (node.val = node.next.val; node.next = node.next.next;)
+
+13. Remove Nth Node from end Linked List :
+	- Approach 1 : Time 0(N) , Space 0(1) (2 traversal)
+		- traverse over the linked list and find the size of linked list
+		-  Now to remove kth node from the end , remove size -k +1 th node from beginning.  
+	- Approach 2 : Time 0(N) , Space 0(1) (single traversal)
+		- take two pointer , A and B , keep A at head and keep B k positions from head
+		- now move both A and B each by one position till the time B pointer reaches the last element, the A pointer will be kth position from the end
+
+14. Reverse a Linked list :
+	- Approach 1 : Using recursion changing data part  Time 0(N) Space 0(N) { Space is of the java call stack}
+		- move to the end of the linked list by making the calls head.next till tead reaches to null
+		- keep a ListNode data member( front ) which points to the head, keep another data member left 
+		- in each iteration swap the data and increase the frontand left value, recursion will handle moving back one pointer from end and also the right value . where right and left value help us to determine after which position we need to stop swapping as we have to swapp only will half.	 
