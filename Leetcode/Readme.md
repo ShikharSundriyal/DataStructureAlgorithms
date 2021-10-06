@@ -122,7 +122,13 @@
 	- Approach 1 : Using recursion changing data part  Time 0(N) Space 0(N) { Space is of the java call stack}
 		- move to the end of the linked list by making the calls head.next till tead reaches to null
 		- keep a ListNode data member( front ) which points to the head, keep another data member left 
-		- in each iteration swap the data and increase the frontand left value, recursion will handle moving back one pointer from end and also the right value . where right and left value help us to determine after which position we need to stop swapping as we have to swapp only will half.	 
+		- in each iteration swap the data and increase the frontand left value, recursion will handle moving back one pointer from end and also the right value . where right and left value help us to determine after which position we need to stop swapping as we have to swapp only first half.	 
+	- Approach 2 : Time 0(N) , Space 0(1)
+		- Keep two pointer , current and previous. Keep previous at null, current at head
+		- while current != null 
+			- save the link temp = current.next
+			- place current.next = prev
+			- move both current and previous pointers,  prev = current , current = temp.  
 
 
 15. 442 Find All Duplicates in an Array :
