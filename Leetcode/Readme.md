@@ -123,3 +123,15 @@
 		- move to the end of the linked list by making the calls head.next till tead reaches to null
 		- keep a ListNode data member( front ) which points to the head, keep another data member left 
 		- in each iteration swap the data and increase the frontand left value, recursion will handle moving back one pointer from end and also the right value . where right and left value help us to determine after which position we need to stop swapping as we have to swapp only will half.	 
+
+
+15. 442 Find All Duplicates in an Array :
+	- Approach 1 (Brute Force) : 0(n2) Space 0(1)
+		- Take 2 pointer i and j , place i at 0 and j at 1 and travel from j to arr.length and see if same element as arr[i] is present
+		- now increase i and j = i+1	
+	- Approach 2 : 0(n) , Space 0(N)
+		- Maintain a Hashset insert the element to hashset , before checking if the element is present in Hashset or not
+	- Approach 3 : Time 0(n), Space 0(1)
+		- Travel over the array
+		- at each element do the following, nums[nums[i]-1] * = -1 (means making the element at idx -ve thus letting )
+		- once you get the same element and we check if nums[abs[ nums[ i ]] - 1] is negative means that this element was already presnt in array and is duplicate  	 
