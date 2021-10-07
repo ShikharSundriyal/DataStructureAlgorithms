@@ -141,3 +141,15 @@
 		- Travel over the array
 		- at each element do the following, nums[nums[i]-1] * = -1 (means making the element at idx -ve thus letting )
 		- once you get the same element and we check if nums[abs[ nums[ i ]] - 1] is negative means that this element was already presnt in array and is duplicate  	 
+
+
+
+
+## String
+16. 8 String to Integer (atoi) :
+	- Approach 1 : time 0(n), space 0(n)
+	- convert string to char array  
+	- handle whitespaces case, iterate over the char array while there is " " (make sure to check that the pointer is within the range of array lemgth)
+	- check for + or - sign ,
+	- iterate while we have digits, while(p<ch.length && (ch[p] >='0' && ch[p]<='9')) and calculate the res i.e res = res* 10 + ch[p]
+	- while calculating make sure that the res is within the integer range
