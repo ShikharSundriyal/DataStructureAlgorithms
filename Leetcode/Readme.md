@@ -130,7 +130,7 @@
 			- place current.next = prev
 			- move both current and previous pointers,  prev = current , current = temp.  
 
-
+## Arrays
 15. 442 Find All Duplicates in an Array :
 	- Approach 1 (Brute Force) : 0(n2) Space 0(1)
 		- Take 2 pointer i and j , place i at 0 and j at 1 and travel from j to arr.length and see if same element as arr[i] is present
@@ -152,22 +152,31 @@
 		- keep two pointer at the end of the arrays at n-1 and m-1 position and ith pointer at the n+mth position
 		- travel and put highest element at the ith position , decrease appropriate pointer by 1 and i by 1
 
+17. 278 First Bad Version :
+	- Approach 1 : Time 0(N), Space 0(1)
+		- iterate over the array from 1 to N and check if its a bad version return that i
+	- Approach 2 : Time 0(logN) , Space 0(1)
+		- keep left at 1, right at n
+		- while(l<r) -> mid = l + (r-l)/2  
+			- if isBad(mid) -> right = mid
+			- else l = mid+1
+		- return l  
 
 ## String
-17. 8 String to Integer (atoi) :
+18. 8 String to Integer (atoi) :
 	- Approach 1 : time 0(n), space 0(n)
 		- convert string to char array  
 		- handle whitespaces case, iterate over the char array while there is " " (make sure to check that the pointer is within the range of array lemgth)
 		- check for + or - sign ,
 		- iterate while we have digits, while(p<ch.length && (ch[p] >='0' && ch[p]<='9')) and calculate the res i.e res = res* 10 + ch[p]
 		- while calculating make sure that the res is within the integer range
-18. Count and Say :
+19. Count and Say :
 	- Approach 1: Time 0(n) , space 0(n) (RECURSION STACK) 
 		- base case if n = 1 , return "11", if n = 2 return "11"
 		- for n = 3 , we need to look at n=2 result i.e. "11" and from that we make , "21"  (count of 1 + number)
 		- for n = 4 , we need to look at n = 3 result i.e. "21" , "1211" (count of 2 + number + count of 1 + number)
 		- From this we can easily make out that its a recursion problem , get result for n-1 and from that make result for n.
-19. 14 Longest Common Prefix :
+20. 14 Longest Common Prefix :
 	- Approach 1 : Time 0(sum of length of string), space 0(1)
 		- iterate over first elements character (for i = 0 ; i<arr[0].length();i++)
 			- inside that iterate over remaining elements of the array and check if element from outside loop is equal to the arr[j].charAt(i) and strs[j].length()> i then continue
