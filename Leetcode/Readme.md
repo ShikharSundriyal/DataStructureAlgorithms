@@ -142,24 +142,32 @@
 		- at each element do the following, nums[nums[i]-1] * = -1 (means making the element at idx -ve thus letting )
 		- once you get the same element and we check if nums[abs[ nums[ i ]] - 1] is negative means that this element was already presnt in array and is duplicate  	 
 
-
+16. 88 Merge Sorted Array : 
+	- Approach 1 : (Brute Force) Time 0(klogk) + Space 0(1)
+		- insert elements from 2nd array to the first array and then call Arrays.sort(array1)
+	- Approach 2 : Time 0(n+m) + Space 0(n+m)
+		- copy the first array to the 3rd array 	
+		- now travel over second array and 3rd array , and insert into 1st array
+	- Approach 3 : Time 0(n+m) + Space 0(1)
+		- keep two pointer at the end of the arrays at n-1 and m-1 position and ith pointer at the n+mth position
+		- travel and put highest element at the ith position , decrease appropriate pointer by 1 and i by 1
 
 
 ## String
-16. 8 String to Integer (atoi) :
+17. 8 String to Integer (atoi) :
 	- Approach 1 : time 0(n), space 0(n)
 		- convert string to char array  
 		- handle whitespaces case, iterate over the char array while there is " " (make sure to check that the pointer is within the range of array lemgth)
 		- check for + or - sign ,
 		- iterate while we have digits, while(p<ch.length && (ch[p] >='0' && ch[p]<='9')) and calculate the res i.e res = res* 10 + ch[p]
 		- while calculating make sure that the res is within the integer range
-17. Count and Say :
+18. Count and Say :
 	- Approach 1: Time 0(n) , space 0(n) (RECURSION STACK) 
 		- base case if n = 1 , return "11", if n = 2 return "11"
 		- for n = 3 , we need to look at n=2 result i.e. "11" and from that we make , "21"  (count of 1 + number)
 		- for n = 4 , we need to look at n = 3 result i.e. "21" , "1211" (count of 2 + number + count of 1 + number)
 		- From this we can easily make out that its a recursion problem , get result for n-1 and from that make result for n.
-18. 14 Longest Common Prefix :
+19. 14 Longest Common Prefix :
 	- Approach 1 : Time 0(sum of length of string), space 0(1)
 		- iterate over first elements character (for i = 0 ; i<arr[0].length();i++)
 			- inside that iterate over remaining elements of the array and check if element from outside loop is equal to the arr[j].charAt(i) and strs[j].length()> i then continue
