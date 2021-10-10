@@ -40,3 +40,12 @@
     - Here traverse over main linked list, make the next of current node as null and based on data add the node (addLast) to either even or odd list
     - then join odd and even linked list
     - Adjust head and tail 
+
+6. Fold a linked List : 
+  - Approach 1 : Time 0(N) , Space 0(N) recrsion space
+    - Keep a left Node as the data member of the class and initialise with head.
+    - Make a foldHelpler Fucntion which takes two parameters(Node right, int floor)
+    - take right to the end of the linked list by calling the function recursively and at each level do the following
+      -   Node temp = left.next, left.next = right, right.next = temp, front = temp;
+      -   Above step should happen only for half of the elements of  the linked list i.e. floor < size/2
+      -   when floor == size/2 then tail = right , tail.next = null;
