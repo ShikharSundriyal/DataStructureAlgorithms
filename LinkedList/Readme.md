@@ -49,3 +49,14 @@
       -   Node temp = left.next, left.next = right, right.next = temp, front = temp;
       -   Above step should happen only for half of the elements of  the linked list i.e. floor < size/2
       -   when floor == size/2 then tail = right , tail.next = null;
+
+7. Add Two Linked Lists
+  - Approach 1 : Time 0(N), Space 0(N)
+    - find the difference between number of nodes between the two linkedlist say d
+    - whichever list is bigger move its pointer d times forward , so that both list 1 and list 2 are at same posiiton which can be added
+    - Now make a recursive call to the helper function which takes two nodes and a LinkedList as a parameter
+    - once we reach to the end of both the linked list add the data part of both nodes and add that as First Node, also calculate carry and update its value as its a static variable
+    - now once the common length nodes of both list are added now we need to take care of the nodes which we moved forward d times 
+      - d-- , 
+      - while d>=0 Node t = either list1.head or list2.head whichever is bigger in length 
+        - for(int i = 0;i<=d;i++){t=t.next} add carry and the node data and add the element to the linked list
