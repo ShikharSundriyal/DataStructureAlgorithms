@@ -182,3 +182,16 @@
 			- inside that iterate over remaining elements of the array and check if element from outside loop is equal to the arr[j].charAt(i) and strs[j].length()> i then continue
 			- else return arr[0].substring(0,i)  
 		- if we come out of for loop that meaans all elements are common with first string return first string.
+
+
+## Binary Search : 
+21. 374 Guess Number Higher or Lower :
+	- Approach 1 : Brute Force Time 0(N), 0(1)
+		- Iterate over all the numbers from 1 to N and call guess method and see if it returns 0 if yes return that i
+	- Approach 2 : Binary Search Time 0(logN) , Space 0(1)
+		- keep two pointers left=1 and right=N
+		- while l<=r 
+			- mid  = l+ (r-l)/2 
+			- if gess(mid) == 0 return mid
+			- else if guess(mid) == -1  r = mid-1
+			- else l = mid+1  
