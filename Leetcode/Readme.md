@@ -195,3 +195,25 @@
 			- if gess(mid) == 0 return mid
 			- else if guess(mid) == -1  r = mid-1
 			- else l = mid+1  
+
+## Dynamic Programming
+22 . Best Time to Buy and Sell Stock	
+	- Approach 1 : T 0(n2), Space 0(1)
+		- consider each point as buying point and traverse from left to right and find the appropriate selling point that is max value
+	- Approach 2 : T 0(N), Space 0(1)
+		- consider each point as a selling point, to sell at a idx we have to buy at the lowest price before that day thus we need to maintain a min so far
+		- maxProfit = 0, minsofar = Integer.MAX_VALUE ,
+		- for int i =0 i < prices.length; i++
+			- if minsofar > prices[i] minsofar = prices[i]
+			- if prices[i] - minsofar > maxP then maxP = prices[i] - minsofar
+
+23. Climbing Stairs :
+	- Approach 1 : T(2^n) , S 0(N)
+		- we are at nth stair and we have to move to 0th stair
+		-  at each step we have two option take 1 step or take 2 step
+		-  thus our faith will :
+			- all paths from climbStairs(n-1) A  
+			- all paths from climbStairs(n-2) B	
+			- total paths will be A + B 
+	- Approach 2 : Apply Memonisation T 0(N) , Space 0(N)
+	- Approach 3 : Tabulation , T 0(N) , S 0(1)
