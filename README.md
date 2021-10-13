@@ -47,6 +47,25 @@ Recursive :
 3. Count Posssible encodings : [Code](https://github.com/ShikharSundriyal/DataStructureAlgorithms/blob/main/DynamicProgramming/Count%20Encoding/solution.java)</br>
 Tabulation :  dp[i] will store count of all possible encodings of string from 0 to i characters. base case = dp[0] and dp[1]. from i = 2 onwards we can have contribution from dp[i-1] + dp[i-2] based on the condition that the encoding formed is correct .
 
+4. 198 House Robber : [Code]()
+    - Approach 1 : Recursion 0(N) , Space 0(N)
+        - Faith get the maximum profit by robbing from 1 to n-1 houses in an array of length 2  
+            - where 0th indx stores maximum profit if the nth house is included  
+            - 1st index stores the maximum profit if nth house is not included
+        - Base case when n == 0 
+            - return new array , arr[0] = prices[0], arr[1] = 0;
+        - From Faith to expectation 
+            - Maximum profit if
+                - Nth house is included then res[0] = prices[n]+ res[1] i.e. if current house is included then previous house cannot be included
+                - Nth house is not included res[1] = Math.max(res[0],res[1]) i.e. previous house can be included or not included    
+    - Approach 2 : Tabulation 0(N), Space 0(1) or 0(1) { if we take 4 variables as we need only one previous maximum previous}
+        - oldmaxIncluded = prices[0] , oldMaxExluded = 0
+        - for(int i =  1;i<prices.length ; i++)
+            - int newMaxIncluded = oldMaxExluded +  prices[i]
+            - int newMaxExcluded = Math.max(oldMaxIncluded, oldMaxExcluded)
+            - oldMaxIncluded = newMaxIncluded;
+            - oldMaxExcluded = newMaxExcluded;
+        - return Math.max(oldMaxIncluded,oldMaxExcluded)
 
 
 ## Group 3 :(DP) </br> 
