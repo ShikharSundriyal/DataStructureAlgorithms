@@ -47,7 +47,7 @@ Recursive :
 3. Count Posssible encodings : [Code](https://github.com/ShikharSundriyal/DataStructureAlgorithms/blob/main/DynamicProgramming/Count%20Encoding/solution.java)</br>
 Tabulation :  dp[i] will store count of all possible encodings of string from 0 to i characters. base case = dp[0] and dp[1]. from i = 2 onwards we can have contribution from dp[i-1] + dp[i-2] based on the condition that the encoding formed is correct .
 
-4. 198 House Robber : [Code]()
+4. 198 House Robber : [Code](https://github.com/ShikharSundriyal/DataStructureAlgorithms/blob/main/Leetcode/198.%20House%20Robber/solution.java)
     - Approach 1 : Recursion 0(N) , Space 0(N)
         - Faith get the maximum profit by robbing from 1 to n-1 houses in an array of length 2  
             - where 0th indx stores maximum profit if the nth house is included  
