@@ -5,3 +5,18 @@
   - If height in terms of nodes, then initialize height = 0
   - faith , get the height of childrens of the root node
   - from faith to expectation, whichever child height is greater take that height and add one as there is one edge between the child node and root node
+2. Level order traversal Line wise : 
+  - We will need to use queue because queue follows first in first out, at any point there are only 2 levels of tree in the queue
+  - Approach 1 :
+    -   Have 2 queues main q and helper q
+    -   Add root node to the mainQ and add the children of root node to helper Q
+    -   While mainQ.size()>0
+      - remove the element from mainQ , print the element and add its children to helper Q
+      - if mainQ.size() == 0 that means one level has finished , print a line and make mainQ = helperQ and helperQ = new arrayDeque<>()
+   - Approach 2 :
+    - using a single Queue
+    - push root node and a node containing null 
+    - while q.size()>1
+      - remvove the element from q , 
+        - if the node contains null then print new line and push another node conataining null
+        - else print the data of node and push the childrens also to the queue
