@@ -20,3 +20,12 @@
       - remvove the element from q , 
         - if the node contains null then print new line and push another node conataining null
         - else print the data of node and push the childrens also to the queue
+   - Approach 3 :
+    - using a single queue
+    - push root node
+    - while(q.sisze()>0)
+     - int sz = mainQ.size(); // finding the number of elements in a level that need to be printed in one line
+     - for(int i = 0;i<sz;i++)
+      - remove the element, print the element and add children to the queue      
+     - System.out.println()
+    
