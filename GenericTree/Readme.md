@@ -29,3 +29,16 @@
       - remove the element, print the element and add children to the queue      
      - System.out.println()
     
+3. Level order traversal Line wise ZigZag :
+  - Approach 1 : Make a queue , add root element , maintain a level variable = 0 , sz = mainQ.size()
+  - while mainQ size > 0
+    -  for int i = 0; i<sz ;i++
+      - remove element from the mainQ and add to a new list  , add its children to the mainQ
+     - if even level  print from 0 to last element
+     - if level is odd , then print elements from last element to 1st element
+     - level++
+  - Approach 2 : Maintain two stacks and a level variable
+    - add root node to the mainStack 
+    - while mainStack.size > 0
+      - if level is even add children to the helperStack from left to right
+      - if level is odd then add children to the helperStack from right to left
