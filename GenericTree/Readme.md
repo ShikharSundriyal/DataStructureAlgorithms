@@ -42,3 +42,8 @@
     - while mainStack.size > 0
       - if level is even add children to the helperStack from left to right
       - if level is odd then add children to the helperStack from right to left
+
+4. Remove Leaves In Generic Tree :
+  - Here the work needs to be done in the preorder , if we do the work in post order i.e. remove the childrens whose children arraylist size is 0 then all the nodes will be removed except the root node.
+  - So here the faith will be , remove the child nodes from the leaf node
+  - work will be, remove the node from the node.children arraylist whose node.children.size is 0 
