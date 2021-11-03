@@ -47,3 +47,18 @@
   - Here the work needs to be done in the preorder , if we do the work in post order i.e. remove the childrens whose children arraylist size is 0 then all the nodes will be removed except the root node.
   - So here the faith will be , remove the child nodes from the leaf node
   - work will be, remove the node from the node.children arraylist whose node.children.size is 0 ( node.children.get(i).children.size()==0 )
+
+5. Are Trees Similar:
+  - similar means the length of children of the node should be equal at each node for both the trees
+
+6. Mirror of a Tree :
+  - we have to apply reverse to all childrens of the node
+
+7. Are two trees mirror of each other : 
+  -  Travel one tree in normal euler and other tree in reverse euler and children size should be equal for both the nodes.
+ 
+8. Is a tree symmetric :
+  - Symmteric means if the mirror image of tree is equal to the tree itself
+  - isMirror(node, node)
+
+
