@@ -61,4 +61,19 @@
   - Symmteric means if the mirror image of tree is equal to the tree itself
   - isMirror(node, node)
 
+9. Ceil and Floor of a Node :
+  - Make two static variables , ceil and floor
+  - traverse the complete tree and check if the value is greater than the value of the node for which ceil has to be calculated 
+    - if yes, check if pre existing value of ceil is greater than the current node value , if yes replace the ceil
+  - traverse the complete tree and check if the value is lesser than the value of the node for which floor has to be calculated
+    - if yes, check if the pre existing value of floor is less than the value of the current node, if yes replace the floor
 
+10. Kth largest element in a tree :
+  - Brute Force :
+    - traverse the entire tree and fill the values in a arraylist
+    - sort the arraylist and kth element from the last will be the kth largest element
+   - Optimal Approach :
+     - using floor method that we used above,
+      - for 1st largest , calculate the floor of infinity
+      - for 2nd largest , calulate the floor of infinity and then again call floor function on the value obtained from the previous floor fucntion call
+    
