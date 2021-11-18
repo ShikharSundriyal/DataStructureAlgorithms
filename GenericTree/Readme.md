@@ -83,4 +83,8 @@
   - Keep 2 static variable Node n and int maxsum
   - write a method sum which returns the sum of a tree at each node
     - to get sum our faith will be get the sum of child nodes and add the current nodes data , while doing so compare if that sum is greater than maxsum static variable
+  - Approach 2 : without static variables
+    - Create a pair class , which has 3 data members maxsum , Node with maxsum and total sum of an subtree
+    - Faith is each child gives sum maximum subtree sum, node which forms ma subtree sum and the sum of the subtree at that particular node
+    - to find the maxsubtreesum, we compare each childs maxsubtreesum and maintain a max and for total sum we add sum of each child node and finally add nodes data and check if the sum is greater than the max sum obtained from childs  
     
