@@ -76,4 +76,11 @@
      - using floor method that we used above,
       - for 1st largest , calculate the floor of infinity
       - for 2nd largest , calulate the floor of infinity and then again call floor function on the value obtained from the previous floor fucntion call
+
+11. Node with maximum subtree sum :
+  - Here we have to find the node whose subtree sum is maximum.
+  - at each node we have to calculate the sub tree sum and we will compare if that is greater than the already existing maximum sub tree sum
+  - Keep 2 static variable Node n and int maxsum
+  - write a method sum which returns the sum of a tree at each node
+    - to get sum our faith will be get the sum of child nodes and add the current nodes data , while doing so compare if that sum is greater than maxsum static variable
     
