@@ -95,8 +95,14 @@
     - Find all the leaf nodes and fill them in an arrylist
     - now start a for loop inside a foor loop and find the two nodes who have greatest distance between them. (distance between two nodes, Find node to root path for both nodes and then find the distance)
    
-   - Optimised :  0(n)
+   - Optimised :  0(n) using static variable
     - Use height of a generic tree method , the height function goes to each node and finds the height of the tree rooted at that node 
       - keep a static variable diameter
       - maintain two variables childheightmax1 and childheightmax2 which will contain the 1st max height and 2nd max height out of the child nodes and at each node check if childheightmax1 + childheightamx2 +2 is greater than the static diameter variable
       -    
+    - Without using static variable , pure faith and expectation
+      - faith : Our method will return a pair containing the height of the child and max diameter possible acorss any of the childs child subtree
+      - from faith to expectation : 
+        - find 1st highest height of child and 2nd highest height of the child 
+        - also compare find the best diamter amongst the childrens
+        - once outside the loop calculate tif 1st highest height + 2nd highest height +2 is greater than the current diamter if yes update the diamter and return a Pair object containing the height of current node i.e. 1st highest height + 2nd highest height + 2 , diameter
