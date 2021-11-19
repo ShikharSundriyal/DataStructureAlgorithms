@@ -88,3 +88,15 @@
     - Faith is each child gives sum maximum subtree sum, node which forms ma subtree sum and the sum of the subtree at that particular node
     - to find the maxsubtreesum, we compare each childs maxsubtreesum and maintain a max and for total sum we add sum of each child node and finally add nodes data and check if the sum is greater than the max sum obtained from childs  
     
+
+12. Diameter of a generic tree : 
+  - Diameter is defined as the maximum distance between any two nodes
+  - Brute Force : 0(n3)
+    - Find all the leaf nodes and fill them in an arrylist
+    - now start a for loop inside a foor loop and find the two nodes who have greatest distance between them. (distance between two nodes, Find node to root path for both nodes and then find the distance)
+   
+   - Optimised :  0(n)
+    - Use height of a generic tree method , the height function goes to each node and finds the height of the tree rooted at that node 
+      - keep a static variable diameter
+      - maintain two variables childheightmax1 and childheightmax2 which will contain the 1st max height and 2nd max height out of the child nodes and at each node check if childheightmax1 + childheightamx2 +2 is greater than the static diameter variable
+      -    
