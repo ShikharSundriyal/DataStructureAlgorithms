@@ -217,3 +217,13 @@
 			- total paths will be A + B 
 	- Approach 2 : Apply Memonisation T 0(N) , Space 0(N)
 	- Approach 3 : Tabulation , T 0(N) , S 0(1)
+	
+	
+	
+## Binary Trees :
+24. Sum Root to Leaf Numbers -
+	- Take approach of Recursion on the way up, while going up make the path that will form the complete number once we reach on the leaf node and use Integer.parseInt to convert to a interger.
+	- Make a static variable sum and add that number to the sum.
+	- rootToLeaf(node.left,path+node.data);
+	- rootToLeaf(node.right,path+node.data);
+	- Remember to make the base case at the leaf node itself . Also we are adding to path the current nodes value . 
