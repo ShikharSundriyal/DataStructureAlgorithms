@@ -11,3 +11,8 @@
 
 2. Construction on input array from a give Binary Tree : 
     -  Iterate over the elements of tree , in preorder input the element in the array and if the left or right child is null add -1 
+
+3. Binary tree leaf to root path : 
+    - Apply recursion on the way up to form the path to leaf nodes.
+    - make the base case at the leaf node itself .
+    - Maintain a string as an argument to the function whil will form the actual path from root to leaf node. 
