@@ -16,3 +16,12 @@
     - Apply recursion on the way up to form the path to leaf nodes.
     - make the base case at the leaf node itself .
     - Maintain a string as an argument to the function whil will form the actual path from root to leaf node. 
+
+4. Print K Level down : 
+    - Approach 1 : Iterative approach 
+        - Same approach as level order , additionaly maintain a level variable , when level variable is equal to given k then , break and print all the Noded present in queue.
+    - Approach 2 : Recursive approach 
+        - create a function kelevel(Node node, int k , int level)
+        - initially keep level is 0 , on each call increase the level variable by 1 when making the call this way all nodes of a level will have a level variable
+        - put a if condition that is k == level , print the Node.data
+             
