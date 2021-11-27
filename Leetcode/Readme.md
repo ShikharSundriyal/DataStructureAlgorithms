@@ -221,13 +221,13 @@
 	
 	
 ## Binary Trees :
-24. Sum Root to Leaf Numbers -
+24. Sum Root to Leaf Numbers :
 	- Take approach of Recursion on the way up, while going up make the path that will form the complete number once we reach on the leaf node and use Integer.parseInt to convert to a interger.
 	- Make a static variable sum and add that number to the sum.
 	- rootToLeaf(node.left,path+node.data);
 	- rootToLeaf(node.right,path+node.data);
 	- Remember to make the base case at the leaf node itself . Also we are adding to path the current nodes value . 
 
-107. Binary Tree Level Order Traversal II :
-	- Normal Level order traversal approach, fill each level as a arraylist to final arraylist
-	- Before returning , reverse the mail arraylist 
+25. Binary Tree Level Order Traversal II : </br>
+	- Normal Level order traversal approach, fill each level as a arraylist to final arraylist. </br>
+	- Before returning , reverse the mail arraylist </br>
