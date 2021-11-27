@@ -227,3 +227,7 @@
 	- rootToLeaf(node.left,path+node.data);
 	- rootToLeaf(node.right,path+node.data);
 	- Remember to make the base case at the leaf node itself . Also we are adding to path the current nodes value . 
+
+107. Binary Tree Level Order Traversal II -
+	- Normal Level order traversal approach, fill each level as a arraylist to final arraylist
+	- Before returning , reverse the mail arraylist 
