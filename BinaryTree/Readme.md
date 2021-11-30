@@ -25,3 +25,11 @@
         - initially keep level is 0 , on each call increase the level variable by 1 when making the call this way all nodes of a level will have a level variable
         - put a if condition that is k == level , print the Node.data
              
+5. Remove leaf nodes from binary tree :
+    - Approach 1 : Without using a return type from the function
+        - void removeLeaves(Node node) -> 
+            - we have one option that we stand at a node and look at the child nodes left and right , if childnodes left and right is null i.e. the child node is a leaf node and current nodes child needs to be updated to null. But here we will need additional checks to handle null pointer
+            - Another option is we add another parameter parent in the function which will keep the current nodes parent and also a indicator as a paramter that whether current node is left child or right child of the parent.
+     - Appraoch 2 : With a return type Node removeLeaves(Node node)
+        - here base case is if node == null return null or node.left == null and node.right == null return null
+        - in the calls we will have node.left = removeLeaves(node.left); , node.right = removeLeaves(node.right) , in this way when we fall from child to parent we will fall to correct node that is either left child or the right child.     
