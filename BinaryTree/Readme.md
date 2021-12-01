@@ -32,4 +32,16 @@
             - Another option is we add another parameter parent in the function which will keep the current nodes parent and also a indicator as a paramter that whether current node is left child or right child of the parent.
      - Appraoch 2 : With a return type Node removeLeaves(Node node)
         - here base case is if node == null return null or node.left == null and node.right == null return null
-        - in the calls we will have node.left = removeLeaves(node.left); , node.right = removeLeaves(node.right) , in this way when we fall from child to parent we will fall to correct node that is either left child or the right child.     
+        - in the calls we will have node.left = removeLeaves(node.left); , node.right = removeLeaves(node.right) , in this way when we fall from child to parent we will fall to correct node that is either left child or the right child. 
+
+6. Transform to a left cloned tree :
+    - at each left child node add another node same as node.
+    - Purely based on faith and expectation
+    - faith is we will get left cloned tree from node.left and we will get left cloned tree from node.right
+    - from faith to expectation :
+        - in post order we create a new node same as current node, add that node to the current nodes left child and the add previous left child node which we have recived from node.left call as the child of new node.
+   
+7. Tranform a left cloned tree to a normal tree :
+    - Purely faith and expectation, we know that root nodes left child is someone whom we want to remove
+    - so our faith will be get normal tree from node.left.left skipping the current nodes left child as its an extra node because of left cloned
+    - now from faith to expectation, make node.left = the node that we got from node.left.left call thus eliminating the extra node
