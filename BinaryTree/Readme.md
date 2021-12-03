@@ -45,3 +45,8 @@
     - Purely faith and expectation, we know that root nodes left child is someone whom we want to remove
     - so our faith will be get normal tree from node.left.left skipping the current nodes left child as its an extra node because of left cloned
     - now from faith to expectation, make node.left = the node that we got from node.left.left call thus eliminating the extra node
+
+8. Tilt of a binary tree :
+    - Tilt for a node is defined as the absolute difference between left subtree sum and right subtree sum for a node.
+    - Tilt for a binary tree is defined as the sum of all the tilts of nodes in a tree.
+    - We will travel the complete tree , and each node will return its subtreesum, before returning sub tree sum for a node we will also calculate the tilt of that node and add it to the total tilt variable that we are maintaining as a static value.
