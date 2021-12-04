@@ -47,6 +47,10 @@
     - now from faith to expectation, make node.left = the node that we got from node.left.left call thus eliminating the extra node
 
 8. Tilt of a binary tree :
-    - Tilt for a node is defined as the absolute difference between left subtree sum and right subtree sum for a node.
-    - Tilt for a binary tree is defined as the sum of all the tilts of nodes in a tree.
-    - We will travel the complete tree , and each node will return its subtreesum, before returning sub tree sum for a node we will also calculate the tilt of that node and add it to the total tilt variable that we are maintaining as a static value.
+    - Approach 1 : using static variable
+        - Tilt for a node is defined as the absolute difference between left subtree sum and right subtree sum for a node.
+        - Tilt for a binary tree is defined as the sum of all the tilts of nodes in a tree.
+        - We will travel the complete tree , and each node will return its subtreesum, before returning sub tree sum for a node we will also calculate the tilt of that node and add it to the total tilt variable that we are maintaining as a static value.
+    - Approach 2 : without using static variable (pure faith and expectation)
+        - faith : our child will return un a Pair object containing the total tilt rooted at subchild and also return a subtree sum rooted at child.
+        - from faith to expectation : caculate subtree sum i.e. left subtree sum - right sub treesum , tilt will be left subtree sum - right sub treesum  + left tilt + right tilt.
