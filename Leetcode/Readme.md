@@ -247,10 +247,11 @@
 		- write a height function, at each node calculate the balancing factor and based on the value update the isbalanced variable value
 
 
-28. Largest BST Subtree : 
-    	- For largest BST subtree we have to travel each node and determine whether it is a BST or not , if yes capture the sz of the subtree
-    	- The travlleing we will do same as ISBST logic , so it will return a pair of min, max,isbst additionally it will return the sz of the largest subtree
-	- If the node at which we are is a BST then the sz will become left.sz + r.sz + 1 .
-	- If the node is not the BST then the sz will be MAX of left.sz and right.sz
-	- Method Defination  Pair ISBST(Node node),  Pair (int min, int max, boolean isbst, int sz)
+28. Largest BST Subtree :
+	- Approach 1 :	 
+		- For largest BST subtree we have to travel each node and determine whether it is a BST or not , if yes capture the sz of the subtree 
+		- The travlleing we will do same as ISBST logic , so it will return a pair of min, max,isbst additionally it will return the sz of the largest subtree
+		- If the node at which we are is a BST then the sz will become left.sz + r.sz + 1 .
+		- If the node is not the BST then the sz will be MAX of left.sz and right.sz
+		- Method Defination  Pair ISBST(Node node),  Pair (int min, int max, boolean isbst, int sz)
 
