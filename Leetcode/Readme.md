@@ -238,4 +238,10 @@
 			- from right child get the height and diameter of tree rooted at right node
 		- From faith to expectation :
 			- the height of the tree will be max of height from left child, right child +1
-			- the diameter of the root node will be max of [ diameter of left, diameter of right, height of left subtree + height of right subtree + 2]	     
+			- the diameter of the root node will be max of [ diameter of left, diameter of right, height of left subtree + height of right subtree + 2]	
+
+
+27.  Balanced Binary Tree :
+	- Approach 1 :
+		- create a static variable isbalanced
+		- write a height function, at each node calculate the balancing factor and based on the value update the isbalanced variable value
