@@ -65,3 +65,10 @@
         - From faith to expectation : 
             -  calculate the balancing factor for root node that will be , left child height - right child height and height i.e Max(left child height, right child height)+1
              
+             
+10. Is binary tree a bst : 
+    - Faith : 
+        - left call will return the max and min values from the subtree rooted on left child 
+        - right call will return the max and min values from the subtree rooted on right child
+     - from faith to expectation :
+        - on root node, the root nodes value should be greater than the max value from the left child and root nodes value should be less than the least value from the right childs node. And as is bst property has to checked for each node  we also return a isbst boolean value along with min and max from the left and right subtree.
