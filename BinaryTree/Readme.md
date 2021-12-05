@@ -74,7 +74,7 @@
         - on root node, the root nodes value should be greater than the max value from the left child and root nodes value should be less than the least value from the right childs node. And as is bst property has to checked for each node  we also return a isbst boolean value along with min and max from the left and right subtree.
 
 
-11 . Largest BST Subtree : 
+11. Largest BST Subtree : 
     - For largest BST subtree we have to travel each node and determine whether it is a BST or not , if yes capture the sz of the subtree
     - The travlleing we will do same as ISBST logic , so it will return a pair of min, max,isbst additionally it will return the sz of the largest subtree
     - If the node at which we are is a BST then the sz will become left.sz + r.sz + 1 .
