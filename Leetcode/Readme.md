@@ -231,3 +231,11 @@
 25. Binary Tree Level Order Traversal II : </br>
 	- Normal Level order traversal approach, fill each level as a arraylist to final arraylist. </br>
 	- Before returning , reverse the mail arraylist </br>
+
+26. Diameter of Binary Tree :
+	- Approach 1 : 
+		- Faith : from left child get the height and diameter of tree rooted at left node
+			- from right child get the height and diameter of tree rooted at right node
+		- From faith to expectation :
+			- the height of the tree will be max of height from left child, right child +1
+			- the diameter of the root node will be max of [ diameter of left, diameter of right, height of left subtree + height of right subtree + 2]	     
