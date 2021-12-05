@@ -66,9 +66,17 @@
             -  calculate the balancing factor for root node that will be , left child height - right child height and height i.e Max(left child height, right child height)+1
              
              
-10. Is binary tree a bst : 
+10. Is binary tree a bst : ( the logic is the current node should be greater than all the nodes on the left and lesser than all the nodes on the right i.e. we need min and max from left child and right child ) 
     - Faith : 
         - left call will return the max and min values from the subtree rooted on left child 
         - right call will return the max and min values from the subtree rooted on right child
      - from faith to expectation :
         - on root node, the root nodes value should be greater than the max value from the left child and root nodes value should be less than the least value from the right childs node. And as is bst property has to checked for each node  we also return a isbst boolean value along with min and max from the left and right subtree.
+
+
+11 . Largest BST Subtree : 
+    - For largest BST subtree we have to travel each node and determine whether it is a BST or not , if yes capture the sz of the subtree
+    - The travlleing we will do same as ISBST logic , so it will return a pair of min, max,isbst additionally it will return the sz of the largest subtree
+    - If the node at which we are is a BST then the sz will become left.sz + r.sz + 1 .
+    - If the node is not the BST then the sz will be MAX of left.sz and right.sz
+    - Method Defination  Pair ISBST(Node node),  Pair (int min, int max, boolean isbst, int sz)
