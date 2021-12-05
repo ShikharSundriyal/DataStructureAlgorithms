@@ -54,3 +54,14 @@
     - Approach 2 : without using static variable (pure faith and expectation)
         - faith : our child will return un a Pair object containing the total tilt rooted at subchild and also return a subtree sum rooted at child.
         - from faith to expectation : caculate subtree sum i.e. left subtree sum - right sub treesum , tilt will be left subtree sum - right sub treesum  + left tilt + right tilt.
+
+9. Is a tree balanced : All nodes should have a balancing factor less than 2 , Balancing factor = Abs (left trees height - right trees height)
+    - Approach 1 : using a static variable
+        - traverse over the tree using the height function and calculate balancing factor and if balancing factor >=2 for aany node make the static variable isBlanced = false
+    - Approach 2 : without using static variable
+        - Faith : 
+            - left child call will give us a Pair containing , boolean is tree balanced and the height of the subtree rooted at left child
+            - right child call will give us a Pair containing , boolean is tree balanced and the height of the subtree rooted at right child
+        - From faith to expectation : 
+            -  calculate the balancing factor for root node that will be , left child height - right child height and height i.e Max(left child height, right child height)+1
+             
