@@ -255,3 +255,11 @@
 		- If the node is not the BST then the sz will be MAX of left.sz and right.sz
 		- Method Defination  Pair ISBST(Node node),  Pair (int min, int max, boolean isbst, int sz)
 
+## Binary Search Tree :
+
+29. 108 Convert Sorted Array to Binary Search Tree : TreeNode create(int[] arr, int lo, int hi)
+	- Given an sorted array create a height balanced binary search tree
+	- For height balanced tree the balancing factor for each node should be -1,0,1.  
+	- find the mid of the array that will be the root of the tree 
+		- faith is after we create the root node that is the middle element of the array, root.left = and roor.right will be filled up by call to children and finally we return the root node.
+		- base case will be when lo > hi 
