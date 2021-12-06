@@ -1,0 +1,1 @@
+Wherever questions are related to the data side of the tree i.e. the question has something to do with data Binary search Tree will optimise the solution as complexoty can be reduced but in case the data is not involved then the time complexity for both BST and binary tree will be same.
