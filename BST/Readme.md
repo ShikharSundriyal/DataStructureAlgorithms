@@ -7,4 +7,7 @@
     - node that has 2 child -> we can have two ways to perfrom deletion for such node
       - case 1 : take the max from the left side of that node (the max node will always be a node with no child or a single child ) , copy the data of max node to the node that needs to be removed and then make a call to remove the max node from the left subtree
       - case 2 : take the min from the right subtree (all the nodes on the right will be greater than this node, so BST property will be still valid), copy the data of min node to the node to which needs to be removed and call a remove the min node from the lright subtree
-      
+
+4. Replace with sum of larger :
+  - the largest number in a bst is in the right bottom node, and our smallest problem i.e replace with sum of larger will also be on the right bottom node as sumof larger elements for the last bottom right node will be zero 
+  - here we need to traverse Right Call , self work, left work
