@@ -15,3 +15,14 @@
 5. Lowest common ancestor between two nodes in BST :
   - In normal binary tree , we will find node to root path for both the nodes and find the first common node but in case of BST we can optimise the approach by using the BST property.
   - Incase of BST, the lowest common ancestor will be, if the current node on which we are standing is greater than node1 and is less than node2 then that point will be the divergent point.
+
+6. Print in range : 
+  - We are given a range lo,hi any element which lies between the range we need to print it. But the printing order should be ascending .
+  - Approach 1 :
+    - As we already know if we print all the nodes of a BST in inorder manner we get a sorted list , we will use the same technique.
+    - we will go to each node and check if it lies between lo and hi , if yes we will print it inorder.
+  - Approach 2 :
+    - Instead of traversing all the nodes we will traverse only correct nodes,
+      - if node.data > hi then there is no point going to the right as all the nodes to the right will be greater than hi and will fall out of range
+      - if node.data < lo , then there is no going to the left as all the nodes to the left will be smaller than lo and will fall out of range
+      - if node.data is between lo and hi , from here we can go both left and right side but inbetween the calls we will print the data. 
