@@ -18,10 +18,10 @@
 
 6. Print in range : 
   - We are given a range lo,hi any element which lies between the range we need to print it. But the printing order should be ascending .
-  - Approach 1 :
+  - Approach 1 : 0(n) -> n is number of nodes
     - As we already know if we print all the nodes of a BST in inorder manner we get a sorted list , we will use the same technique.
     - we will go to each node and check if it lies between lo and hi , if yes we will print it inorder.
-  - Approach 2 :
+  - Approach 2 : 0(height of tree)  
     - Instead of traversing all the nodes we will traverse only correct nodes,
       - if node.data > hi then there is no point going to the right as all the nodes to the right will be greater than hi and will fall out of range
       - if node.data < lo , then there is no going to the left as all the nodes to the left will be smaller than lo and will fall out of range
