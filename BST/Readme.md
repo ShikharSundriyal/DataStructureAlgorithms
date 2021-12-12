@@ -11,3 +11,7 @@
 4. Replace with sum of larger :
   - the largest number in a bst is in the right bottom node, and our smallest problem i.e replace with sum of larger will also be on the right bottom node as sumof larger elements for the last bottom right node will be zero 
   - here we need to traverse Right Call , self work, left work
+
+5. Lowest common ancestor between two nodes in BST :
+  - In normal binary tree , we will find node to root path for both the nodes and find the first common node but in case of BST we can optimise the approach by using the BST property.
+  - Incase of BST, the lowest common ancestor will be, if the current node on which we are standing is greater than node1 and is less than node2 then that point will be the divergent point.
