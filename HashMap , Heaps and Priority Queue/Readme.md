@@ -14,15 +14,15 @@
 
 # Questions :
 1. Common elements amongst two arrays : (without duplicates) 0(n)
-  - arr1 [1,4,2,5,6,2,1] 
-  - arr2 [1,2,6,7]
-  - output : 1 , 2,  6
-  - Put all the elements of arr1 in a HashSet -> [1,4,2,5,6]
-  - Now iterate over arr2 and check if hashset contains that element if yes print that element and remove it from HashSet as we dont need to print duplicates
+    - arr1 [1,4,2,5,6,2,1] 
+    - arr2 [1,2,6,7]
+    - output : 1 , 2,  6
+    - Put all the elements of arr1 in a HashSet -> [1,4,2,5,6]
+    - Now iterate over arr2 and check if hashset contains that element if yes print that element and remove it from HashSet as we dont need to print duplicates
  
 2. Common elements amongst two arrays : (print all the common pairs amongst both the arrays)
-  - arr1 [1,4,2,5,6,2,1]
-  - arr2 [1,2,6,1,7]
-  - output : 1 2 6 1 
-  - Create a hashmap from arr1 key=element and value = frequency of that element in array
-  - iterate over arr2 , check if the element is present in hashmap and its value is greater than 0 if yes , print the element and reduce the frequency by 1
+    - arr1 [1,4,2,5,6,2,1]
+    - arr2 [1,2,6,1,7]
+    - output : 1 2 6 1 
+    - Create a hashmap from arr1 key=element and value = frequency of that element in array
+    - iterate over arr2 , check if the element is present in hashmap and its value is greater than 0 if yes , print the element and reduce the frequency by 1
