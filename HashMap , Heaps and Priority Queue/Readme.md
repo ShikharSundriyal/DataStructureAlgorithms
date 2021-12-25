@@ -41,3 +41,19 @@
       - now we iterate over the hashmap and check whether the element can be a sequence starter if yes
         - we form the the sequence by checking while the next element is present in the hashmap .
      
+# Priority Queue : 
+
+4. K Largest Elements : 
+    - Given an array find the k largest elements 
+    - input arr [1,7,3,4,6] , k = 3
+    - Approach 1 : T 0(nlogn), S 0(1)
+      - sort the array [1,3,4,6,7]
+      - from the end print k elements
+    - Approach 2 : T o(klogk + nlogk), space 0(k)
+      - Create a Priority Queue where lower value has more priority i.e. MIN Priority Queue
+      - iterate over the array
+        - if queue.size <= k 
+          - add element to the queue
+        - else 
+          - check if queue.peek() (which contains the min value amongst the queue) < element of the array
+            - then remove the element from the queue and add the array element to the queue.             
