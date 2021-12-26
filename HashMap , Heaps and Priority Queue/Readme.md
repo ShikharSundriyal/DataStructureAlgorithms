@@ -57,3 +57,15 @@
         - else 
           - check if queue.peek() (which contains the min value amongst the queue) < element of the array
             - then remove the element from the queue and add the array element to the queue.             
+
+5. Merge K sorted Lists :
+    - Given a Arraylist of size k containing k sorted arraylist, we need to return a combined sorted arraylist 
+    - Approach 1 : T(nlogn) 
+      - Add all elements of every list to an array and then sort
+    - Approach 2 :
+      - we need to keep k pointers at beginning of each list , compare all elements of each list according to appropriate pointer position and push the smallest element to the result arraylist and as one element from that list is consumed for next comparisions we need to move the pointer for that list by 1
+      - Inorder to solve this we make a Pair class which has 3 data members, listnumber, index, value -> which correspond to listno from lists arraylist, index is the current index which need to be compared, the value is the value for that list at that index
+      - We will add 0th index elements from k list to a priority queue ,
+        - now we will remove the smallest element from queue 
+        - and push the value of that pair to resultant arraylist
+        - now we need to add another element to the queue from the list the element got removed but with an increased index . The only thing to keep in mind is that while doing so we need to check that the list is not totaally consumed i.e. all elements are already consumed from that list.  
