@@ -69,3 +69,11 @@
         - now we will remove the smallest element from queue 
         - and push the value of that pair to resultant arraylist
         - now we need to add another element to the queue from the list the element got removed but with an increased index . The only thing to keep in mind is that while doing so we need to check that the list is not totaally consumed i.e. all elements are already consumed from that list.  
+
+6. Median Priority Queue : 
+  - Uisng 2 priority queue , create a new Priority Queue Class which returns the median when peek and remove is called.
+  - The user defined class will have new Priority Queue in the constructor , for left side it will be a max priority Queue and for right side it will be a min priority queue
+  - if the left and right side pq are of equal size the median will be largest element of the left pq or peek of the left pq
+  - if the left pq size is one greater than the right pq then median will be from the left pq
+  - if the right pq is greaater than the left pq then , smallest element of right pq will be the median that is peek of right
+  - For addition of elements we need to keep in mind that, the left and right pq sizes do not differ at most by 1
