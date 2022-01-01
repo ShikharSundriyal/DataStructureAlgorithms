@@ -77,3 +77,8 @@
     - if the left pq size is one greater than the right pq then median will be from the left pq
     - if the right pq is greaater than the left pq then , smallest element of right pq will be the median that is peek of right
     - For addition of elements we need to keep in mind that, the left and right pq sizes do not differ at most by 1
+   
+7. sort k-sorted array :
+    - Given an sorted array where each position has been displaced atmost k positions from the original sorted position. Find the sorted array
+    - Create a priority queue , add 0 to k (k included) elements to it, now iterate over the remaining array elements , remove the peek of the PQ and add new array element at each iteration. 
+    - Time nlogk 
