@@ -22,7 +22,7 @@
   - Given a graph, source and destination tell whether there is a path between the source and destination
   - Make a travel function which takes grpah , src , destination and a boolean matrix of length total vertex
   - public void travel(ArrayList<Edge>[] graph, int src, int dest, boolean[] visited)
-  ```java
+```java
 boolean hasPath(ArrayList<Edge>[] graph, int src, int dest,boolean[] vis){
 	if(src == dest) return true;
 	vis[src]=true;
@@ -32,9 +32,25 @@ boolean hasPath(ArrayList<Edge>[] graph, int src, int dest,boolean[] vis){
 		}
 	}
 	return false;
-	
-}
-  ```
+	}
+```
 
 2. Print all paths :
-  
+	- Given a src and destination, print all the possible paths
+	- Here we need to explore all the paths so we will unmark the visited vertex
+```java
+void printPath(ArrayList<Edge>[] graph, int src, int dest,boolean[] vis,String ans){
+	if(src == dest) {
+		System.out.println(ans+src);
+		return;
+	}
+	vis[src]=true;
+	for(Edge edge:graph[src]){
+		if(vis[edge.nbr]==false){
+			hasPath(graph,edge.nbr,dest,vis,ans+src);
+		}
+	}
+	vis[src]=false;
+}
+```
+
