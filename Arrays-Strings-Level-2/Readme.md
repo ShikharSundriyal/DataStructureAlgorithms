@@ -61,3 +61,62 @@
         
     }
 ```
+
+3. Max Range Queries : (Uses range addition which uses prefix sum, count of k's till ith idx and count of k+1 till ith idx)
+  - Given an array and certain queries and an integer k, we need to find out after we apply all the queries which query should we remove which will give us maximum count of K
+  - First we need to calculate the range addition which is nothing but giving overall impact of all queries and then calculating prefix sum
+  - Once we have the overall impact of all the queries we have two approach :
+    - Approch 1 : 0(nk)
+      - Iterate over the queries array and from si to ei reduce 1 and then count number of k's in array.   
+    - Approach 2 : 0(k)
+      - Make two arrays containing count of k's and count of k+1 till ith index using the final prefix sum array.
+        - if finalarray[i] == k then countk[i]=countk[i-1]+1; 
+      - Now iterate over queries array , calculate total k's if this query is removed then 
+        - remaining k's formula = total k's - count of k's +count of k+1 as k+1 will become k
+```java
+public static void maxRangeQueries(int[] arr, int k, int[][] queries){
+	
+	int[] finarr = new int[arr.length];
+	
+	for(int i =0;i<queries.length;i++){
+		int si = queries[i][0];
+		int ei = queries[i][1];
+		finarr[si]+=1;
+		if(ei+1<arr.length)
+			finarr[ei+1]-=1;
+	}
+	for(int i =1;i<arr.length;i++){
+		finarr[i] = finarr[i-1]+finarr[i];
+	}
+	int total_k=0;
+	for(int i:finarr){
+		if(i==k) total_k++;
+	}
+	int[] countk = new int[arr.length];
+	int[] countkp = new int[arr.length];
+	if(finarr[0] == k ){
+		countk[0] =1;
+	}
+	if(finarr[0] == k+1){
+		countkp[0]=1;
+	}
+	for(int i =1;i<finarr.length;i++){
+		if(finarr[i] == k){
+			countk[i] = countk[i-1]+1;
+		}
+		if(finarr[i] ==k+1){
+			countkp[i]=countkp[i-1]+1;
+		}
+	}
+	int res = Integer.MIN_VALUE;
+	for(int i =0;i<queries.length;i++){
+		int si = queries[i][0];
+		int ei = queries[i][1];
+		int ck = countk[ei]-(si-1>=0?countk[si-1]:0);
+		int ckp1 = countk[ei]-(si-1>=0?countk[si-1]:0);
+		int total = total_k - (ck)+(ckp1);
+		if(total>res) res = total;
+	}
+	
+}
+```
