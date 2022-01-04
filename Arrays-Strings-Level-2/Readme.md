@@ -120,3 +120,32 @@ public static void maxRangeQueries(int[] arr, int k, int[][] queries){
 	
 }
 ```
+
+4. 977 Squares of a Sorted Array :
+	- Given an sorted array containing both negative and positive elements. Return an sorted array containing the squares of the element.
+	- Approach 1 : 0(nlogn) using sorting 
+		- find squares of the array
+		- sort the array and return
+	- Approach 2 : 0(n)
+		- Have two pointers i and j , one at 0th idx and j at last idx
+		- while i<=j 
+			- check which elements square value is more either i or j , if i put that square value to new array at kth index and increment i
+			- if the jth square is more than put that square value to new array kth idx and then decrement j
+			- finally decrement k
+```java
+public int[] sortedSquares(int[] nums) {
+        int[] arr = new int[nums.length];
+        int i = 0,j=nums.length-1,k=nums.length-1;
+        while(i<=j){
+            if(nums[i]*nums[i] <=nums[j]*nums[j]){
+                arr[k]=nums[j]*nums[j];
+                j--;
+            }else{
+                arr[k]=nums[i]*nums[i];
+                i++;
+            }
+            k--;
+        }
+        return arr;
+    }
+```
