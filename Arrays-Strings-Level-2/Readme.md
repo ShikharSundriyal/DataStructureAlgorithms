@@ -149,3 +149,29 @@ public int[] sortedSquares(int[] nums) {
         return arr;
     }
 ```
+
+5. 11 Container With Most Water : Optimised approach in 0(n)
+	- Brute Force : 0(n2)
+		- start a for loop over the heights array, inside that start another for loop from i+1, check area and compare with maxarea
+	- Optimised Approach : (Two pointer approach)
+		- Thigs to observe is area = width * Minimum of height out of two pillars
+		- when we select 0th pillar and last pillar , and find the area , then we discard the smaller wall either left or right for next iteration by moving i or j pointer. This works because if 0th height is less than other pairs that i can pair up with will have a width less than the original widht that we used as j was present at the last position and height will remain same or will decrease if we encounter a smaller height, so there is no way we will get larger area . So we discard the smaller wall
+```java
+ public int maxArea(int[] height) {
+        int i =0,j=height.length-1,maxarea=0;
+        
+        while(i<j){
+            int area = (j-i) * Math.min(height[i],height[j]);
+            if(area > maxarea){
+                maxarea = area;
+            }
+            
+            if(height[i]<height[j]){
+                i++;
+            }else{
+                j--;
+            }
+        }
+        return maxarea;
+    }
+```
