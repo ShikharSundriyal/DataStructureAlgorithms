@@ -175,3 +175,35 @@ public int[] sortedSquares(int[] nums) {
         return maxarea;
     }
 ```
+
+
+6. 238 Product of Array Except Self :
+	- We are given an sorted array we need to create a new array where ith idx contains multiplition of all values except idx , we cannot use division operator
+	- If the Division operator constraint was not given then approavh would be , find the total multiplication of all the elements and at each idx divide the total nultiplication value by by current value 
+	- Approach 1 : 
+		- Create two arrays where 
+			- array1 will store the prefix multiplication starting from 0th i i.e arr1[i] = arr1[i-1] multiplied by nums[i]
+			- array2 will store the prefix multiplication starting from last index to 0 i.e arr2[i] = arr1[i+1] multiplied by nums[i] 
+			- now multiplication at ith idx will be multiplication of all elements from 0 to i-1 multiplied by multiplication of all elements from i+1 to last idx
+			- we have both the values stroed in arr1 and arrr2[]
+
+```java
+ public int[] productExceptSelf(int[] nums) {
+        int[] p1 = new int[nums.length];
+        int[] p2 =  new int[nums.length];
+        int[] res =  new int[nums.length];
+        p1[0] = nums[0];
+        for(int i =1;i<nums.length;i++){
+         p1[i] = p1[i-1]*nums[i]; 
+        }
+        p2[nums.length-1]=nums[nums.length-1];
+        for(int i =nums.length-2;i>=0;i--){
+            p2[i] = p2[i+1]*nums[i];
+        }
+        for(int i = 0;i<nums.length;i++){
+            
+            res[i] = (i-1>=0?p1[i-1]:1)*(i+1<nums.length?p2[i+1]:1);
+        }
+        return res;
+    }
+```
