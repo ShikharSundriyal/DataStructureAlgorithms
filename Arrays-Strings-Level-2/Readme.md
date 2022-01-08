@@ -301,3 +301,51 @@ public static void printMajorityElement(int[] arr) {
         }
     }
 ```  	 	  
+
+
+9. Majority Elements two :
+	- Find the manjority element in an array where majority element is an element whose frequency is more than arr.length/3 
+	- Here also Brute force will be 0(N) time and 0(N) space using a frequency map
+	- Optimised Approach : Time 0(N) and space 0(1)
+	- Incase of n/3 we can have atmost 2 elements as Majority elements
+	- We will keep 2 variables , v1 = arr[0], c1 = 1, v2 = 0, c2 = 0
+	- iterate over the array 
+		- if arr[i] == val1 -> increase count of c1
+		- else if arr[i] == val2 -> increase count of c2
+		- else we need to compensate the values from both c1 and c2 but before that we need to check if c1 ==0 then v1 = arr[i] c1 = 1
+```java
+ public List<Integer> majorityElement(int[] nums) {
+        int val1 = nums[0];
+        int c1 = 1;
+        int val2 = 0;
+        int c2 = 0;
+        
+        for(int i =1;i<nums.length;i++){
+            if(nums[i] == val1) c1++;
+            else if(nums[i]==val2) c2++;
+            else{
+                if(c1 == 0){
+                    c1 = 1;
+                    val1=nums[i];
+                }
+                else if(c2 == 0){
+                    c2=1;
+                    val2=nums[i];
+                }
+                else{
+                    c1--;
+                    c2--;
+                }
+            }
+        }
+        int f1=0,f2=0;
+        List<Integer> al = new ArrayList<>();
+        for(int i = 0;i<nums.length;i++){
+            if(nums[i] == val1) f1++;
+            else if(nums[i]==val2) f2++;
+        }
+        if(f1>nums.length/3) al.add(val1);
+        if(f2>nums.length/3) al.add(val2);
+        return al;
+    }
+```
