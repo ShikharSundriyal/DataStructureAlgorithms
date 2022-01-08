@@ -207,3 +207,56 @@ public int[] sortedSquares(int[] nums) {
         return res;
     }
 ```
+
+
+7. 11 Container With Most Water :
+	- Given an array heights which contain the height of ith bar.
+	- We need to find the the max area that can formed using two bars.
+	- Approach 1 : Brute Force 0(n2)
+		- iterate over each bar and try to find the suitable bar with iterating over the other bars and finding the maximum area
+	- Approach 2 : 0(n) Two pointer approach
+		-  Keep two pointers at 0 and end of the array 
+		-  the area = height * width , where width = distance between two bars and height will be Minimum of height[i] and height[j]
+		-  so the height is kind of constant when we from from left to right but the widht is increasing so we can say that we will get the best contender where widht is maximum. Hence we take two pointer approach
+		-  while i < j iterate over the array
+			-  area = minimum of heights of i and j * widht i.e. j-i
+			-  whichever height is minimum we need not do any more comparisions for that bar as rest all areas will be less as width will decrease if we travel 
+			-  so whichever height is minimum remove that, i.e. i++ or j--
+```java
+//Brute force
+public static int mostWater(int[] heights) {
+        // write your code here
+        
+        int area = Integer.MIN_VALUE;
+        for(int i = 0;i<heights.length;i++){
+            for(int j=i+1;j<heights.length;j++){
+                int h = Math.min(heights[i],heights[j]);
+                int w = j-i;
+                if(h*w>area){
+                    area = h*w;
+                }
+            }
+        }
+        return area;
+    }
+
+
+// Optimised
+public int maxArea(int[] heights) {
+        int i = 0,j=heights.length-1;
+        int totalarea = Integer.MIN_VALUE;
+        while(i<j){
+            int area = Math.min(heights[i],heights[j])* (j-i);
+            if(area > totalarea){
+                totalarea = area;
+            }
+            
+            if(heights[i]>heights[j]){
+                j--;
+            }else{
+                i++;
+            }
+        }
+        return totalarea;
+    }
+```
