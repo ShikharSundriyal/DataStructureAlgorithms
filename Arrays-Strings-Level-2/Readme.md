@@ -349,3 +349,7 @@ public static void printMajorityElement(int[] arr) {
         return al;
     }
 ```
+
+10. Majority elements general :
+	- Given an array , find a majority element where majority element is defined as , if frequency of element > arr.length/k
+	- Use the brute force approach i.e. create a frequency hashmap 
