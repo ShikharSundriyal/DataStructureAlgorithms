@@ -353,3 +353,33 @@ public static void printMajorityElement(int[] arr) {
 10. Majority elements general :
 	- Given an array , find a majority element where majority element is defined as , if frequency of element > arr.length/k
 	- Use the brute force approach i.e. create a frequency hashmap 
+
+
+11. Reverse Vowels of String :
+	- Use a two pointer approach 
+	- move i to appropriate position that is to a vowel 
+	- move j to appropriate position that is to a vowel 
+```java
+public boolean isvowel(char ch){
+        String s = "aeiouAEIOU";
+        return s.contains(ch+"");
+    }
+    public String reverseVowels(String s) {
+        char[] arr = s.toCharArray();
+        int i = 0,j=s.length()-1;
+        while(i<j){
+            while(i<j && isvowel(arr[i]) == false){
+                i++;
+            }
+            while(i<j && isvowel(arr[j]) == false){
+                j--;
+            }
+            char t = arr[i];
+            arr[i] = arr[j];
+            arr[j] = t;
+            i++;
+            j--;
+        }
+        return String.valueOf(arr);
+    }
+```
