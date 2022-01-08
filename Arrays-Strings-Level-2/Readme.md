@@ -260,3 +260,44 @@ public int maxArea(int[] heights) {
         return totalarea;
     }
 ```
+
+8. Majority Element 1 :
+	- Given an array we need to find an element whose occurence is greater than array.length/2
+	- In an array there will be atmost one manjority element as for an element to be majority element it has to come more than n/2 times.
+	- Brute force : Time 0(N), Space 0(N)
+		- Make a frequency hashmap for each element of the array
+		- iterate over the hashmap and check whose key has value greater than arr.length/2 
+	- Optimised Approach : Time 0(N), Space 0(1) We will use Moore's voting algorithm
+		- We will try to find the element which has the most chances of becoming the Majority element i.e. we will count how many more times an element is coming as compared to other elements
+		- maintain two variables count and val, initially val = arr[0] and count = 1
+		- iterate over the array form 1 to arr.length
+			- if arr[i] == val that means that element is coming again , so count++
+			- else count-- which means a different elment came and we have to compensate the previous value now if after compensating say that count becomes zero then we have to give chance to the current new element that came 
+			- i.e if count == 0 val arr[i] count =1
+		- At the end we will have one contender, now we need to iterate over the entire array and find the frequency of that element and chaeck if its greater than arr.length/2
+```java
+public static void printMajorityElement(int[] arr) {
+        // write your code here
+        int val = arr[0];
+        int count=1;
+        for(int i = 1;i<arr.length;i++){
+            if(arr[i]==val) count++;
+            else{
+                count--;
+                if(count ==0){
+                    count =1;
+                    val = arr[i];
+                }
+            }
+        }
+        int c=0;
+        for(int i:arr){
+            if(i==val) c++;
+        }
+        if(c>arr.length/2){
+            System.out.println(val);
+        }else{
+            System.out.println("No Majority Element exist");
+        }
+    }
+```  	 	  
