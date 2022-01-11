@@ -383,3 +383,119 @@ public boolean isvowel(char ch){
         return String.valueOf(arr);
     }
 ```
+
+
+12. Complex Number Multiplication :
+	- given num1 and num2 as String 
+	- num1 = "a+bi", num2 = "c+di"
+	- real part afternultiply will be : a*c - b*d
+	- imaginary part will be : a * d + b * c 
+	- return real + "+" + imaginary + "i";
+```java
+ public String complexNumberMultiply(String num1, String num2) {
+        int a = Integer.parseInt(num1.split("\\+")[0]);
+        int b = Integer.parseInt(num1.split("\\+")[1].split("i")[0]);
+        int c = Integer.parseInt(num2.split("\\+")[0]);
+        int d = Integer.parseInt(num2.split("\\+")[1].split("i")[0]);
+        int real =a*c-b*d;
+        int ima = a*d+b*c;
+        
+            return real+"+"+ima+"i";
+        
+        
+    }
+```
+
+13. First Missing positive integer : 
+	- Brute Force 0(nlogn)
+		- Sort the array 
+		- now iterate over the array and find the mmissing number
+	- Optimised : T 0(n) , S 0(1)
+		- The approach should be , partition the array move all 0 and -ve elements to the right of the array
+		- Now we know the start and end index of the positive integers
+		- Now start marking the indexes with negative sign which will indicate that idx+1 postive number is present in the array
+		- -ve sign at 0th idx indicate that 1 is present, -ve at 1st idx represent 2 is present
+		- we will mark the indexes -ve where arr[i] is within the positive index range and arr[i] is positive because there can be a case of duplicates
+		- Now we will iterate over the array from 0 to positive index range and see which index has positive value , the idx which has +ve value means i+1 positive interger is missing from array
+		- if all the index are negative that means last idx of positive range + 2 , integer is missing.
+```java
+ public static int firstMissingPositive(int[] arr) {
+    // write your code here
+    int i =-1,j=0;
+    // partition an array move all 0 and negative elements to the right
+    while(j<arr.length){
+        if(arr[j]<=0){
+            j++;
+        }else{
+            i++;
+            int t = arr[i];
+            arr[i]=arr[j];
+            arr[j]=t;
+            j++;
+        }
+    }
+    
+    for(int m = 0; m<=i;m++){
+        
+        int val = Math.abs(arr[m]);
+        if(val-1 <=i && arr[val-1]>0){
+            arr[val-1]=-arr[val-1];
+        }
+    }
+    
+    for(int m = 0;m<=i;m++){
+        if(arr[m]>0){
+            return m+1;
+        }
+    }
+    return i+2;
+  }
+```
+
+14. Max Product Of Three Numbers :
+	- Given an array of both positive and negative integers find the product of 3 numbers such that the product is largest
+	- Approach 1 :  Brute Force Sort the array 0(Nlogn)
+		- Sort the array 
+		- now the max product can be formed by last 3 elements of the array if all the vlaues in array are positive
+		- the 2 negative values with max magnitude and largest positive number can also give max product as two negatives will make one positive
+		- Compare these two factors which ever is maximum is answer
+	- Approach 2 : Optimised 0(N) Single pass
+		- Now we know we just need 2 least numbers and 3 max numbers which we can maintain while we traversse the array
+		- and then compare factor 1 and factor2 as approach 1 and get the answer
+```java
+    public int maximumProductBruteForce(int[] nums) {
+        Arrays.sort(nums);
+        int f1 = nums[0]*nums[1]*nums[nums.length-1];
+        int f2 = nums[nums.length-1]*nums[nums.length-2]*nums[nums.length-3];
+        return Math.max(f1,f2);
+    }
+     public int maximumProduct(int[] nums) {
+         int min1=Integer.MAX_VALUE;
+         int min2 = Integer.MAX_VALUE;
+         int max1=Integer.MIN_VALUE;
+         int max2=Integer.MIN_VALUE;
+         int max3=Integer.MIN_VALUE;
+         for(int i = 0;i<nums.length;i++){
+             if(nums[i]>max1 ){
+                 max3 = max2;
+                 max2 = max1;
+                 max1 = nums[i];
+             }else if(nums[i] > max2){
+                 max3 = max2;
+                 max2 = nums[i];
+             }else if(nums[i]>max3){
+                 max3 = nums[i];
+             }
+             
+             if(nums[i] < min1){
+                 min2 = min1;
+                 min1 = nums[i];
+             }else if(nums[i]<min2){
+                 min2 = nums[i];
+             }
+         }
+         int f1 = min1*min2*max1;
+         int f2= max1*max2*max3;
+         return Math.max(f1,f2);
+         }
+}
