@@ -499,3 +499,21 @@ public boolean isvowel(char ch){
          return Math.max(f1,f2);
          }
 }
+```
+
+15. 769 Max Chunks To Make Sorted :
+	- Given an array where elements are strictly between [0 to n-1]
+	- We will maintain a variable MaxRange that is nothing but will help us in determining which all elements can be grouped together
+	- iterate over the array
+		- maxRange = Math.max(maxRange,arr[i]) -> that is the current element can go to max which position
+		- if maxRange == i chunk++;  -> this means that we have got our chunk, as all elements till i will move within maxRange and take correct position as per result sorted array . This is working because we actually know that all elements are between 0 to n-1
+```java
+public int maxChunksToSorted(int[] arr) {
+        int maxRange = Integer.MIN_VALUE,chunks=0;
+        for(int i =0;i<arr.length;i++){
+            maxRange = Math.max(maxRange,arr[i]);
+            if(maxRange == i) chunks++;
+        }
+        return chunks;
+    }
+```
