@@ -517,3 +517,82 @@ public int maxChunksToSorted(int[] arr) {
         return chunks;
     }
 ```
+
+16. Max Chunks to make array sorted 2 : 
+	- Given an array where there is no restrictions on the values of the array . Find the max chunks in which the array can be divided such that if chunks sorted individually form a overall sorted array
+	- Time 0(N), Space 0(N)
+	- Approach :
+		- Inorder to make a chunk it must follow : max of all elements from left should be lesser than min of all the elements on the right because in an sorted array it follows the same
+		- Create two arrays, 
+			- arr1 which stores max of prefix elements i.e from 0 to i , arr1[i] will store max element exconutered till ith idx
+			- arr2 which stores min of suffix i.e. from arr.length-1 to i , arr2[i] will store the min element encountered till ith idx from behind
+		- iterate over the array and see where arr1[i] < arr2[i+1] chunks++
+```
+ public static int maxChunksToSorted2(int[] arr) {
+        // write your code here
+        int[] pre= new int[arr.length];
+        int[] suf= new int[arr.length+1];
+        suf[suf.length-1]=Integer.MAX_VALUE;
+        int chunks=0;
+        pre[0]=arr[0];
+        for(int i = 1;i<arr.length;i++){
+            pre[i] = Math.max(arr[i],pre[i-1]);
+        }
+        
+        for(int i = arr.length-1;i>=0;i--){
+            suf[i] = Math.min(suf[i+1],arr[i]);
+        }
+        
+        for(int i = 0;i<arr.length;i++){
+            if(pre[i]<=suf[i+1]) chunks++;
+        }
+        return chunks;
+    }
+```
+
+17. Partition Array into Disjoint Intervals
+	- Given an integer array nums, partition it into two (contiguous) subarrays left and right so that:
+		- Every element in left is less than or equal to every element in right.
+		- left and right are non-empty.
+		- left has the smallest possible size.
+	- Approach 1 : Time 0(N), Space 0(N) 
+		- very similar to the divide array into chunks , here we just need to return the first chunk length
+	- Approach 2 : Time 0(N), Space 0(1)
+		- Make an array and see at each index till where it is going till max 
+		- We will maintain 3 variables , potential answer, maxtilli, maxtillpotentialanswer
+		- we can divide an array into chunks 
+			- when arr[i] <  maxtillpotentialanswer  this means that arr[i] wants to merge with the left hand side which means our previous potential answer was wrong so we update the potentialanswer = i and maxttillpotentialanswer = maxtilli as maxtilli will be the max till potential answer as we have updated potential answer
+			- in other case if arr[i] > maxtilli just update maxtilli because here we cannot partition the array as this element will come into a single partition
+```java
+public int partitionDisjoint1(int[] arr) {
+        int[] pre= new int[arr.length];
+    int[] suf = new int[arr.length+1];
+    pre[0] = arr[0];
+    for(int i = 1;i<arr.length;i++){
+        pre[i] = Math.max(pre[i-1],arr[i]);
+    }
+    suf[suf.length-1] = Integer.MAX_VALUE;
+    for(int i = arr.length-1;i>=0;i--){
+        suf[i] = Math.min(suf[i+1],arr[i]);
+    }
+    for(int i =0;i<arr.length;i++){
+        if(pre[i]<=suf[i+1]) return i+1;
+    }
+    return -1;
+    }
+    public int partitionDisjoint(int[] arr) {
+        int max = arr[0];
+        int potentialAnswerMax = arr[0];
+        int potentialAnswer = 0;
+        
+        for(int i =1;i<arr.length;i++){
+            if(arr[i] > max){
+                max = arr[i];
+            }else if(arr[i] < potentialAnswerMax){
+                potentialAnswer = i;
+                potentialAnswerMax = max;
+            }
+        }
+        return potentialAnswer+1;
+    }
+```	
