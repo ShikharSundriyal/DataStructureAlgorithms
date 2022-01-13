@@ -555,6 +555,8 @@ public int maxChunksToSorted(int[] arr) {
 		- Every element in left is less than or equal to every element in right.
 		- left and right are non-empty.
 		- left has the smallest possible size.
+	- Approach 0 :  Brute Force 0(n2)
+		- start from left hand side of array , maintain max and from i+1 to arr.length check if arr[j] < max which means partition will happen at that jth idx.  
 	- Approach 1 : Time 0(N), Space 0(N) 
 		- very similar to the divide array into chunks , here we just need to return the first chunk length
 	- Approach 2 : Time 0(N), Space 0(1)
@@ -564,6 +566,25 @@ public int maxChunksToSorted(int[] arr) {
 			- when arr[i] <  maxtillpotentialanswer  this means that arr[i] wants to merge with the left hand side which means our previous potential answer was wrong so we update the potentialanswer = i and maxttillpotentialanswer = maxtilli as maxtilli will be the max till potential answer as we have updated potential answer
 			- in other case if arr[i] > maxtilli just update maxtilli because here we cannot partition the array as this element will come into a single partition
 ```java
+// brute force 
+0(N2)
+ public int partitionDisjoint(int[] arr) {
+        int maxelement = Integer.MIN_VALUE;
+        for(int i=0;i<arr.length;i++)
+        {	boolean flag = true;
+            maxelement = Math.max(maxelement,arr[i]);
+            for(int j = i+1;j<arr.length;j++){
+                if(maxelement > arr[j]){
+                    flag = false;
+                    break;
+                }
+            }
+            if(flag) return i+1;
+        }
+        return -1;
+    }
+
+// 0(N) , with 0(N) space
 public int partitionDisjoint1(int[] arr) {
         int[] pre= new int[arr.length];
     int[] suf = new int[arr.length+1];
@@ -580,6 +601,7 @@ public int partitionDisjoint1(int[] arr) {
     }
     return -1;
     }
+    // Optimised 0(N) with 0(1) space
     public int partitionDisjoint(int[] arr) {
         int max = arr[0];
         int potentialAnswerMax = arr[0];
