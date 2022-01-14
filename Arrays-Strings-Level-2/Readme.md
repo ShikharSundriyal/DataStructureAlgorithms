@@ -86,6 +86,9 @@
         - if finalarray[i] == k then countk[i]=countk[i-1]+1; 
       - Now iterate over queries array , calculate total k's if this query is removed then 
         - remaining k's formula = total k's - count of k's +count of k+1 as k+1 will become k
+<details><summary>Code</summary>
+<p>
+
 ```java
 public static void maxRangeQueries(int[] arr, int k, int[][] queries){
 	
@@ -133,6 +136,9 @@ public static void maxRangeQueries(int[] arr, int k, int[][] queries){
 	
 }
 ```
+</p>
+</details>
+
 
 4. 977 Squares of a Sorted Array :
 	- Given an sorted array containing both negative and positive elements. Return an sorted array containing the squares of the element.
@@ -145,6 +151,9 @@ public static void maxRangeQueries(int[] arr, int k, int[][] queries){
 			- check which elements square value is more either i or j , if i put that square value to new array at kth index and increment i
 			- if the jth square is more than put that square value to new array kth idx and then decrement j
 			- finally decrement k
+<details><summary>Code</summary>
+<p>
+
 ```java
 public int[] sortedSquares(int[] nums) {
         int[] arr = new int[nums.length];
@@ -162,6 +171,8 @@ public int[] sortedSquares(int[] nums) {
         return arr;
     }
 ```
+</p>
+</details>
 
 5. 11 Container With Most Water : Optimised approach in 0(n)
 	- Brute Force : 0(n2)
@@ -631,3 +642,65 @@ public int partitionDisjoint1(int[] arr) {
         return potentialAnswer+1;
     }
 ```	
+
+18. 2 Sum Target Sum Unique pairs :
+	- Given an array and a target find the unique pairs which can form a target
+	- brute force Approach : 0(n2)
+		- start a for loop from 0 to arr.length-2
+		- Start another for loop inside above for loop , from j=i to arr.length
+			- check if arr[i]+arr[j] == target then we have a pair but this way still we will have duplicate pairs 
+			- example 10 10 20 20 , target = 30
+			- as per brute force we will get 10,20 , 10,20 in first iteration , in second iteration again we will get 10,20 10,20
+			- so as a quick fix we can store the result in a hashset or hashmap
+	- Optimised Approach : T (nlogn)
+		- sort the array and apply two pointer approach
+		- keep i = 0, j=arr.length-1
+		- now while i<j
+			- if i!=0 && arr[i]==arr[i-1] i++; continue; this condition is to handle the duplicates
+			- if (arr[i] + arr[j] == target) store that pair and i++, j--;
+			- if arr[i] + arr[j] < target i++;
+			- else j--
+	- Approach 3 : Time 0(n), space 0(N)
+		- using a hashmap , storing each element along with its frequency in hashmap 
+		- here also we need to see how we can remove duplicate pairs
+<details><summary>Code</summary>
+<p>
+```java
+public static List<List<Integer>> twoSum(int[] arr, int target) {
+    // write your code here
+    /* 0n2 approach but it will also give duplicate pairs
+    for(int i =0;i<arr.length;i++){
+        for(int j = i+1;j<arr.length;j++){
+            if(arr[i] + arr[j] == target){
+                System.out.println(arr[i]+" "+arr[j]);
+            }
+        }
+    }
+    */
+    // 0(NlogN) sort the array, two pointer appraoch without duplicates
+    Arrays.sort(arr); 
+    int i =0,j=arr.length-1;
+    List<List<Integer>> res = new ArrayList<>();
+    while(i<j){
+        if(i!=0 && arr[i]==arr[i-1]){
+            i++;
+            continue;
+        }
+        if(arr[i] + arr[j] == target){
+            List<Integer> al = new ArrayList<>();
+            al.add(arr[i]);
+            al.add(arr[j]);
+            i++;
+            j--;
+            res.add(al);
+        }else if(arr[i]+arr[j] < target){
+            i++;
+        }else{
+            j--;
+        }
+    }
+    return res;
+  }
+```
+</p>
+</details>
