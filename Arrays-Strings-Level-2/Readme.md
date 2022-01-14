@@ -3,7 +3,10 @@
   - edge cases to keep in mind :
     - typed gets fully consumed and original still has elements return false
     - typed length is smaller than original string return false
-  
+
+<details><summary>Code</summary>
+<p>
+
 ```java
  public static boolean isLongPressedName(String name, String typed) {
  	 	 // Write your code here
@@ -30,6 +33,10 @@
  	 }
 ```
 
+</p>
+</details>
+
+
 2. Range Addition :
   - Given an empty array of length n, and an 2d array containing k updates that need to be applied to the array
   - Approach 1 : T 0(kn)
@@ -40,6 +47,9 @@
     - put arr[startidx]+=update_value and arr[endidx+1]-=updatevalue
     - After all updates are done
     - Do a prefix sum on the array 
+<details><summary>Code</summary>
+<p>
+
 ```java
     public int[] getModifiedArray(int length, int[][] updates) {
         int[] arr = new int[length];
@@ -61,7 +71,10 @@
         
     }
 ```
+</p>
+</details>
 
+					 
 3. Max Range Queries : (Uses range addition which uses prefix sum, count of k's till ith idx and count of k+1 till ith idx)
   - Given an array and certain queries and an integer k, we need to find out after we apply all the queries which query should we remove which will give us maximum count of K
   - First we need to calculate the range addition which is nothing but giving overall impact of all queries and then calculating prefix sum
