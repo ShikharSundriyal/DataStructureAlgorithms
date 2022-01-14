@@ -663,8 +663,7 @@ public int partitionDisjoint1(int[] arr) {
 	- Approach 3 : Time 0(n), space 0(N)
 		- using a hashmap , storing each element along with its frequency in hashmap 
 		- here also we need to see how we can remove duplicate pairs
-<details><summary>Code</summary>
-<p>
+
 ```java
 public static List<List<Integer>> twoSum(int[] arr, int target) {
     // write your code here
@@ -702,5 +701,4 @@ public static List<List<Integer>> twoSum(int[] arr, int target) {
     return res;
   }
 ```
-</p>
-</details>
+
