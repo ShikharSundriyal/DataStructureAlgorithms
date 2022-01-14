@@ -702,3 +702,45 @@ public static List<List<Integer>> twoSum(int[] arr, int target) {
   }
 ```
 
+19. 3 Sum Target Sum Unique triplets : 
+	- Given an array find the triplets whose sum is equal to given target
+	- Here we will follow the same logic as 2 sum target Time complexity 0(n3)
+	- we will iterate over each element of the array and call 2 sum target , where target will become target-arr[i] which means 2 sum function will give us a list of pairs whose sum is equal to target - arr[i] and if we add arr[i] to those pairs than the sum of those triplets will become equal to target. 
+```java
+ public List<List<Integer>> twosum(int[] arr,int target,int si){
+        List<List<Integer>> res = new ArrayList<>();
+        int i =si,j=arr.length-1;
+        while(i<j){
+            if(i!=si&& arr[i]==arr[i-1]){
+                i++;
+                continue;
+            }
+            if(arr[i]+arr[j]==target){
+                List<Integer> al = new ArrayList<>();
+                al.add(arr[i]);
+                al.add(arr[j]);
+                res.add(al);
+                i++;
+                j--;
+            }else if(arr[i]+arr[j] > target){
+                j--;
+            }else{
+                i++;
+            }
+        }
+        return res;
+    }
+    public List<List<Integer>> threeSum(int[] arr) {
+        List<List<Integer>> res = new ArrayList<>();
+        Arrays.sort(arr);
+        for(int i = 0;i<arr.length;i++){
+            if(i!=0 && arr[i]==arr[i-1]) continue;
+            List<List<Integer>> al = twosum(arr,-arr[i],i+1);
+            for(List<Integer> l:al){
+                l.add(arr[i]);
+                res.add(l);
+            }
+        }
+        return res;
+    }
+```
