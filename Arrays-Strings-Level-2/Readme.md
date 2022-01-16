@@ -862,3 +862,36 @@ public static List<List<Integer>> twoSum(int[] arr, int target) {
 
 </p>
 </details>
+
+	
+21. Pascals Triangle :
+	- Given a row print the required
+	- If row 0 -> 1
+	- If row 1 -> 1 1
+	- If row 2 -> 1 2 1
+	- If row 3 -> 1 3 3 1
+	- If row 4 -> 1 4 6 4 1
+	- approach 1 : Optimised 
+		- If we look at the pattern it is nc0+nc1+nc2+.....+ncn
+		- nco is always 1, and we can calculate ncr+1 from ncr using , ncr+1=ncr * (n-r)/(r+1)
+
+<details><summary>Code</summary>
+<p>
+
+```java
+  public static ArrayList<Integer> pascalRow(int r) {
+    // write your code here
+    ArrayList<Integer> al = new ArrayList<>();
+    al.add(1);
+    int ncr=1;
+    for(int i = 0;i<r;i++){
+        int ncr1 = (ncr * (r-i)/(i+1));
+        al.add(ncr1);
+        ncr=ncr1;
+    }
+    return al;
+  }
+```
+	
+</p>
+</details>
