@@ -86,6 +86,7 @@
         - if finalarray[i] == k then countk[i]=countk[i-1]+1; 
       - Now iterate over queries array , calculate total k's if this query is removed then 
         - remaining k's formula = total k's - count of k's +count of k+1 as k+1 will become k
+
 <details><summary>Code</summary>
 <p>
 
@@ -136,6 +137,7 @@ public static void maxRangeQueries(int[] arr, int k, int[][] queries){
 	
 }
 ```
+
 </p>
 </details>
 
@@ -171,6 +173,7 @@ public int[] sortedSquares(int[] nums) {
         return arr;
     }
 ```
+
 </p>
 </details>
 
@@ -180,6 +183,7 @@ public int[] sortedSquares(int[] nums) {
 	- Optimised Approach : (Two pointer approach)
 		- Thigs to observe is area = width * Minimum of height out of two pillars
 		- when we select 0th pillar and last pillar , and find the area , then we discard the smaller wall either left or right for next iteration by moving i or j pointer. This works because if 0th height is less than other pairs that i can pair up with will have a width less than the original widht that we used as j was present at the last position and height will remain same or will decrease if we encounter a smaller height, so there is no way we will get larger area . So we discard the smaller wall
+
 ```java
  public int maxArea(int[] height) {
         int i =0,j=height.length-1,maxarea=0;
@@ -247,7 +251,6 @@ public int[] sortedSquares(int[] nums) {
 			-  whichever height is minimum we need not do any more comparisions for that bar as rest all areas will be less as width will decrease if we travel 
 			-  so whichever height is minimum remove that, i.e. i++ or j--
 ```java
-//Brute force
 public static int mostWater(int[] heights) {
         // write your code here
         
@@ -265,7 +268,6 @@ public static int mostWater(int[] heights) {
     }
 
 
-// Optimised
 public int maxArea(int[] heights) {
         int i = 0,j=heights.length-1;
         int totalarea = Integer.MIN_VALUE;
@@ -760,8 +762,8 @@ public static List<List<Integer>> twoSum(int[] arr, int target) {
 		- base case : the abse case will be twosum that is when k = 2 call twosum method
 <details><summary>Code</summary>
 <p>
+
 ```java
-//Approach 1 
  public static List<List<Integer>> twosum(int[] arr, int target, int si){
         List<List<Integer>> res = new ArrayList<>();
         int i = si;
@@ -810,7 +812,6 @@ public static List<List<Integer>> twoSum(int[] arr, int target) {
    
   }
   
-  Approach 2 : 
    public List<List<Integer>> twosum(int[] arr,int target,int si){
         List<List<Integer>> res = new ArrayList<>();
         int i = si,j=arr.length-1;
@@ -857,5 +858,6 @@ public static List<List<Integer>> twoSum(int[] arr, int target) {
         
     }
 ```
+
 </p>
 </details>
