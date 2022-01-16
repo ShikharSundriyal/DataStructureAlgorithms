@@ -972,7 +972,7 @@ public static List<List<Integer>> twoSum(int[] arr, int target) {
 </details>
 
     
-21. Pascals Triangle :
+21. Pascals Triangle 2 (Leetcode):
     - Given a row print the required
     - If row 0 -> 1
     - If row 1 -> 1 1
@@ -1001,5 +1001,34 @@ public static List<List<Integer>> twoSum(int[] arr, int target) {
   }
 ```
     
+</p>
+</details>
+
+
+22. Pascals Triangle 1 : 
+  - Given a row index return a list of all rows till that row index, 
+  - Same logic of ncr+1 = ncr* (n-r) / (r+1) , additionaly change is we need to treat rowindex from 0 to row_index so that we get all rows
+
+<details><summary>Code</summary>
+<p>
+
+```java
+public List<List<Integer>> generate(int numRows) {
+        List<List<Integer>> res = new ArrayList<>();
+        for(int i = 0;i<numRows;i++){
+            List<Integer> al = new ArrayList<>();
+            al.add(1);
+            int ncr = 1;
+            for(int j = 0;j<i;j++){
+                int ncr1 = ncr*(i-j)/(j+1);
+                al.add(ncr1);
+                ncr = ncr1;
+            }
+            res.add(al);
+        }
+        return res;
+    }
+```
+                                                     
 </p>
 </details>
