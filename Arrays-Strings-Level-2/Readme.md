@@ -764,6 +764,7 @@ public static List<List<Integer>> twoSum(int[] arr, int target) {
 <p>
 
 ```java
+// Approch 1
  public static List<List<Integer>> twosum(int[] arr, int target, int si){
         List<List<Integer>> res = new ArrayList<>();
         int i = si;
@@ -811,7 +812,7 @@ public static List<List<Integer>> twoSum(int[] arr, int target) {
     return helper(arr,target,k,0);
    
   }
-  
+  // Approach 2 
    public List<List<Integer>> twosum(int[] arr,int target,int si){
         List<List<Integer>> res = new ArrayList<>();
         int i = si,j=arr.length-1;
