@@ -1032,3 +1032,110 @@ public List<List<Integer>> generate(int numRows) {
                                                      
 </p>
 </details>
+  
+23. Seive : 
+  - Print all the prime numbers between 2 to b, b inclusive
+  - Approach 1 : T(n root n)
+    - Iterate from 2 to b and for each number check if its a prime number
+  - Approach2 : 
+    - create an boolean array of size b+1
+    - iterate from 2 to root b
+    - start a for loop and mark each factor of i except first factor as false as it cannot be prime
+    - iterate over the array and check which idx have value as true , whichever is true add them to a list those are prime numbers from 2 to b
+
+<details><summary>Code</summary>
+<p>
+  
+```java
+public static void printPrimeUsingSieve(int n) {
+        boolean[] arr = new boolean[n + 1];
+        Arrays.fill(arr, true);
+
+        for (int k = 2; k * k <= n; k++) {
+            if (arr[k] == true) {
+                for (int i = 2 * k; i <= n; i += k) {
+                    arr[i] = false;
+                }
+            }
+        }
+
+
+        for (int i = 2; i <= n; i++) {
+            if (arr[i] == true) {
+                System.out.print(i + " ");
+            }
+        }
+    }
+```
+                              
+</p>
+</details>
+  
+
+24. Segmented Sieve :
+  - Find all the prime numbers from a to b, both a and b inclusive
+  - Approach 1 : 
+    - Travel from a to b and check which all numbers are prime
+  - Approach 2 :
+    - Create an boolean array of length b-a+1 size
+    - get all the primes from 2 to root b using seive algo 
+    - Iterate over the list of primes 
+      - find the multiplying factor i.e ceil of a/prime[i] 
+      - if mf == 1 that means that prime itself is present in the array so we have to ignore that by making mf++;
+      - if mf!=1 then the first multiple of that prime will be at idx = mf*prime[i] - a, this idx is the starting point wher the first multiple of that prime number is prensent and needs to be marked as not prime
+    - Now when travlling over the boolean array check which all index are still true , if true then a+i is prime condition being i+a > 1
+  
+  
+<details><summary>Code</summary>
+<p>
+  
+```java
+  public static ArrayList<Integer> seive(int a){
+      boolean[] arr = new boolean[a+1];
+      Arrays.fill(arr,true);
+      for(int i =2;i*i<= a;i++){
+          
+          for(int j = 2*i;j<=a;j+=i){
+              arr[j]=false;
+          }
+      }
+      ArrayList<Integer> al = new ArrayList<>();
+      for(int i =2;i<arr.length;i++){
+          if(arr[i]==true){
+              al.add(i);
+          }
+      }
+      return al;
+  }
+
+  public static void segmentedSieveAlgo(int a, int b) {
+    // write your code here
+    
+    int n = b-a+1;
+    boolean[] arr = new boolean[n];
+    Arrays.fill(arr,true);
+    int modb = (int)Math.sqrt(b);
+    ArrayList<Integer> primesal = seive(modb);
+    // rather than math.sqrt we will iterate over only primes which we will get through sieve
+    for(int i:primesal){
+        int closest_factor = (int)Math.ceil(((a*1.0)/i));
+        if(closest_factor == 1){ closest_factor++;}
+        int idx = closest_factor*i -a; // finding the index of first factor in array
+        for(int j = idx;j<arr.length;j+=i){
+            arr[j]=false;
+        }
+    }
+    int count =0;
+    for(int i =0;i<arr.length;i++){
+        // this i+a>1 is required becasue the primes always start from 2
+        if(arr[i]==true && i+a>1) System.out.println(i+a); 
+    }
+    // return count;
+  }
+  
+```
+  
+</p>
+</details>
+  
+  
