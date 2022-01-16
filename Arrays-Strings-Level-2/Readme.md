@@ -744,3 +744,118 @@ public static List<List<Integer>> twoSum(int[] arr, int target) {
         return res;
     }
 ```
+
+20. 4Sum
+	- Given an array nums of n integers, return an array of all the unique quadruplets [nums[a], nums[b], nums[c], nums[d]] such that:
+	- nums[a] + nums[b] + nums[c] + nums[d] == target
+	- Approach 1 : 0(n3)
+		- here we will use three sum function which we have written earlier which internally calls 2 sum
+		- for each index of i we will call 3sum to find triplets from i+1 idx whose sum is equal to target - arr[i] 
+		- then once we have those triplets we can add arr[i] and we will get quadruplets whose sum is equal to target
+	- Approach 2 : 
+		- This is a more general approach where we can will use recursion 
+		- faith : for ith idx we have all the triplets whose sum is = target-arr[i]  
+		- from faith to expectation : we will add arr[i] to triplets list to get quadruplets 
+		- as we need to find triplets whose sum is equal to targer-arr[i] for all index of array we will need a for loop, to handle duplicates we will make sure we sort the array and check if arr[i]==arr[i-1]
+		- base case : the abse case will be twosum that is when k = 2 call twosum method
+<details><summary>Code</summary>
+<p>
+```java
+//Approach 1 
+ public static List<List<Integer>> twosum(int[] arr, int target, int si){
+        List<List<Integer>> res = new ArrayList<>();
+        int i = si;
+        int j = arr.length-1;
+        while(i<j){
+            if(i!=si && arr[i]==arr[i-1]){
+                i++;
+                continue;
+            }
+            if(arr[i]+arr[j]== target){
+                List<Integer> al = new ArrayList<>();
+                al.add(arr[i]);
+                al.add(arr[j]);
+                res.add(al);
+                i++;
+                j--;
+            }else if(arr[i]+arr[j] < target){
+                i++;
+            }else{
+                j--;
+            }
+        }
+        return res;
+    }
+     public static List<List<Integer>> helper(int[] arr, int target, int k, int si){
+       if(k==2){
+         List<List<Integer>> base = twosum(arr,target,si);
+         return base;
+    }
+    List<List<Integer>> res = new ArrayList<>();
+    for(int i = si;i<arr.length-k+1;i++){
+        if(i!=si && arr[i]==arr[i-1]) continue;
+        List<List<Integer>> a = helper(arr,target-arr[i],k-1,i+1); // get pairs who have k-1 pairs and target = target - arr[i]
+        for(List<Integer> l:a){
+            l.add(arr[i]);
+            res.add(l);
+        }
+    }
+    return res;
+  }
+
+  public static List<List<Integer>> kSum(int[] arr, int target, int k) {
+    // write your code here
+    Arrays.sort(arr);
+    return helper(arr,target,k,0);
+   
+  }
+  
+  Approach 2 : 
+   public List<List<Integer>> twosum(int[] arr,int target,int si){
+        List<List<Integer>> res = new ArrayList<>();
+        int i = si,j=arr.length-1;
+        while(i<j){
+            if(i!=si && arr[i]==arr[i-1]){
+                i++;
+                continue;
+            }
+            if(arr[i]+arr[j]==target){
+                List<Integer> al = new ArrayList<>();
+                al.add(arr[i]);
+                al.add(arr[j]);
+                res.add(al);
+                i++;
+                j--;
+            }else if (arr[i]+arr[j]<target){
+                i++;
+            }else{
+                j--;
+            }
+        }
+        // System.out.println(res);
+        return res;
+    }
+    public List<List<Integer>> helper(int[] nums, int target, int si,int k){
+        if(k == 2){
+            return twosum(nums,target,si);
+        }
+        List<List<Integer>> res = new ArrayList<>();
+        for(int i = si;i<nums.length-k+1;i++){
+            if(i!=si && nums[i]==nums[i-1]) continue;
+            List<List<Integer>> a = helper(nums,target-nums[i],i+1,k-1);
+            for(List<Integer> al:a){
+                al.add(nums[i]);
+                res.add(al);
+            }
+        }
+        return res;
+    }
+    public List<List<Integer>> fourSum(int[] nums, int target) {
+        Arrays.sort(nums);
+        return helper(nums,target,0,4);
+        
+        
+    }
+```
+</p>
+</details>
