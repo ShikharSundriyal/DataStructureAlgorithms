@@ -1138,4 +1138,52 @@ public static void printPrimeUsingSieve(int n) {
 </p>
 </details>
   
+ 
+25. 290 Word Pattern (Leetcode) :
+  - Given a pattern and a string s, find if s follows the same pattern.
+  - Input: pattern = "abba", s = "dog cat cat dog" Output: true
+  - Input: pattern = "abba", s = "dog cat cat fish" Output: false
+  - Approach 1 : Using 2 HashMaps Time o(n) where n is the size of the pattern , space 0(M) where M . after splitting s length of array
+  - Here initial thought that comes to out mind is to create a single hashmap and store pattern[i]->s[i] as pair , and then travel over pattern and see whatever we have in hashmap is inline with the current pattern . But here one test case will fail i.e. 
+    - Pattern : "abba" , s = "dog dog dog dog" here in hashmap both a and b will have dog as value when we travel over pattern and s it wont throw an error but it should
+  - To overcome this we create two hashmap which contains , s[i]->pattern[i] and pattern[i]->s[i]
+  - iterate over the pattern and string 
+    - If the hashmap1 does not contain the pattern key 'a' 
+      - then check if hm2 contains the string key 'dog' if it contains that means dog is mapped to a different pattern alphabet which is wrong return false 
+      - else hm2 also does not contain dog then add make entry to both hm1 and hm2
+    - If the hasmap1 already contains the pattern key i.e. 'a' then
+      - the value from hm1 'a' should be equal to the value we have when iterating over the string array if not then return false
   
+
+<details><summary>Code</summary>
+<p>
+  
+```java
+
+public boolean wordPattern(String pattern, String s) {
+       
+        String[] arr = s.split(" ");
+        if(arr.length != pattern.length()) return false;
+        HashMap<Character,String> hm1= new HashMap<>();
+        HashMap<String,Character> hm2= new HashMap<>();
+        
+        for(int i = 0;i<pattern.length();i++){
+            char ch = pattern.charAt(i);
+            String val = arr[i];
+            if(!hm1.containsKey(ch)){
+                if(hm2.containsKey(val)){
+                    return false;
+                }else{
+                hm1.put(ch,val);
+                hm2.put(val,ch);
+                }
+            }else{
+                String value = hm1.get(ch);
+                if(!value.equals(val)) return false;
+            }
+            }
+        
+        return true;
+    }
+  
+```
