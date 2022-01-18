@@ -1187,3 +1187,55 @@ public boolean wordPattern(String pattern, String s) {
     }
   
 ```
+</p>
+</details>
+  
+26. 605 Can Place Flowers :
+  - Given an integer array flowerbed containing 0's and 1's, where 0 means empty and 1 means not empty, and an integer n, return if n new flowers can be planted in the flowerbed without violating the no-adjacent-flowers rule.
+  - Approach 1 : 0(N)
+    - iterate over the array 
+    - if index == 0 check only i+1 
+    - if index == arr.length-1 then check only i-1
+    - else check i+1 and i-1 at both index it should be 0.
+ 
+  
+<details><summary>Code</summary>
+<p>
+  
+```java
+ public boolean canPlaceFlowers(int[] arr, int n) {
+        if(n == 0 ) return true;
+        if(arr.length == 1) {
+            if(arr[0]==0) return true;
+            else return false;
+        }
+        for(int i = 0;i<arr.length;i++){
+            if(arr[i]==0){
+                if(i == 0  ){
+                    if(arr[i+1]==0){
+                        arr[i]=1;
+                        n--;
+                    }
+                }else if(i == arr.length-1){
+                    if(arr[i-1]==0){
+                        arr[i]=1;
+                        n--;
+                    }
+                }
+                else{
+                    if(arr[i-1]==0 && arr[i+1]==0){
+                        arr[i]=1;
+                        n--;
+                    }
+                }
+            }
+            if(n==0) return true;
+        }
+        return false;
+    }
+  
+  
+```
+  
+</p>
+</details>
