@@ -1239,3 +1239,43 @@ public boolean wordPattern(String pattern, String s) {
   
 </p>
 </details>
+
+  
+27. 268 Missing Number (Leetcode):
+  - Given an array nums containing n distinct numbers in the range [0, n], return the only number in the range that is missing from the array.
+  - Approach 1 : 0(N) , O(1)
+    - Create an boolean array and iterate over orignal array mark all the index which are coming as element in arr.
+    - Then iterate over the array and see which idx is false that is the missing number
+  - Approach 2 : 0(N) , O(1)
+    - use sum of first n numbers formula , subtract the sum of array from the sum of n number that will be the answer.
+  
+  
+<details><summary>Code</summary>
+<p>
+  
+```java
+  
+public int missingNumber1(int[] nums) {
+        boolean[] arr = new boolean[nums.length+1];
+        
+        for(int i:nums){
+            arr[i] = true;
+        }
+        for(int i = 0;i<arr.length;i++){
+            if(arr[i] == false) return i;
+        }
+        return arr.length;
+    }
+     public int missingNumber(int[] arr) {
+        int n = arr.length;
+        int s = (n*(n+1) )/2;
+        for(int i:arr){
+            s= s-i;
+        } 
+        return s;
+    }
+  
+```
+  
+</p>
+</details>
