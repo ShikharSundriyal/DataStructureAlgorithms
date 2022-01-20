@@ -1279,3 +1279,57 @@ public int missingNumber1(int[] nums) {
   
 </p>
 </details>
+
+  
+28. 56 Merge Intervals :
+  - Given a list of intervals , return a list of overlapping intervals
+  - [[1,3],[2,6],[8,10],[15,18]] output -> [[1,6],[8,10],[15,18]]
+  - Sort the given array based on the starting index
+  - then add the first interval to an arraylist of 2d integers
+  - Now iterate over the remianing intervals and check if the current interval's starting point is less than or equal to the arraylist's last intervals ending idx, if yes change the ending idx of arraylist to Math.max(endingidxof arraylist, endingidx of interval over where we are iterating)
+  
+  
+<details><summary>Code</summary>
+<p>
+  
+```java
+  
+public int[][] merge(int[][] intervals) {
+        if(intervals.length == 0) return new int[0][2];
+        Arrays.sort(intervals,(a,b)->{
+           return a[0]-b[0]; 
+        });
+        ArrayList<int[][]> al = new ArrayList<>();
+        int[][] smallInterval1 = new int[1][2];
+        smallInterval1[0][0] = intervals[0][0];
+        smallInterval1[0][1] = intervals[0][1];
+        al.add(smallInterval1);
+        // al.add(intervals[0]);
+        // System.out.println(al);
+        for(int i = 1;i<intervals.length;i++){
+            int startingIdx = intervals[i][0];
+            int endingIdx = intervals[i][1];
+            if(startingIdx <= al.get(al.size()-1)[0][1]){
+                int[][] pair = al.get(al.size()-1);
+                int newEndingIdx = Math.max(endingIdx,al.get(al.size()-1)[0][1]);
+                pair[0][1] = newEndingIdx;
+            }else{
+                int[][] smallInterval = new int[1][2];
+                smallInterval[0][0] = startingIdx;
+                smallInterval[0][1] = endingIdx;
+                al.add(smallInterval);
+            }
+        }
+        int[][] res = new int[al.size()][2];
+        for(int i = 0;i<res.length;i++){
+            int[][] mergedInterval = al.get(i);
+            res[i][0] = mergedInterval[0][0];
+            res[i][1] = mergedInterval[0][1];
+        }
+        return res;
+    }
+  
+```
+  
+</p>
+</details>
