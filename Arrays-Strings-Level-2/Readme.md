@@ -1333,3 +1333,42 @@ public int[][] merge(int[][] intervals) {
   
 </p>
 </details>
+  
+
+29 . Minimum number of platforms required : 
+  - Given two arrays containing arrival and departure times of the trains find the minimum number of platforms required to accomodate the train schedule
+  - Approach 1 : 0(NlogN) 
+    - Sort both arrival and departure array , now keep i = 1 which will iterate over arrivals array and j=0 which will iterate over the departures array
+    - We will need a new platform if the the arrival time of current train is less than the departure time of a train .
+    - Incase the arrival time of current train is greater than the departure time of train then number of platform required will be one less
+    - Here we are only interested to know at a particular time how many trains are coming in parallel those many minimum number of platforms will be required.
+
+
+<details><summary>Code</summary>
+<p>
+  
+```java
+  
+static int findPlatform(int arr[], int dep[], int n)
+    {
+        // add your code here
+        int platform = 1,maxPlatform=1;
+    Arrays.sort(arr);
+    Arrays.sort(dep);
+    int i = 1,j=0;
+    while(i<arr.length && j<dep.length){
+        
+        if(arr[i]<=dep[j]){
+            platform++;
+            i++;
+        }else{
+            j++;
+            platform--;
+        }
+        if(maxPlatform<platform) maxPlatform = platform;
+    }
+    return maxPlatform;
+        
+    }
+  
+```  
