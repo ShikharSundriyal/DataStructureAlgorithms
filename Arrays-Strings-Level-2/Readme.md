@@ -1342,7 +1342,11 @@ public int[][] merge(int[][] intervals) {
     - We will need a new platform if the the arrival time of current train is less than the departure time of a train .
     - Incase the arrival time of current train is greater than the departure time of train then number of platform required will be one less
     - Here we are only interested to know at a particular time how many trains are coming in parallel those many minimum number of platforms will be required.
-
+    - Here we can think of as how many max trains are coming at a particular time instance for example
+        - train1 comes at 7 goes at 11 -> maxtrains at 7 o clock is 1 
+        - train2 comes at 8 goes at 1 -> maxtrains at 8 0 clock is 2 as 7 0 clock hasnt left yet
+        - train3 comes at 9 goes as 1:20 -> maxtrains at 9 o clock is 3 as nor train1 nor train2 have left
+        - train4 comes at 12 goes at 1:30 -> maxtrains at 12 is 3-1 as train1 has left (train 4 coming will be taken care in next iteration where arrival[i] will become greater than departure of j which means another train has come)
 
 <details><summary>Code</summary>
 <p>
@@ -1352,20 +1356,20 @@ public int[][] merge(int[][] intervals) {
 static int findPlatform(int arr[], int dep[], int n)
     {
         // add your code here
-        int platform = 1,maxPlatform=1;
+        int maxTrains = 1,maxPlatform=0;
     Arrays.sort(arr);
     Arrays.sort(dep);
     int i = 1,j=0;
     while(i<arr.length && j<dep.length){
         
         if(arr[i]<=dep[j]){
-            platform++;
+            maxTrains++;
             i++;
         }else{
             j++;
-            platform--;
+            maxTrains--;
         }
-        if(maxPlatform<platform) maxPlatform = platform;
+        if(maxTrains<platform) maxPlatform = maxTrains;
     }
     return maxPlatform;
         
