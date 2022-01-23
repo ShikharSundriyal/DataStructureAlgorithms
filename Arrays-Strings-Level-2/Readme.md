@@ -1450,3 +1450,59 @@ static int findPlatform(int arr[], int dep[], int n)
 
 </p>
 </details>
+
+  
+32. 986 Interval List Intersections :
+  - You are given two lists of closed intervals, firstList and secondList, where firstList[i] = [starti, endi] and secondList[j] = [startj, endj]. Each list of intervals is pairwise disjoint and in sorted order.
+  - Return the intersection of these two interval lists.
+  - Input: firstList = [[0,2],[5,10],[13,23],[24,25]], secondList = [[1,5],[8,12],[15,24],[25,26]] 
+  - Output: [[1,2],[5,5],[8,10],[15,23],[24,24],[25,25]]
+  - Approach 1 : 0(N) as the intervals are already sorted
+    - Take 2 pointers , i and j. Keep i at 0 and j = 0
+    - the intersection Interval will be , startidx = Math.max(firstList start idx , secondList startIdx) and endidx = Math.min(firstList end idx, secondList endidx) ( this will be valid only if startidx <= endidx )
+  - whosesoever end idx is smaller that list's pointer needs to be increased , if both list's endInterval are same increase both pointers
+
+<details><summary>Code</summary>
+<p>
+
+```java
+  
+public int[][] intervalIntersection(int[][] firstList, int[][] secondList) {
+        ArrayList<int[][]> al = new ArrayList<>();
+        int i = 0,j=0;
+        while(i<firstList.length && j<secondList.length){
+            int s1 = firstList[i][0];
+            int e1 = firstList[i][1];
+            int s2 = secondList[j][0];
+            int e2 = secondList[j][1];
+            int commonstart = Math.max(s1,s2);
+            int commonend = Math.min(e1,e2);
+            if(commonstart<=commonend){
+                int[][] a = new int[1][2];
+                a[0][0] = commonstart;
+                a[0][1] = commonend;
+                al.add(a);
+            }
+            if(e1<e2){
+                i++;
+            }else if(e1>e2){
+                j++;
+            }else{
+                i++;
+                j++;
+            }   
+        }
+        int[][] fres = new int[al.size()][2];
+        int k = 0;
+        for(int[][] arr:al){
+            fres[k][0] = arr[0][0];
+            fres[k][1]=arr[0][1];
+            k++;
+        }
+        return fres;
+    }
+  
+```
+  
+</p>
+</details>
