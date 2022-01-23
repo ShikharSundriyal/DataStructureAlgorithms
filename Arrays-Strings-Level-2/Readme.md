@@ -1413,3 +1413,40 @@ static int findPlatform(int arr[], int dep[], int n)
   
 </p>
 </details>
+
+31. 253 Meeting Rooms II :
+  - Given an array of meeting time intervals intervals where intervals[i] = [starti, endi], return the minimum number of conference rooms required.
+  - Same approach as minimum number of plarforms.
+  - Just convert the 2d array into teo different array which correspond to start time and end time 
+  
+<details><summary>Code</summary>
+<p>
+
+```java
+  public int minMeetingRooms(int[][] intervals) {
+        int[] start = new int[intervals.length];
+        int[] end = new int[intervals.length];
+        for(int i = 0;i<intervals.length;i++){
+            start[i] = intervals[i][0];
+            end[i] = intervals[i][1];
+        }
+        Arrays.sort(start);
+        Arrays.sort(end);
+        int  i = 0, j = 0, minrooms = Integer.MIN_VALUE, rooms = 0;
+        while(i<start.length && j<end.length){
+            if(start[i]<end[j]){
+                rooms++;
+                i++;
+            }else{
+                rooms--;
+                j++;
+            }
+            minrooms = Math.max(rooms,minrooms);
+        }
+        return minrooms;
+    }
+  
+```
+
+</p>
+</details>
