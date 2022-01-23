@@ -1506,3 +1506,49 @@ public int[][] intervalIntersection(int[][] firstList, int[][] secondList) {
   
 </p>
 </details>
+  
+
+33. 680 Valid Palindrome II :
+  - Given a string s, return true if the s can be palindrome after deleting at most one character from it.
+  - Approach 1 : 0(N) two pointer approach
+    - travel over the string, wherever we find two character from front and end are not equal , check if we remove the ith or jth character and after that the remaining string is palindrone or not.
+  
+<details><summary>Code</summary>
+<p>
+
+```java
+ public static boolean isPali(String str, int s, int e){
+    while(s<e){
+        if(str.charAt(s)==str.charAt(e)){
+            s++;
+            e--;
+        }else{
+            return false;
+        }
+    }
+    return true;
+}
+  // ~~~~~~~~~~~~~~User Section~~~~~~~~~~~~~~
+  public static boolean validPalindrome(String s) {
+    // write your code here
+    int i = 0,j=s.length()-1;
+    while(i<j){
+        if(s.charAt(i) != s.charAt(j)){
+            boolean res1 = isPali(s,i+1,j);
+            if(res1) return true;
+            boolean res2 = isPali(s,i,j-1);
+            if(res2) return true;
+            return false;
+        }else{
+            i++;
+            j--;
+        }
+    }
+    return true;
+    
+  } 
+  
+```
+  
+</p>
+</details>
