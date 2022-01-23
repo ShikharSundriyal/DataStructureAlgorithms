@@ -1375,4 +1375,41 @@ static int findPlatform(int arr[], int dep[], int n)
         
     }
   
+
 ```  
+  
+</p>
+</details>
+  
+  
+30. Meeting Rooms I :
+  - Given an array containing the start time and end time of the meetings find if a person can attend all the meetings
+  - Approach 1 : 0(NlogN)
+    - sort the given intervals array based on the start time of the meeting 
+    - then travel over the intervals array and check if startidx of i is less than the end interval of the i-1 then return false
+
+  
+<details><summary>Code</summary>
+<p>
+  
+  
+```java
+ public static boolean meetingRooms(int intervals[][]){
+        // write code here
+        Arrays.sort(intervals, (a,b)->{
+           return a[0]-b[0]; 
+        });
+        
+        for(int i = 1;i<intervals.length;i++){
+            int endidx = intervals[i-1][1];
+            int startidx = intervals[i][0];
+            if(startidx<endidx) return false;
+        }
+        return true;
+    }
+  
+  
+```
+  
+</p>
+</details>
