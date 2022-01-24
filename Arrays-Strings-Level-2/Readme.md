@@ -1552,3 +1552,45 @@ public int[][] intervalIntersection(int[][] firstList, int[][] secondList) {
   
 </p>
 </details>
+
+  
+34. Car Pooling : 
+  - Given an input [passenger, startlocation, drop location] in an list and a capaity of the cab find if the cab can complete the trip without overloading the cab.
+  - If we look at the input the input of intervals is very similar to range addition , here we will put the overall affect of all the passenger 
+  - the array we will create of size of maxlength of the destinaton from all the intervals i.e. the maximum distance the cab has to go .
+  - this way we can will have at each location what was the capacity of the cab and if it increases from capacity we return false
+
+<details><summary>Code</summary>
+<p>
+  
+```java
+  
+  public boolean carPooling(int[][] trips, int capacity) {
+        int maxL = 0;
+        for(int i =0;i<trips.length;i++){
+            if(trips[i][2]>maxL){
+                maxL = trips[i][2];
+            }
+        }
+        
+        int[] arr = new int[maxL+1];
+        for(int i =0;i<trips.length;i++){
+            int start = trips[i][1];
+            int end = trips[i][2];
+            int passenger = trips[i][0];
+            arr[start]+=passenger;
+            arr[end]-=passenger;
+        }
+        if(arr[0]>capacity) return false;
+        for(int i = 1;i<arr.length;i++){
+            arr[i] = arr[i]+arr[i-1];
+            if(arr[i] > capacity) return false;
+        }
+        return true;
+    }
+  
+```
+  
+  
+</p>
+</details>
