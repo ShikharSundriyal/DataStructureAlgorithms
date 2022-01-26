@@ -1699,3 +1699,47 @@ public int nextGreaterElement(int n) {
   
 </p>
 </details>
+
+  
+37. 324 Wiggle Sort II :
+  - Given an integer array nums, reorder it such that nums[0] < nums[1] > nums[2] < nums[3] >
+  - Its different from wiggle sort 1 as equality sign is not present 
+  - Approach 1 : 
+    - Sort the array 
+    - keep a pointer k = arr.length-1
+    - start filling the odd index of the result array , i=1 , i+=2 res[i] = arr[k] , k--;
+    - start filling the even index of result array, i = 0; i+=2 res[i] = arr[k] ,k -- (while filling odd index , at the end of the loop k is at the correct position)
+  
+  
+<details><summary>Code</summary>
+<p> 
+    
+  
+  
+```java  
+  
+   public void wiggleSort(int[] nums) {
+        Arrays.sort(nums);
+        int[] res = new int[nums.length];
+        int k = res.length-1;
+        for(int i = 1;i<res.length;i+=2){
+            res[i] = nums[k];
+            k--;
+        }
+        
+        // nums = res;
+        for(int i =0 ;i<res.length;i+=2){
+            res[i]=nums[k];
+            k--;
+        }
+        for(int i = 0;i<res.length;i++){
+            nums[i] = res[i];
+        }
+    }
+  
+```
+    
+  
+</p>
+</details>  
+                                                                                            
