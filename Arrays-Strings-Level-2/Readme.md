@@ -1661,3 +1661,41 @@ public int nextGreaterElement(int n) {
   
 </p>
 </details>
+
+  
+36. 280 Wiggle Sort :
+  - Given an integer array nums, reorder it such that nums[0] <= nums[1] >= nums[2] <= nums[3] >=
+  - Approach 1 : Time 0(n), Space 0(1)
+    - if we look at the order mentioned , the elements at the odd index follow a property i.e. they are larger than left and right element and similarly the even indexes follow that they are smaller than both right and left element
+    - we will use the same insight and travel over the array if idx is even we will check if it is larger than i+1 element if yes we perform a swap, similarly for odd idx
+    - we need not compare with the i-1th idx because while moving from left to right we would have already satisfied the first condition that is either a <= b in case of and in next index we need not compare with i-1th idx 
+
+  
+<details><summary>Code</summary>
+<p> 
+    
+  
+  
+```java
+
+ public void swap(int[] nums, int i, int j){
+        int tmp = nums[i];
+        nums[i]=nums[j];
+        nums[j]=tmp;
+    }
+    public void wiggleSort(int[] nums) {
+        
+        for(int i = 0;i<nums.length-1;i++){
+            if(i%2 == 0 && nums[i]>nums[i+1]){
+                swap(nums, i, i+1);
+            }else if(i % 2 !=0 && nums[i] < nums[i+1]){
+                swap(nums, i, i+1);
+            }    
+        }
+    }
+                                                       
+```
+    
+  
+</p>
+</details>
