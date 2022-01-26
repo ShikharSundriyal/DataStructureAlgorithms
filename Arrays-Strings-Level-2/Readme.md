@@ -1594,3 +1594,70 @@ public int[][] intervalIntersection(int[][] firstList, int[][] secondList) {
   
 </p>
 </details>
+
+35. 556 Next Greater Element III :
+  - Given a positive integer n, find the smallest integer which has exactly the same digits existing in the integer n and is greater in value than n. If no such positive integer exists, return -1.
+  - Approach 1 :
+    - Take a pointer i and eep ar end of the string, and traverse and find the first dip i.e. where str.charAt(i)>str.charAt(i-1)
+    - reverse the string from , ith position to str.length()
+    - k = i-1 , now travel from ith idx and find an element whose just greater than str.charAt(k) , swap that element with str.charAt(k)
+
+  
+<details><summary>Code</summary>
+<p> 
+  
+  
+```java
+  
+public int nextGreaterElement(int n) {
+        String str = n+"";
+        StringBuilder sb = new StringBuilder(str);
+        int i = sb.length()-1;
+        boolean flg = false;
+        while(i>0){
+            //first dip idx
+            if(sb.charAt(i)>sb.charAt(i-1)){
+                flg = true;
+                break;
+            }
+            i--;
+        }
+        if(flg == false){
+            return -1;
+        }else{
+            reverse(sb,i,sb.length()-1);
+            int k = i-1;
+            // System.out.println(k);
+            while(i<sb.length()){
+                if(sb.charAt(i)>sb.charAt(k)){
+                    // System.out.println("swap");
+                    char tmp = sb.charAt(i);
+                    sb.setCharAt(i,sb.charAt(k));
+                    sb.setCharAt(k,tmp);
+                    break;
+                }
+                i++;
+            }
+            Long res = Long.parseLong(sb.toString());
+            if(res>Integer.MAX_VALUE || res < Integer.MIN_VALUE){
+                return -1;
+            }else{
+                return Integer.parseInt(sb.toString());
+            }
+        }
+        
+    }
+    public void reverse(StringBuilder sb, int si, int end){
+        while(si<end){
+            char tmp = sb.charAt(si);
+            sb.setCharAt(si,sb.charAt(end));
+            sb.setCharAt(end,tmp);
+            si++;
+            end--;
+        }
+    }  
+  
+```
+  
+</p>
+</details>
