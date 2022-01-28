@@ -132,3 +132,69 @@ public boolean searchMatrix(int[][] matrix, int target) {
   
 </p>
 </details>
+
+  
+4. 475 Heaters :
+  -Every house can be warmed, as long as the house is within the heater's warm radius range. Given the positions of houses and heaters on a horizontal line, return the minimum radius standard of heaters so that those heaters could cover all houses.
+  - Approach 1 Brute Force 0(heaters.length*houses.length): 
+    - On reading the question we can see that for every house we have to find the the closest heater and the maximum amongst the minimum's will be the answer.
+    - If we do it via brute force we will iterate over each house and then iterate over heaters for each house and find the closest heater to that house and then compare it with the exixting max.
+  - Approach 2 : Optimised (houses.length *log(heaters.length)) + 0((heaters.length)*log(heaters.length))
+    - If we look at the brute force approach we observe that instead iterating over heaters array for each house, we need to find the ceil and floor which means we need to find only the two clostest heater from the house and which ever is minimum of these two will be the radius for this house. For this we will need to sort the heaters array.
+    - then we compare it with already existing minRadius amongst other radius .
+
+
+  
+<details><summary>Code</summary>
+<p>
+
+```java
+  
+  class Pair{
+        int ceil;
+        int floor;
+        Pair(int ceil, int floor){
+            this.ceil= ceil;
+            this.floor = floor;
+        }
+    }
+    public Pair helper(int house,int[] heaters){
+        //here we find the heater which is closest to the house i.e. closest heater will be either just before the house or just after the house so we find ceil and floor
+        int lo = 0,hi = heaters.length-1;
+        int possibleceil=Integer.MAX_VALUE,possiblefloor=Integer.MIN_VALUE;
+        while(lo<=hi){
+            int mid = (lo+hi)/2;
+            
+            if(heaters[mid] == house){
+                return new Pair(0,0);
+            }else if(heaters[mid] > house){
+                // System.out.println("cc");
+                possibleceil = heaters[mid];
+                hi = mid-1;
+            }else{
+                possiblefloor = heaters[mid];
+                lo = mid+1;
+            }
+            
+        }
+        return new Pair(possibleceil,possiblefloor);
+        
+    }
+    public int findRadius(int[] houses, int[] heaters) {
+        int minumumRadius = 0;
+        Arrays.sort(heaters);
+        for(int i = 0;i<houses.length;i++){
+            Pair p = helper(houses[i],heaters);
+            // System.out.println(p.floor + " " +p.ceil);
+            int d1 = (p.ceil==Integer.MAX_VALUE ? Integer.MAX_VALUE:p.ceil - houses[i]);
+            int d2 = (p.floor == Integer.MIN_VALUE) ? Integer.MAX_VALUE:houses[i]-p.floor;
+            int m = Math.min(d1,d2);
+            minumumRadius = Math.max(m,minumumRadius);
+        }
+        return minumumRadius;
+    }
+```
+  
+</p>
+</details>
+  
