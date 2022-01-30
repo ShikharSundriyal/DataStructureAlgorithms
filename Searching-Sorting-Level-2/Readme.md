@@ -198,3 +198,31 @@ public boolean searchMatrix(int[][] matrix, int target) {
 </p>
 </details>
   
+  
+5. Given an array A[ ] of positive integers of size N, where each value represents the number of chocolates in a packet. Each packet can have a variable number of chocolates. There are M students, the task is to distribute chocolate packets among M students such that :
+    Each student gets exactly one packet.
+    The difference between maximum number of chocolates given to a student and minimum number of chocolates given to a student is minimum.
+  - Approach1 : 
+    - Sort the chocolates array
+    - Now iterate over the array for i = 0 to i <= arr.length-m
+      - check if arr[i+m-1] - arr[i] < minsofar if yes minsofar = arr[i+m-1]-arr[i]
+
+<details><summary>Code</summary>
+<p>
+
+```java
+   public long findMinDiff (ArrayList<Long> a, long n, long m)
+    {
+        Collections.sort(a);
+        // your code here
+        long minsofar = Integer.MAX_VALUE;
+        for(int i = 0;i<=a.size()-(int)(m);i++){
+            long gap = a.get(i+(int)(m)-1)-a.get(i);
+            if(gap<minsofar){
+                minsofar = gap;
+            }
+        }
+        return minsofar;
+    }
+  
+```
