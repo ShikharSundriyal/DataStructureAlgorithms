@@ -274,3 +274,56 @@ public boolean searchMatrix(int[][] matrix, int target) {
     
 </p>
 </details>
+
+  
+7. 724 Find Pivot Index :
+  Given an array of integers nums, calculate the pivot index of this array.
+
+The pivot index is the index where the sum of all the numbers strictly to the left of the index is equal to the sum of all the numbers strictly to the index's right.
+
+If the index is on the left edge of the array, then the left sum is 0 because there are no elements to the left. This also applies to the right edge of the array.
+
+Return the leftmost pivot index. If no such index exists, return -1.
+  - Approach 1 : Brute Force 0(n2) 
+    - travel from i = 1st idx to arr.length-1
+    - now travel from 0 to i-1 and find sum
+    - and travel from i+1 to arr.length and find sum 
+    - check if both sum's are equal if yes return i
+ 
+  - Approach 2 : Optimised 0(N) , space 0(N)
+    - make two arrays one with prefic sum and one with suffix sum 
+    - now iterate over the array from i = 1 to i< arr.length - 1
+      - check if prefix[i-1] == suffix[i+1] return i;
+
+ 
+
+                                                            
+<details><summary>Code</summary>
+<p>
+
+```java
+ public int pivotIndex(int[] nums) {
+        int[] pre = new int[nums.length];
+        int[] suf = new int[nums.length];
+        pre[0] = nums[0];
+        suf[nums.length-1] = nums[nums.length-1];
+        for(int i = 1;i<pre.length;i++){
+            pre[i] = pre[i-1] + nums[i];
+        }
+        for(int i = nums.length-2;i>=0;i--){
+            suf[i] = suf[i+1]+nums[i];
+        }
+        if(suf[1] == 0) return 0;
+        
+        for(int i = 1;i<nums.length-1;i++){
+            if(pre[i-1] == suf[i+1]) return i;
+        }
+        if(pre[nums.length-2] == 0) return nums.length-1;
+        return -1;
+    }
+  
+```
+  
+    
+</p>
+</details>
