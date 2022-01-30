@@ -226,3 +226,51 @@ public boolean searchMatrix(int[][] matrix, int target) {
     }
   
 ```
+  
+    
+</p>
+</details>
+  
+  
+6. Count the triplets :
+  - Given an array of distinct integers. The task is to count all the triplets such that sum of two elements equals the third element.
+  - Approach 1 : 0(nlogn)
+    - We can apply sum of pairs equal to target concept where target will become the arr[i]
+ 
+  
+<details><summary>Code</summary>
+<p>
+
+```java
+  
+  int pairsum(int[] arr, int target,int i,int j){
+        int count = 0;
+        while(i<j){
+            int sum = arr[i]+arr[j];
+            if(sum == target){
+                count++;
+                i++;
+                j--;
+            }else if (sum > target){
+                j--;
+            }else{
+                i++;
+            }
+        }
+        return count;
+    }
+    int countTriplet(int arr[], int n) {
+        // code here
+        Arrays.sort(arr);
+        int res = 0;
+        for(int i = n-1;i>=2;i--){
+            res+=pairsum(arr,arr[i],0,i-1);
+        }
+        return res;
+    }
+  
+```
+  
+    
+</p>
+</details>
