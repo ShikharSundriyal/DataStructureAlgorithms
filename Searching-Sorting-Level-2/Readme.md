@@ -323,7 +323,92 @@ Return the leftmost pivot index. If no such index exists, return -1.
     }
   
 ```
-  
-    
+
 </p>
 </details>
+
+  
+8. Koko Eating Bananas :
+  Koko loves to eat bananas. There are n piles of bananas, the ith pile has piles[i] bananas. The guards have gone and will come back in h hours.
+  Koko can decide her bananas-per-hour eating speed of k. Each hour, she chooses some pile of bananas and eats k bananas from that pile. If the pile has less than k bananas, she eats all of them instead and will not eat any more bananas during this hour.
+  Koko likes to eat slowly but still wants to finish eating all the bananas before the guards return.
+  Return the minimum integer k such that she can eat all the bananas within h hours.
+  
+    - Approach 1 : Brute Force 
+      - The possible speed of eating bananas per hour can be 1 to max of array. As if koko eats max of array bananas in every hour then in total arr.length hours it will eat all the piles of bananas
+      - We will write a function which checks if koko can eat all piles of bananas with current speed where speed will vary from 1 to max of array
+      - No of hours taken to eat each pile of bananas is ceil of bananas/speed 
+    - Approach 2 : Optimised
+      - Here we will use binary search as we know the answer can range from 1 to max of array and 1 to 11 is sorted so we can use binary search
+      - lo = 1 and hi = max of array
+         - we find mid and check if with speed of mid koko can eat all bananas if yes then we mark this mid as possible ans and make hi = mid-1
+         - if with k speed koko cant eat all bananas then we will make lo = mid + 1 as we need know we need to increase the speed 
+  
+  
+  
+                                                            
+<details><summary>Code</summary>
+<p>
+
+```java
+  // brute force 
+  class Solution {
+    public boolean caneat(int[] piles,int speed, int hour){
+        for(int bananas:piles){
+            int hrs = (int)(Math.ceil(1.0*bananas/speed)); //time taken in each pile
+            hour-=hrs;
+            if(hour<0) return false;
+        }
+        return true;
+    }
+    public int minEatingSpeed(int[] piles, int h) {
+        // possible speed is 1 to 11
+        int maxSpeed = 0;
+        for(int val:piles){
+            if(val>maxSpeed){
+                maxSpeed = val;
+            }
+        }
+        for(int i = 1;i<=maxSpeed;i++){
+            if(caneat(piles,i,h)) return i;
+        }
+        return -1;
+    }
+}
+  
+  
+  
+  
+  
+ // optimised 
+  public boolean caneat(int[] piles,int speed, int hour){
+        for(int bananas:piles){
+            int hrs = (int)(Math.ceil(1.0*bananas/speed)); //time taken in each pile
+            hour-=hrs;
+            if(hour<0) return false;
+        }
+        return true;
+    }
+    public int minEatingSpeed(int[] piles, int h) {
+        // possible speed is 1 to 11
+        int maxSpeed = 0;
+        for(int val:piles){
+            if(val>maxSpeed){
+                maxSpeed = val;
+            }
+        }
+        int lo =1,hi = maxSpeed,ans = 0;
+        while(lo<=hi){
+            int mid = lo+(hi-lo)/2;
+            if(caneat(piles,mid,h)){
+                ans = mid;
+                hi = mid-1;
+            }else{
+                lo = mid+1;
+            }
+        }
+        return ans;
+    }
+  
+  
+```
