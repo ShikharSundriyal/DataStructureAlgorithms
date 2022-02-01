@@ -477,3 +477,55 @@ Return the leftmost pivot index. If no such index exists, return -1.
   
   
   
+10. 1011 Capacity To Ship Packages Within D Days : (Similar to Allocate pages)
+  - A conveyor belt has packages that must be shipped from one port to another within days days.
+  The ith package on the conveyor belt has a weight of weights[i]. Each day, we load the ship with packages on the conveyor belt (in the order given by weights). We may not load more weight than the maximum weight capacity of the ship.
+  Return the least weight capacity of the ship that will result in all the packages on the conveyor belt being shipped within days days
+  - Approach 1 : 
+    - mincase if we place one by one the packages on the ship the minimum capacity of ship will be max of array as ship should be able to handle all the bags so minimum weight it should be able to handle is max of weights.
+    - maxcase will be if all the packages are loaded to the ship on the same day so ship should be able to handle sum of all weights
+    - Now we know the answer range we can apply binary search
+
+  
+<details><summary>Code</summary>
+<p>
+
+```java  
+  class Solution {
+    public  boolean canShipWithWeight(int[] arr,int min_weight,int days){
+        int total_weight = 0, days_taken = 1;
+        for(int i = 0;i<arr.length;i++){
+            total_weight+=arr[i];
+            if(total_weight>min_weight){
+                days_taken++;
+                total_weight = arr[i];
+            }
+        }
+        return days_taken<=days;
+    }
+
+  public  int shipWithinDays(int[]arr, int days) {
+    //write your code here
+    int lo =0,hi=0;
+    for(int val:arr){
+        hi +=val;
+        lo = Math.max(lo,val);
+    }
+    int poss = 0;
+    while(lo<=hi){
+        int mid = lo+(hi-lo)/2;
+        if(canShipWithWeight(arr,mid,days)){
+            poss = mid;
+            hi = mid-1;
+        }else{
+            lo = mid+1;
+        }
+    }
+    
+    return poss;
+  }
+
+}
+```
+</p>
+</details>    
