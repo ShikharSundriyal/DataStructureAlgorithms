@@ -415,9 +415,53 @@ Return the leftmost pivot index. If no such index exists, return -1.
 </p>
 </details>
 
+
+  
+9. 1283 Find the Smallest Divisor Given a Threshold  : Similar to Koko eating banans :
+  - Given an array of integers nums and an integer threshold, we will choose a positive integer divisor, divide all the array by it, and sum the division's result. Find the smallest divisor such that the result mentioned above is less than or equal to threshold.
+  Each result of the division is rounded to the nearest integer greater than or equal to that element. (For example: 7/3 = 3 and 10/2 = 5).
+  - Approach 1 : 
+    - Here its same as koko problem , here threshold is nothing but the total hours within which we have to finish the bananas
+    - divisor is nothing but the rate of eating banans
+    - and we need to find the smallest divisor
+
+<details><summary>Code</summary>
+<p>
+
+```java  
+  class Solution {
+    public boolean possible(int[] arr, int div, int threshold){
+        int sum = 0;
+        for(int i = 0;i<arr.length;i++){
+            sum+= (int)(Math.ceil(arr[i]*1.0/div));
+        }
+        return sum<=threshold;
+    }
+    public int smallestDivisor(int[] nums, int threshold) {
+        int lo = 1,hi = 0;
+        for(int val:nums){
+            hi = Math.max(hi,val);
+        }
+        int poss=0;
+        while(lo<=hi){
+            int mid = lo+(hi-lo)/2;
+            if(possible(nums,mid,threshold)){
+                poss = mid;
+                hi = mid-1;
+            }else{
+                lo = mid+1;
+            }
+        }
+        return poss;
+    }
+}
+  
+```
+</p>
+</details>  
+  
                       
-                      
-9. Allocate Minimum Number Of Pages (InterviewQuery): 
+10. Allocate Minimum Number Of Pages (InterviewQuery): 
   - Given an array of integers A of size N and an integer B.
   College library has N bags,the ith book has A[i] number of pages.You have to allocate books to B number of students so that maximum number of pages alloted to a student is minimum.
   A book will be allocated to exactly one student.
@@ -477,7 +521,7 @@ Return the leftmost pivot index. If no such index exists, return -1.
   
   
   
-10. 1011 Capacity To Ship Packages Within D Days : (Similar to Allocate pages)
+11. 1011 Capacity To Ship Packages Within D Days : (Similar to Allocate pages)
   - A conveyor belt has packages that must be shipped from one port to another within days days.
   The ith package on the conveyor belt has a weight of weights[i]. Each day, we load the ship with packages on the conveyor belt (in the order given by weights). We may not load more weight than the maximum weight capacity of the ship.
   Return the least weight capacity of the ship that will result in all the packages on the conveyor belt being shipped within days days
