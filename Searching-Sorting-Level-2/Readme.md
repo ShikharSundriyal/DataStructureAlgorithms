@@ -412,3 +412,68 @@ Return the leftmost pivot index. If no such index exists, return -1.
   
   
 ```
+</p>
+</details>
+
+                      
+                      
+9. Allocate Minimum Number Of Pages (InterviewQuery): 
+  - Given an array of integers A of size N and an integer B.
+  College library has N bags,the ith book has A[i] number of pages.You have to allocate books to B number of students so that maximum number of pages alloted to a student is minimum.
+  A book will be allocated to exactly one student.
+  Each student has to be allocated at least one book.Allotment should be in contiguous order, for example: A student cannot be allocated book 1 and book 3, skipping book 2.
+  - Approach1 : 
+    - if the number of students greater than the number of books then return -1 and books cannot be divided
+    - the answer will range from minimum number of pages that can be assigned and the maximum number of pages that can be assigned
+    - minimum number of pages that can be assigned is : if each student is given one book then max of array will be the minimum pages that will be assigned in this permutation
+    - maximum number of pages that can be asigned is : if all the books are assinged to a single student then minimum pages that need to be read by the student will be sum of arr
+    - Now we know that the answer will vary from max of array to sum of array so we can apply binary search
+    - we write a function can AllocateBooks which checks if x number of books can be assinged to given number of students
+
+  
+                                                            
+<details><summary>Code</summary>
+<p>
+
+```java
+  
+  public class Solution {
+    public boolean canAllocate(int[] arr, int mid, int pages){
+        int p =1,sum=0;
+        for(int i = 0;i<arr.length;i++){
+            sum+=arr[i];
+            if(sum>mid){
+                p++;
+                sum=arr[i];
+            }
+        }
+        return p<=pages;
+    }
+    public int books(int[] A, int B) {
+        if(A.length<B) return -1;
+    int hi=0,lo=Integer.MIN_VALUE;
+    for(int val: A){
+        hi+=val;
+        lo = Math.max(lo,val);
+    }
+    int poss = 0;
+    while(lo<=hi){
+        int mid = lo + (hi-lo)/2;
+        if(canAllocate(A,mid,B)){
+            poss = mid;
+            hi = mid-1;
+        }else{
+            lo = mid+1;
+        }
+    }
+    return poss;
+    }
+}
+
+  
+```
+</p>
+</details>  
+  
+  
+  
