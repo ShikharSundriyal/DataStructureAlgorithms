@@ -519,9 +519,58 @@ Return the leftmost pivot index. If no such index exists, return -1.
 </p>
 </details>  
   
+
+11. 410 Split Array Largest Sum :
+  -Given an array nums which consists of non-negative integers and an integer m, you can split the array into m non-empty continuous subarrays.
+  Write an algorithm to minimize the largest sum among these m subarrays.
+  - Approach 1 : Similar to allocate pages
+    - the answer will range from Max(arr) to sum(arr) 
+    - lo = Max(arr) when all the elements of the array come as arr.length subarrays then largest sum will be Max of array
+    - hi = sum(array) when all the elements of subarray come in single subarray then largest sum will be sum of all elements in array
+    - Now write a function which checks if it is possible to get mminimum of largest sum among 'm' subarray is equal to a given number
   
+ 
+<details><summary>Code</summary>
+<p>
+
+```java   
+ class Solution {
+    public boolean isPossible(int[] nums, int actual_sum, int subarrayscount){
+        int count = 1,sum =0;
+        for(int i = 0;i<nums.length;i++){
+            sum+=nums[i];
+            if(sum>actual_sum){
+                count++;
+                sum = nums[i];
+            }
+        }
+        return count<=subarrayscount;
+    }
+    public int splitArray(int[] nums, int m) {
+        int hi = 0,lo=0;
+        for(int val:nums){
+            hi +=val;
+            lo = Math.max(lo,val);
+        }
+        int poss = 0;
+        while(lo<=hi){
+            int mid = lo+(hi-lo)/2;
+            if(isPossible(nums,mid,m)){
+                poss = mid;
+                hi = mid-1;
+            }else{
+                lo = mid+1;
+            }
+        }
+        return poss;
+    }
+}
   
-11. 1011 Capacity To Ship Packages Within D Days : (Similar to Allocate pages)
+```
+</p>
+</details>    
+  
+12. 1011 Capacity To Ship Packages Within D Days : (Similar to Allocate pages)
   - A conveyor belt has packages that must be shipped from one port to another within days days.
   The ith package on the conveyor belt has a weight of weights[i]. Each day, we load the ship with packages on the conveyor belt (in the order given by weights). We may not load more weight than the maximum weight capacity of the ship.
   Return the least weight capacity of the ship that will result in all the packages on the conveyor belt being shipped within days days
