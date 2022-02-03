@@ -55,6 +55,21 @@ class Trie {
         }
         return true;
     }
+     
+    public void printAll(Node curr,String str){
+        if(curr.isEnd){
+            System.out.println(str);
+        }
+        
+        for(int i = 0;i<26;i++){
+            
+            if(curr.children[i] != null){
+                // System.out.println(i);
+                 char ch = (char)('a'+i);
+                printAll(curr.children[i],str+ch+"" );
+            }
+        }
+    }
 }
 
 ```
