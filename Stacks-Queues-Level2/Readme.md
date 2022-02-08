@@ -43,6 +43,69 @@ class Solution {
   }
 }
       
-   
+```   
+</p>
+</details>
+
+2. 84 Largest Rectangle in Histogram :
+  - Given an array of integers heights representing the histogram's bar height where the width of each bar is 1, return the area of the largest rectangle in the histogram.
+  - In this we will at each height[i] we will consider that height of rectangle is height[i] and we need to find the max possible widht , which will be next smallest element on the right - next smallest element of the left -1
+
+<details><summary>Code</summary>
+<p>
+
+```java
+  class Solution {
+    public int[] getNextSmallestLeft(int[] arr){
+        Stack<Integer> st = new Stack<>();
+        int n = arr.length;
+        int[] nge = new int[n];
+        st.push(0);
+        nge[0] = -1;
+        for(int i = 1;i<n;i++){
+            while(st.size()>0 && arr[st.peek()]>=arr[i]){
+                st.pop();
+            }
+            if(st.size()==0){
+                nge[i] = -1;
+            }else{
+                nge[i] = st.peek();
+            }
+            st.push(i);
+        }
+        return nge;
+    }
+    public int[] getNextSmallestRight(int[] arr){
+        Stack<Integer> st = new Stack<>();
+        int n = arr.length;
+        int[] nge = new int[n];
+        st.push(n-1);
+        nge[n-1] = n;
+        for(int i = n-2;i>=0;i--){
+            while(st.size()>0 && arr[st.peek()]>=arr[i]){
+                st.pop();
+            }
+            if(st.size()==0){
+                nge[i] = n;
+            }else{
+                nge[i] = st.peek();
+            }
+            st.push(i);
+        }
+        return nge;
+    }
+    public int largestRectangleArea(int[] heights) {
+        int[] nextSmallestLeft = getNextSmallestLeft(heights);
+        int[] nextSmallestRight = getNextSmallestRight(heights);
+        int ans = 0;
+        for(int i = 0;i<heights.length;i++){
+            int widht = nextSmallestRight[i] - nextSmallestLeft[i]-1;
+            ans = Math.max(widht*heights[i],ans);
+        }
+        return ans;
+    }
+}
+ 
+```   
 </p>
 </details>
