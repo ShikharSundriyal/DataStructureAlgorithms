@@ -109,3 +109,37 @@ class Solution {
 ```   
 </p>
 </details>
+
+  
+3. 921 Minimum Add to Make Parentheses Valid :
+  - Return the minimum number of moves required to make s valid.
+  - Simple approach is we need to remove the balanced brackets and the remaining unbalanced brackets will give us the count of additional parentheses requeired to make the string valid.
+  
+  
+<details><summary>Code</summary>
+<p>
+
+  class Solution {
+    public int minAddToMakeValid(String s) {
+        
+        Stack<Character> st = new Stack<>();
+        for(int i = 0;i<s.length();i++){
+            char ch = s.charAt(i);
+            if(ch == '('){
+                st.push(ch);
+            }else{
+                
+                if(st.size()>0 && st.peek()=='('){
+                    st.pop();
+                }else{
+                    st.push(ch);
+                }
+            }
+        }
+        return st.size();
+    }
+}
+ 
+```   
+</p>
+</details>
