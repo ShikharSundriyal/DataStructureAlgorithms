@@ -65,19 +65,14 @@
     {
         // Your code here
         HashMap<Integer,Integer> hm = new HashMap<>();
-        int res = 0,ps=arr[0];
+        int res = 0,ps=0;
         hm.put(0,-1);
         for(int i = 0;i<arr.length;i++){
-            if(i==0){
-                hm.put(arr[i],i);
+            ps +=arr[i];
+            if(hm.containsKey(ps)){
+                res = Math.max(res,i-hm.get(ps));
             }else{
-                ps = arr[i]+ps;
-                if(hm.containsKey(ps)){
-                    res = Math.max(res,i-hm.get(ps));
-                }else{
-                    hm.put(ps,i);    
-                }
-                
+                hm.put(ps,i);    
             }
         }
         return res;
