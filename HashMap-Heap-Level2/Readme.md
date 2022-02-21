@@ -119,6 +119,10 @@
 |gap|2|2|
   
   - this means after xth idx 2 more 0's were added and 2 more 1's were added
+  - Solution : 
+    - in hashmap we will store the difference as key and the index at which that gap is seen as value.
+    - initially diff is 0 for idx =-1 
+    - then we travel over the array and see and calculate the number of 0's till ith idx and count of 1's till ith idx using same prefix approach and then calculate the  difference and check if that difference is present in hashmap if yes then calculate the length of the subarray which will be i-hm.get(diff) or else add diff and idx to hm. 
   - Approach 2 : 
 
 
