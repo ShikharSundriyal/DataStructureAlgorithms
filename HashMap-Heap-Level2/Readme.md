@@ -44,3 +44,68 @@
   
 </p>
 </details>  
+
+
+2. Longest subarray having sum 0
+  - Brute force ,0(n3)
+    - Normal three loops , one for starting point, other for ending point and one for starting to ending and calculate the sum
+  - Approach 2 : 0(n2)
+    - whenever we see subarraya and sum together we can think of using prefix sum which will optimise the previous approach also as instead of third loop we can store the prefix sum in an array and calculate the subarray sum from starting point to ending point with the help of prefix sum array.
+  - Approach 3 : 0(n)
+    - We will use HashMap , which will store the pprefix sum against the index at which that prefix sum is seen, if we see a pefix sum again that means all the elements between current index and first index where same prefix sum was seen has a subarray sum of 0.
+
+
+
+<details><summary>Code</summary>
+<p>
+
+```java
+  
+   int maxLen(int arr[], int n)
+    {
+        // Your code here
+        HashMap<Integer,Integer> hm = new HashMap<>();
+        int res = 0,ps=arr[0];
+        hm.put(0,-1);
+        for(int i = 0;i<arr.length;i++){
+            if(i==0){
+                hm.put(arr[i],i);
+            }else{
+                ps = arr[i]+ps;
+                if(hm.containsKey(ps)){
+                    res = Math.max(res,i-hm.get(ps));
+                }else{
+                    hm.put(ps,i);    
+                }
+                
+            }
+        }
+        return res;
+    }
+                                                                   
+    //Brute force
+    int maxLen(int arr[], int n)
+    {
+        // Your code here
+        int res=0;
+        for(int i =0;i<arr.length;i++){
+            
+            for(int j= i;j<arr.length;j++){
+                int subarraysum =0;
+                for(int k=i;k<=j;k++){
+                    subarraysum+=arr[k];
+                   
+                }
+                 if(subarraysum == 0){
+                        res = Math.max(res,j-i+1);
+                    }
+                
+            }
+        }
+        return res;
+    }                                                               
+  
+```
+  
+</p>
+</details>  
