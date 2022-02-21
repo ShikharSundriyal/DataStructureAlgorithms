@@ -104,3 +104,54 @@
   
 </p>
 </details>  
+
+
+
+3. 525 Contiguous Array
+  - Given a binary array nums, return the maximum length of a contiguous subarray with an equal number of 0 and 1.
+  - Approach 1 : (gap of 0's and 1's at ith idx and gap of 0's and 1's at jth idx equal that means i+1 to jth idx has same number of 0's and 1's)
+  - if there was a gap of 2 between number of 0's - number of 1's at a point x and going forward if we see a gap again of 2 between number of 0's - number of 1's at y idx that means from x+1 to yth idx equal number of 0's and equal number of 0's and 1's were added to the number of 0's and 1's that were present at x idx as the gap between the two is still constant.
+  -
+| idx        | x| y  |
+| ------------- |:-------------:| -----:|
+| 0's|4|6|
+|1's|2|4|
+|gap|2|2|
+  
+  - this means after xth idx 2 more 0's were added and 2 more 1's were added
+  - Approach 2 : 
+
+
+<details><summary>Code</summary>
+<p>
+
+```java
+  
+  class Solution {
+    public int findMaxLength(int[] arr) {
+        HashMap<Integer,Integer> hm = new HashMap<>();
+        int res =0;
+        hm.put(0,-1); //difference btw num 0's - num 1's at -1 idx
+        int c0=0,c1=0,diff=0;
+        for(int i = 0;i<arr.length;i++){
+            if(arr[i] == 0){
+                c0++;
+                diff = c0-c1;
+            }else{
+                c1++;
+                diff = c0-c1;
+            }
+            if(hm.containsKey(diff)){
+                res = Math.max(res,i-hm.get(diff));
+            }else{
+                hm.put(diff,i);
+            }
+        }
+        return res;
+    }
+}
+
+```
+  
+</p>
+</details>  
