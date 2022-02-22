@@ -107,7 +107,42 @@
 
 
 
-3. 525 Contiguous Array
+3. Zero Sum Subarrays 
+  - You are given an array arr[] of size n. Find the total count of sub-arrays having their sum equal to 0.
+  - Approach 1 :
+    - here we will create a hashmap storing, Prefix sum and the frequency of prefix sum
+    - if we see a prefix sum already existing in the hashmap that means from i+1 to current index all elements sum is zero , in counting the nunber of sub arrays as the hashmap already has the frequency of number of times the same prefix sum was seen that means from the current position it can form x subarrayss wehre x is frequency of current prefix sum. 
+    - Once we have taken the impact to the overall answer we add the prefix sum to the hashmap with frequency as 1 if we are seeing the prefix sum for the 1st time or we increase the already existing frequency of that prefix sum.
+ 
+
+<details><summary>Code</summary>
+<p>
+
+```java
+  
+  public static int solution(int[] arr) {
+		// write your code here
+		HashMap<Integer,Integer>hm=new HashMap<>();
+		hm.put(0,1);
+		int ps = 0,ans=0;
+		for(int i = 0;i<arr.length;i++){
+		    ps+=arr[i];
+		    if(hm.containsKey(ps)){
+		        int freq = hm.get(ps);
+		        ans+=freq;
+		    }
+		    hm.put(ps,hm.getOrDefault(ps,0)+1);
+		}
+
+		return ans;
+	}
+
+```
+  
+</p>
+</details>  
+
+4. 525 Contiguous Array
   - Given a binary array nums, return the maximum length of a contiguous subarray with an equal number of 0 and 1.
   - Approach 1 : (gap of 0's and 1's at ith idx and gap of 0's and 1's at jth idx equal that means i+1 to jth idx has same number of 0's and 1's)
   - if there was a gap of 2 between number of 0's - number of 1's at a point x and going forward if we see a gap again of 2 between number of 0's - number of 1's at y idx that means from x+1 to yth idx equal number of 0's and equal number of 0's and 1's were added to the number of 0's and 1's that were present at x idx as the gap between the two is still constant.
