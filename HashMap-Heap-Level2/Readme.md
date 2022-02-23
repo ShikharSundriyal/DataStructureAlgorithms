@@ -390,3 +390,91 @@ class Solution {
   
 </p>
 </details>   
+
+
+
+10. Longest Subarray With Equal Number Of 0s 1s And 2s 
+    - You have to find length of the longest subarray with equal number of 0s, 1s, and 2s.
+    - Here we will create a hashmap of a state where state is count of 0's - count of 1's @ count 1's - count 2's vs first index where this state is seen
+    - at an index x and y if the two states are same that means elemnents from x+1 to y have equal number of 0 1 and 2
+
+
+<details><summary>Code</summary>
+<p>
+
+
+```java
+
+public static int solution(int[] arr) {
+        // write your code here
+        
+        HashMap<String,Integer> hm = new HashMap<>();
+        hm.put("0@0",-1);
+        int c0=0,c1=0,c2=0,ans=0;
+        for(int i =0;i<arr.length;i++){
+            if(arr[i] == 0){
+                c0++;
+            }else if(arr[i]==1){
+                c1++;
+            }else{
+                c2++;
+            }
+            
+            int d1 = c0-c1;
+            int d2 = c1-c2;
+            String k = d1+"@"+d2;
+            if(hm.containsKey(k)){
+                ans = Math.max(ans,i-hm.get(k));
+            }else{
+                hm.put(k,i);
+            }
+        }
+        return ans;
+        // return 0;
+    }
+
+```
+  
+</p>
+</details>   
+
+11. Count Of Subarrays With Equal Number Of 0s 1s And 2s 
+    - You have to find the count of subarrays with equal number of 0s, 1s, and 2s.
+    - Here we will create a hashmap of state vs frequency of this state seen earlier
+
+<details><summary>Code</summary>
+<p>
+
+
+```java
+
+ public static int solution(int[] arr) {
+        // write your code here
+        HashMap<String,Integer>hm = new HashMap<>();
+        hm.put("0@0",1);
+        int c0=0,c1=0,c2=0;
+        int ans = 0;
+        for(int i = 0;i<arr.length;i++){
+            if(arr[i]==0){
+                c0++;
+            }else if(arr[i]==1){
+                c1++;
+            }else{
+                c2++;
+            }
+            
+            int g1 = c0-c1;
+            int g2 = c1-c2;
+            String state = g1+"@"+g2;
+            if(hm.containsKey(state)){
+                ans+=hm.get(state);
+            }
+            hm.put(state,hm.getOrDefault(state,0)+1);
+        }
+        return ans;
+    }
+
+```
+  
+</p>
+</details>     
