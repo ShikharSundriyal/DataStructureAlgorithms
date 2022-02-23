@@ -478,3 +478,102 @@ public static int solution(int[] arr) {
   
 </p>
 </details>     
+
+
+12. Word Pattern :
+    - Given a pattern and a string s, find if s follows the same pattern.Here follow means a full match, such that there is a bijection between a letter in pattern and a non-empty word in s.
+    - Here there are three cases :
+        - case 1 : pattern character is not present in hashmap and word element is not present in hashset that means its a new valid entry , add pattern chracter mapping with word element in hashmap and add word element to the hashset
+        - case 2 : pattern character is already present in hashmap then we need to check if the key in hashmap is same as the current word element if not return false
+        - case 3 : deault case i.e. if hashset already has arr[i] return false
+
+<details><summary>Code</summary>
+<p>
+
+
+```java
+
+class Solution {
+    public boolean wordPattern(String pattern, String str) {
+       
+       String[] arr = str.split(" ");
+        if(arr.length !=pattern.length()) return false;
+        
+        HashMap<Character,String>hm = new HashMap<>();
+        HashSet<String>hs = new HashSet<>();
+        for(int i = 0;i<pattern.length();i++){
+            if(!hm.containsKey(pattern.charAt(i)) && !hs.contains(arr[i]) ){
+                hm.put(pattern.charAt(i),arr[i]);
+                hs.add(arr[i]);
+            }else if(hm.containsKey(pattern.charAt(i))){
+                if(!hm.get(pattern.charAt(i)).equals(arr[i])){
+                    return false;
+                }
+            }else{
+                return false;
+            }
+           
+        }
+        
+        
+        return true;
+    }
+}
+
+```
+  
+</p>
+</details> 
+
+
+13. 1502 Can Make Arithmetic Progression From Sequence :
+    - A sequence of numbers is called an arithmetic progression if the difference between any two consecutive elements is the same.Given an array of numbers arr, return true if the array can be rearranged to form an arithmetic progression. Otherwise, return false.
+    - Approach 0(N) :
+        -For a AP we need the common difference and the first term
+        - for first term we can find the min element in the array
+        - for common difference we find min and second min and subtract secondmin and min
+        - we put all the elements of the array in the hashset
+        - if common difference is 0 and hashset size is 1 then it means either array has only one element or all the elements in array are same so its a AP
+        - else if common difference is 0 but hashset size() >1 that means there are more than two different elements in the array but common difference which is 0 is suggesting that all elements should be same in the array that is not the case so we reuturn false
+        - now we travel from 1 to arr.length and check if the term is present in the hashset or not
+
+<details><summary>Code</summary>
+<p>
+
+
+```java
+
+class Solution {
+    public boolean canMakeArithmeticProgression(int[] arr) {
+         int min = Integer.MAX_VALUE,sec_min = Integer.MAX_VALUE;
+        HashSet<Integer> hs = new HashSet<>();
+        for(int i = 0;i<arr.length;i++){
+            if(arr[i]<min){
+                sec_min = min;
+                min = arr[i];
+            }else if(arr[i]<sec_min){
+                sec_min = arr[i];
+            }
+            
+            hs.add(arr[i]);
+        }
+        int cd = sec_min-min;
+        
+        if(cd == 0 && hs.size() == 1)
+            return true;
+        else if(cd == 0){
+            return false;
+        }
+        int term = min;
+        for(int i = 1;i<arr.length;i++){
+            term +=cd;
+            if(!hs.contains(term)) return false;
+        }
+        return true;
+    }
+}
+
+```
+  
+</p>
+</details>          
