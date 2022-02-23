@@ -196,3 +196,197 @@
   
 </p>
 </details>  
+
+	
+
+5. Subarrays with equal 1s and 0s :
+    - Given an array containing 0s and 1s. Find the number of subarrays having equal number of 0s and 1s.
+    - Approach 1 : 
+        - Here we will create a hashmap with key as gap i.e. difference in counts of zero - counts to 1's and value as the frequency we have seen this gap earlier
+        - Initially we will put a entry 0 , 0 as gap and count will be 1.
+        - Then we iterate over the array and increase the number of 1's and 0's based on the value of arr[i] and then calculate gap and see if we have seen the gap earlier
+            - If we have seen that gap earlier then the frequency of thegap from the hashmap is fetched and added to overall answer and then we increase the frequency of that gap and put it in the hashmap.
+            - if we are seeing that gap for the first time then we make a entry with gap,1
+
+<details><summary>Code</summary>
+<p>
+
+```java
+  
+class Solution
+{
+    //Function to count subarrays with 1s and 0s.
+    static int countSubarrWithEqualZeroAndOne(int arr[], int n)
+    {
+        // add your code here
+        HashMap<Integer,Integer>hm = new HashMap<>();
+        hm.put(0,1);
+        int c0=0,c1=0,ans=0;
+        for(int i = 0;i<arr.length;i++){
+            if(arr[i] == 0){
+                c0++;
+            }else{
+                c1++;
+            }
+            int gap = c0-c1;
+            if(hm.containsKey(gap)){
+                ans+=hm.get(gap);
+                hm.put(gap,hm.get(gap)+1);
+            }else{
+                hm.put(gap,1);
+            }
+        }
+
+        return ans;
+    }
+}
+
+```
+  
+</p>
+</details>              
+
+
+
+6. 325 Maximum Size Subarray Sum Equals k :
+    - Given an integer array nums and an integer k, return the maximum length of a subarray that sums to k. If there is not one, return 0 instead.
+    - As we need to get the max length of the subarray we wll create a hashmap which will store prefix sum vs first index at which that prefix sum is seen
+    - We will check if the hashmap contains prefixsum-k in the hashmap 
+        - if yes, we have an opportunity to make the answer
+    - then we make a entry of prefix sum vs index in hashmap if it does not contain prefix sum earlier
+
+<details><summary>Code</summary>
+<p>
+
+```java
+  
+class Solution {
+    public int maxSubArrayLen(int[] nums, int k) {
+        HashMap<Integer,Integer>hm = new HashMap<>();
+        hm.put(0,-1);
+        int ans=0,ps=0;
+        for(int i = 0;i<nums.length;i++){
+            ps+=nums[i];
+            
+            if(hm.containsKey(ps-k)){
+                ans = Math.max(ans,i-hm.get(ps-k));
+            }
+            hm.put(ps,hm.getOrDefault(ps,i));
+        }
+        return ans;
+    }
+}
+
+```
+  
+</p>
+</details>   
+
+7. 560 Subarray Sum Equals K :
+    - Given an array of integers nums and an integer k, return the total number of subarrays whose sum equals to k.
+    - Here as we have to find the total count of the subarrays we will create a hashmap of Prefix sum vs frequency of that prefix sum
+    - We will iterate over the array and create prefix sum, at each index we will check if 
+        - hashmap contains prefixsum - k 
+            - if yes then we have an opportunity to make the answer
+        - we will make the entry of the prefix sum in the hashmap , if we are seeing the prefix sum for the first time
+
+<details><summary>Code</summary>
+<p>
+
+```java
+
+ class Solution {
+    public int subarraySum(int[] nums, int k) {
+        HashMap<Integer,Integer>hm = new HashMap<>();
+        hm.put(0,1);
+        int ps = 0,ans=0;
+        for(int i = 0;i<nums.length;i++){
+            ps+=nums[i];
+            if(hm.containsKey(ps-k)){
+                ans+=hm.get(ps-k);
+            }
+            hm.put(ps,hm.getOrDefault(ps,0)+1);
+        }
+        return ans;
+    }
+}
+
+```
+  
+</p>
+</details>   
+
+
+8. Longest Subarray With Sum Divisible By K :
+    - You have to find length of the longest subarray whose sum is divisible by K.
+    - Here we will create a hashmap of rem vs index of first occurence of that rem
+    - the rem will be calculated with the prefix sum % k , as rem is always positive if we get a -ve remainder we will make it positive by adding k to it
+    - if we seen the remainder earlier that means from previous seen index + 1 to current idx the subarray is divisible by k 
+
+
+<details><summary>Code</summary>
+<p>
+
+```java
+ public static int solution(int[] arr, int k) {
+        // write your code here
+        HashMap<Integer,Integer> hm = new HashMap<>();
+        hm.put(0,-1);
+        int ans = 0,ps=0;
+        for(int i = 0;i<arr.length;i++){
+            ps+=arr[i];
+            int rem = ps%k;
+            if(rem<0){
+                rem+=k;
+            }
+            
+            if(hm.containsKey(rem)){
+                ans = Math.max(ans,i-hm.get(rem));
+            }
+            hm.put(rem,hm.getOrDefault(rem,i));
+        }
+
+        return ans;
+    }
+    
+
+```
+  
+</p>
+</details>   
+
+9. 974 Subarray Sums Divisible by K :
+    - Given an integer array nums and an integer k, return the number of non-empty subarrays that have a sum divisible by k.  
+    - Here we will create a hashmap of rem vs number of times we have seen this rem earlier
+    - if we seen the remainder earlier that means from previous seen index+1 to current idx the subarray is divisible by k but as we only need the count of subarrays we will get the count of how many times we have seen this remainder which will the number of subarrays which are divisible. 
+
+
+<details><summary>Code</summary>
+<p>
+
+
+```java
+
+class Solution {
+    public int subarraysDivByK(int[] arr, int k) {
+        HashMap<Integer,Integer>hm = new HashMap<>();
+        int ps =0,ans=0;
+        hm.put(0,1);
+        for(int i =0;i<arr.length;i++){
+            ps+=arr[i];
+            int rem = ps%k;
+            if(rem<0)
+                rem+=k;
+            if(hm.containsKey(rem)){
+                ans +=hm.get(rem);
+            }
+            hm.put(rem,hm.getOrDefault(rem,0)+1);
+        }
+        return ans;
+    }
+}
+
+```
+  
+</p>
+</details>   
