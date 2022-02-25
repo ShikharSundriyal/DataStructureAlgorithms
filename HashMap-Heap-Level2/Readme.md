@@ -121,21 +121,21 @@
 ```java
   
   public static int solution(int[] arr) {
-		// write your code here
-		HashMap<Integer,Integer>hm=new HashMap<>();
-		hm.put(0,1);
-		int ps = 0,ans=0;
-		for(int i = 0;i<arr.length;i++){
-		    ps+=arr[i];
-		    if(hm.containsKey(ps)){
-		        int freq = hm.get(ps);
-		        ans+=freq;
-		    }
-		    hm.put(ps,hm.getOrDefault(ps,0)+1);
-		}
+        // write your code here
+        HashMap<Integer,Integer>hm=new HashMap<>();
+        hm.put(0,1);
+        int ps = 0,ans=0;
+        for(int i = 0;i<arr.length;i++){
+            ps+=arr[i];
+            if(hm.containsKey(ps)){
+                int freq = hm.get(ps);
+                ans+=freq;
+            }
+            hm.put(ps,hm.getOrDefault(ps,0)+1);
+        }
 
-		return ans;
-	}
+        return ans;
+    }
 
 ```
   
@@ -159,8 +159,8 @@
     - initially diff is 0 for idx =-1 
     - then we travel over the array and see and calculate the number of 0's till ith idx and count of 1's till ith idx using same prefix approach and then calculate the  difference and check if that difference is present in hashmap if yes then calculate the length of the subarray which will be i-hm.get(diff) or else add diff and idx to hm .
   - Approach 2
-	- Repace 0 with -1 and then apply longest subarray with sum 0 
-	
+    - Repace 0 with -1 and then apply longest subarray with sum 0 
+    
 
 
 <details><summary>Code</summary>
@@ -197,7 +197,7 @@
 </p>
 </details>  
 
-	
+    
 
 5. Subarrays with equal 1s and 0s :
     - Given an array containing 0s and 1s. Find the number of subarrays having equal number of 0s and 1s.
@@ -577,3 +577,163 @@ class Solution {
   
 </p>
 </details>          
+
+
+14. 205 Isomorphic Strings :
+    - Given two strings s and t, determine if they are isomorphic.Two strings s and t are isomorphic if the characters in s can be replaced to get t.All occurrences of a character must be replaced with another character while preserving the order of characters. No two characters may map to the same character, but a character may map to itself.
+    - Approach 1 : 
+        - Very Similar to Word Pattern problem
+        - Here we will create one hashmap and one hashset.
+        - three cases :
+            - If there is not an entry of string s ith character in hashmap and ith character of string t is not present in hashset then
+                - make an entry in hashmap ( s.charAt(i), t.charAt(i)) and hashset t.charAt(i)
+            - If there is entry of string s ith character in hashmap then,
+                - we need to check if the current chacter from string t and the hashmap entry are same or not
+            - If the hashset already has an entry for t string ith character that means two characters are mapping to same character
+
+
+<details><summary>Code</summary>
+<p>
+
+
+```java
+class Solution {
+    public boolean isIsomorphic(String s, String t) {
+        HashMap<Character,Character> hm = new HashMap<>();
+        HashSet<Character>hs = new HashSet<>();
+        for(int i =0;i<s.length();i++){
+            if(!hm.containsKey(s.charAt(i)) && !hs.contains(t.charAt(i))){
+                hm.put(s.charAt(i),t.charAt(i));
+                hs.add(t.charAt(i));
+            }else if(hm.containsKey(s.charAt(i))){
+                if(hm.get(s.charAt(i)) != t.charAt(i)) return false;
+            }else if(hs.contains(t.charAt(i))){
+                return false;
+            }
+            
+            
+        }
+        return true;
+    }
+}
+
+```
+  
+</p>
+</details>     
+
+
+15. 781 Rabbits in Forest :
+    - There is a forest with an unknown number of rabbits. We asked n rabbits "How many rabbits have the same color as you?" and collected the answers in an integer array answers where answers[i] is the answer of the ith rabbit. Given the array answers, return the minimum number of rabbits that could be in the forest.
+    - Approach : 
+        - Create a frequency hashmap containing answers[i] as key and frequency as value
+        - now iterate over the hashmap ,
+            - group size = key+1, 
+            - number of group = Math.ceil(1.0 * value/group_size)
+            - number of rabbit in each group = number_of_group * group_size
+
+<details><summary>Code</summary>
+<p>
+
+
+```java
+class Solution {
+    public int numRabbits(int[] answers) {
+        HashMap<Integer,Integer> hm = new HashMap<>();
+        for(int i = 0;i<answers.length;i++){
+            hm.put(answers[i],hm.getOrDefault(answers[i],0)+1);
+        }
+        int numRabbits = 0;
+        for(int key:hm.keySet()){
+            int groupSize = key+1;
+            int val = hm.get(key);
+            numRabbits += (int)Math.ceil(1.0*val/groupSize)*groupSize;
+        }
+        return numRabbits;
+    }
+}
+
+```
+  
+</p>
+</details>     
+
+16. 554 Brick Wall :
+    - There is a rectangular brick wall in front of you with n rows of bricks. The ith row has some number of bricks each of the same height (i.e., one unit) but they can be of different widths. The total width of each row is the same.Draw a vertical line from the top to the bottom and cross the least bricks. If your line goes through the edge of a brick, then the brick is not considered as crossed. You cannot draw a line just along one of the two vertical edges of the wall, in which case the line will obviously cross no bricks.Given the 2D array wall that contains the information about the wall, return the minimum number of crossed bricks after drawing such a vertical line.
+    - Approach :
+        - Here we have to find the line which will intersect the least number of bricks.
+        - Instead we will try to find out the position at which max number of bricks have a common ending this way we will find the line with least bricks intersection.
+        - We will create a hashmap containing the brick_ending_position and freqency of (number of times a brick ended at this position).
+        - We will iterate over the hasmap and see at which position did bricks end the most. if at 3rd position 5 bricks ended and the total rows were 7 then minimum 2 bricks were crossed if a vertcal line was drawn from 3rd position.
+        - Point to remember is that we should not consider the bricks ending at last position because at last position all the bricks will be ending and there we will not cut any bricks .
+
+<details><summary>Code</summary>
+<p>
+
+
+```java
+class Solution {
+    public int leastBricks(List<List<Integer>> wall) {
+        HashMap<Integer,Integer> hm = new HashMap<>();
+        for(List<Integer> ls:wall){
+            int gap_ending_position = 0;
+            for(int i = 0;i<ls.size()-1;i++){
+                gap_ending_position+=ls.get(i);
+                hm.put(gap_ending_position,hm.getOrDefault(gap_ending_position,0)+1);
+            }
+        }
+        int max = 0;
+        for(int gap_ending_position:hm.keySet()){
+            int val = hm.get(gap_ending_position);
+            if(val>max) max = val;
+        }
+        return wall.size()-max;
+    }
+}
+```
+  
+</p>
+</details>   
+
+
+17. 242 Valid Anagram :
+    - Given two strings s and t, return true if t is an anagram of s, and false otherwise.An Anagram is a word or phrase formed by rearranging the letters of a different word or phrase, typically using all the original letters exactly once 
+    - Approach :
+        - Firstly the length of both string should be equal if not return false
+        - Create a frequency hashmap of charcter and occurence of that char in string t
+        - now iterate over string t,
+            - check if t.charAt(i) is prensent in hm 
+                - if not present return false
+                - if present reduce the frequency in the hashmap
+        - now iterate over hashmap and check if any key is having value other than 0 if yes return false
+
+<details><summary>Code</summary>
+<p>
+
+
+```java
+class Solution {
+    public boolean isAnagram(String s, String t) {
+        if(s.length()!=t.length()) return false;
+        HashMap<Character,Integer>hm = new HashMap<>();
+        for(int i =0;i<s.length();i++){
+            char ch = s.charAt(i);
+            hm.put(ch,hm.getOrDefault(ch,0)+1);
+        }
+        for(int i =0;i<t.length();i++){
+            char ch = t.charAt(i);
+            if(!hm.containsKey(ch)) return false;
+            else {
+                hm.put(ch,hm.get(ch)-1);
+            }
+        }
+        for(char c : hm.keySet()){
+            if(hm.get(c)!=0) return false;
+        }
+        return true;
+    }
+}
+```
+  
+</p>
+</details>   
