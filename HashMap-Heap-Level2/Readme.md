@@ -737,3 +737,42 @@ class Solution {
   
 </p>
 </details>   
+
+
+18. 760 Find Anagram Mappings :
+    - You are given two integer arrays nums1 and nums2 where nums2 is an anagram of nums1. Both arrays may contain duplicates.Return an index mapping array mapping from nums1 to nums2 where mapping[i] = j means the ith element in nums1 appears in nums2 at index j. If there are multiple answers, return any of them.An array a is an anagram of an array b means b is made by randomizing the order of the elements in a.
+    - Approach 1 :
+        - we will first create the hashmap from nums2 having key as nums2[i] and value as an arraylist of index where nums2[i] are present
+        - Now we will iterate over the nums1 array and check this element is present in which position in the hashmap.
+
+<details><summary>Code</summary>
+<p>
+
+
+```java
+class Solution {
+    public int[] anagramMappings(int[] nums1, int[] nums2) {
+        HashMap<Integer,ArrayList<Integer>>hm = new HashMap<>();
+        
+        for(int i=nums2.length-1;i>=0;i--){
+            ArrayList<Integer> val = hm.getOrDefault(nums2[i], new ArrayList<>());
+            val.add(i);
+            hm.put(nums2[i],val);
+        }
+        int[] res = new int[nums1.length];
+        for(int i=0;i<nums1.length;i++){
+            ArrayList<Integer> al = hm.get(nums1[i]);
+            int idx = al.get(al.size()-1);
+            al.remove(al.size()-1);
+            hm.put(nums1[i],al);
+            res[i] = idx;
+        }
+        return res;
+    }
+}
+```
+  
+</p>
+</details>   
+
+
