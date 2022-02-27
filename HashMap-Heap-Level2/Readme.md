@@ -861,3 +861,82 @@ class Solution {
   
 </p>
 </details> 
+
+
+21. 49 Group Anagrams :
+	- Given an array of strings strs, group the anagrams together. You can return the answer in any order.An Anagram is a word or phrase formed by rearranging the letters of a different word or phrase, typically using all the original letters exactly once.
+	- Approach 1 :
+		- Create a HashMap with key as <HashMap<Character,Integer>> and value as as ArrayList
+		- now iterate over the Strings array 
+			- create a temp hashmap which is a frequency hashmap 
+			- now check if this temo hashmap is present in the main hashmap or not , if present add the current string to the arraylist of the value and if not present create a new arraylist and add the string
+		- At the end iterater over the main hashmap and get all the values and add those to a final list of list
+	- Approach 2 :
+		- Create a function which gives you string which contains all the character in sorted order concatenated with the frequency of those characters . example "bor" output -> b1o1r1 
+		- Iterater over the strings array and apply the above function to get a key , now store that key in a hashmap with value as a arraylist of that string . Repeat this for all the string elements.
+		
+		
+		
+<details><summary>Code</summary>
+<p>
+
+
+```java
+class Solution {
+// Approach 1 
+    public List<List<String>> groupAnagrams(String[] strs) {
+        HashMap<HashMap<Character,Integer>,ArrayList<String>>hm  = new HashMap<>();
+        
+        for(String s:strs){
+            HashMap<Character,Integer> map = new HashMap<>();
+            for(int i = 0;i<s.length();i++){
+                map.put(s.charAt(i),map.getOrDefault(s.charAt(i),0)+1);
+            }
+            ArrayList<String> al = hm.getOrDefault(map,new ArrayList<>());
+            al.add(s);
+            hm.put(map,al);
+        }
+        List<List<String>> res = new ArrayList<>();
+        for(HashMap<Character,Integer> a:hm.keySet()){
+            res.add(hm.get(a));
+        }
+        return res;
+    }
+}
+
+// Approach 2 : 
+class Solution {
+    public String getKey(String s){
+		int[] arr = new int[26];
+		for(int i = 0;i<s.length();i++){
+			char ch = s.charAt(i);
+			arr[ch-'a']+=1;
+		}
+		StringBuilder sb = new StringBuilder();
+		for(int i=0;i<arr.length;i++){
+			if(arr[i]==0) continue;
+			char ch = (char)('a'+i);
+			int count = arr[i];
+	        sb.append(ch+""+count);
+		}
+		return sb.toString();
+	}
+	public List<List<String>> groupAnagrams(String[] strs) {
+       HashMap<String,ArrayList<String>>hm=new HashMap<>();
+	   for(String s:strs){
+		   String k = getKey(s);
+		   ArrayList<String> al = hm.getOrDefault(k,new ArrayList<>());
+		   al.add(s);
+		   hm.put(k,al);
+	   }
+	   List<List<String>> res = new ArrayList<>();
+	   for(String key:hm.keySet()){
+		   res.add(hm.get(key));
+	   }
+	   return res;
+    }
+}
+```
+  
+</p>
+</details> 
