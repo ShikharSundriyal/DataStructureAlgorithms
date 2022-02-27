@@ -775,4 +775,89 @@ class Solution {
 </p>
 </details>   
 
+19. 914 X of a Kind in a Deck of Cards :
+	- In a deck of cards, each card has an integer written on it.Return true if and only if you can choose X >= 2 such that it is possible to split the entire deck into 1 or more groups of cards, where:
+		- Each group has exactly X cards.
+		- All the cards in each group have the same integer.
+	- Approach 1 :
+		- create a frequency hashmap of card number and number of cards of that card number
+		- Now we have to find if it is possible to split into multiple groupSize
+			- In order to achieve that we have to take the GCD of all the frequency of the keys if final GCD is other than 1 that means we can group the cards in some groups following all the conditions
+			- example a->4 , b->6 which tells us there are 4 cards with a name and 6 cards with name b. we can split them into group of 2's each such that it all the cards in each group is same and each group has name number of cards. 
+			- The number 2 is achieved by taking the GCD of 4 and 6 which denotes 2 can divide both the numbers completely. 
 
+<details><summary>Code</summary>
+<p>
+
+
+```java
+class Solution {
+    public int findGcd(int a,int b){
+        while(a%b!=0){
+            int rem = a%b;
+            a=b;
+            b = rem;
+        }
+        return b;
+        // recursion to find GCD
+//         if(b==0) return a;
+//         int rem = a%b; 
+//         return findGcd(b,rem);
+        
+    }
+    public boolean hasGroupsSizeX(int[] deck) {
+        HashMap<Integer,Integer>hm= new HashMap<>();
+        for(int i = 0;i<deck.length;i++){
+            hm.put(deck[i],hm.getOrDefault(deck[i],0)+1);
+        }
+        int gcd = 0;
+        for(int k:hm.keySet()){
+            gcd = findGcd(gcd,hm.get(k));
+        }
+       
+        return gcd != 1;
+    }
+}
+```
+  
+</p>
+</details> 
+
+
+20. 1347 Minimum Number of Steps to Make Two Strings Anagram :
+	- You are given two strings of the same length s and t. In one step you can choose any character of t and replace it with another character.Return the minimum number of steps to make t an anagram of s.An Anagram of a string is a string that contains the same characters with a different (or the same) ordering.
+	- Approach 1 : 
+		- Create a frequency hashmap of str1 
+		- Now travel over the str2 and subtract the frequency from the hashmap and which characters are not present put a entry in hashmap with key as character and value as -1
+		- Now iterate over the hashmap and take a sum of all the negative frequency that will the answer
+<details><summary>Code</summary>
+<p>
+
+
+```java
+class Solution {
+    public int minSteps(String str1, String str2) {
+        HashMap<Character,Integer> hm1 = new HashMap<>();
+ 	 	for(int  i=0;i<str1.length();i++){
+ 	 	    hm1.put(str1.charAt(i),hm1.getOrDefault(str1.charAt(i),0)+1);
+ 	 	    
+ 	 	}
+ 	 	
+        for(int  i=0;i<str2.length();i++){
+            if(!hm1.containsKey(str2.charAt(i))){
+                hm1.put(str2.charAt(i),-1);
+            }else{
+                hm1.put(str2.charAt(i),hm1.getOrDefault(str2.charAt(i),0)-1);
+            }
+        }
+ 	 		int count=0;
+ 	 		for(char ch:hm1.keySet()){
+ 	 		    if(hm1.get(ch)>0) count+=hm1.get(ch);
+ 	 		}
+        return count;
+    }
+}
+```
+  
+</p>
+</details> 
