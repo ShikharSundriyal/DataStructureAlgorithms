@@ -941,8 +941,154 @@ class Solution {
 </p>
 </details> 
 
+# Acquire and release Strategy : 
 
-22. 3 Longest Substring Without Repeating Characters :
+
+22. 76 Minimum Window Substring :
+    - Given two strings s and t of lengths m and n respectively, return the minimum window substring of s such that every character in t (including duplicates) is included in the window. If there is no such substring, return the empty string "".
+    - create a variable matchcount = 0, i =-1 , j = -1 
+    - create a frequency hashmap for t
+    - Now while i is less than s.length() - 1
+        - acquire till the time we are not valid i.e. matchcount < t.length -> we acquire the ith character and put in a hashmap , if the chracter is also present in the t hashmap and the frequeny of char ch in t >= frequency of ch in hm then increase matchcount
+        - release will the time we do not become invalid again, as we are valid when we enter the release phase we will make the answer and then release the jth character i.e. reduce the frequency by one and if it becomes zero remove the key , after doing so we check if we have become invalid that is done by checking the character that was removed or frequency reduced was it present in the t hashmap and the frequency of that character in t hashmap > frequency of the character in hm hashmap if yes decrement matchcount.
+
+<details><summary>Code</summary>
+<p>
+
+```java
+public String minWindow(String s, String t) {        
+        int mtc = 0;
+        HashMap<Character,Integer>sm = new HashMap<>(); //for current window
+        HashMap<Character,Integer>tm = new HashMap<>(); //for 't' string
+        
+        for(int i=0; i < t.length();i++) {
+            char ch = t.charAt(i);
+            int nf = tm.getOrDefault(ch,0) + 1;
+            tm.put(ch,nf);
+        }
+        
+        int as = -1;
+        int ae = -1;
+        int olen = Integer.MAX_VALUE;
+        int i = -1; //aquiring
+        int j = -1; //release
+        
+        while(i < s.length()-1) {
+            //aquire 
+            while(i < s.length()-1 && mtc < t.length()) {
+                i++;
+                
+                //aquire ith char 
+                char ch = s.charAt(i);
+                
+                int nf = sm.getOrDefault(ch,0) + 1;
+                sm.put(ch,nf);
+                
+                //impact on mtc
+                if(sm.get(ch) <= tm.getOrDefault(ch,0)) {
+                    mtc++;
+                }
+            }
+            
+            //release
+            while(j < i && mtc == t.length()) {
+                //ans -> j+1 to i
+                
+                int len = i-j;
+                if(len < olen) {
+                    as = j+1;
+                    ae = i;
+                    olen = len;
+                }
+                
+                j++;
+                
+                //release jth char
+                char ch = s.charAt(j);
+                if(sm.get(ch) == 1) {
+                    sm.remove(ch);
+                }
+                else {
+                    int nf = sm.get(ch) - 1;
+                    sm.put(ch,nf);
+                }
+                
+                //impact on match count
+                if(sm.getOrDefault(ch,0) < tm.getOrDefault(ch,0)) {
+                    mtc--;
+                }
+            }
+        }
+        
+        if(as == -1 && ae == -1) {
+            return "";
+        }
+        
+        return s.substring(as,ae+1);
+    }
+
+```
+</p>
+</details> 
+
+
+23. Smallest distinct window :
+    - Given a string 's'. The task is to find the smallest window length that contains all the characters of the given string at least one time.
+    For eg. A = aabcbcdbca, then the result would be 4 as of the smallest window will be dbca.
+    - create a hashset and add all characters of the string
+    - now acquire : we will acquire while hashmap.size() != hashset.size()
+    - release : we will keep on releasing till the time we are valid i.e. hashmap.size() == hashset.size() 
+    - answer making will happen inside the release phase before releaseing
+<details><summary>Code</summary>
+<p>
+
+```java
+
+class Solution {
+    public String findSubString( String str) {
+        // Your code goes here
+        HashSet<Character>hs=new HashSet<>();
+        for(int i =0;i<str.length();i++){
+            hs.add(str.charAt(i));
+        }
+        HashMap<Character,Integer>hm = new HashMap<>();
+        int i = -1,j=-1,ans=Integer.MAX_VALUE;
+        int si=-1,ei=-1;
+        while(i<str.length()-1){
+            while(i<str.length()-1 && hm.size()<hs.size()){
+                i++;
+                char ch = str.charAt(i);
+                hm.put(ch,hm.getOrDefault(ch,0)+1);
+            }
+            while(j<i && hm.size()==hs.size()){
+               
+                if(ans>i-j){
+                    si = j+1;
+                    ei = i;
+                    ans = i-j;
+                }
+                j++;
+                char ch = str.charAt(j);
+                if(hm.get(ch)==1){
+                    hm.remove(ch);
+                }else{
+                    hm.put(ch,hm.get(ch)-1);
+                }
+            }
+        }
+        // System.out.println(ans);
+        if(si==-1 && ei==-1) return "";
+        return str.substring(si,ei+1);
+    }
+}
+
+```
+</p>
+</details> 
+
+
+
+24. 3 Longest Substring Without Repeating Characters :
     - Given a string s, find the length of the longest substring without repeating characters.
     - We will use acquire and release straregy , 
     - we will acquire indefinately , till the time while acquiring we encounter an element which has come already at that point we break as we have become invalid
@@ -997,7 +1143,7 @@ class Solution {
 </p>
 </details> 
 
-23. Count Of Substrings Having All Unique Characters :
+25. Count Of Substrings Having All Unique Characters :
     - You are given a string.
     - You have to find the count of valid substrings of the given string.
     - Valid substring is defined as a substring that has all unique characters.
