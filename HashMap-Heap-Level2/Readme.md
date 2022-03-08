@@ -1198,3 +1198,53 @@ class Solution {
   
 </p>
 </details> 
+
+
+26. Longest K unique characters substring :
+    - Given a string you need to print the size of the longest possible substring that has exactly K unique characters. If there is no possible substring then print -1.
+    - S = "aabacbebebe", K = 3 , Output: 7
+    - As we have to form the largest string , we will make the answer in the acquire phase .
+    - acquire : we wil keep on acquiring till the hashmap size is less than or equal to k
+    - we will make the answer inside acquire phase if the hashmap size is equal to k.
+    - release : we will come inside release phase if the hashmap size has become more than the k , then we will release till the hashmap.size() not equal to k.
+
+<details><summary>Code</summary>
+<p>
+
+
+```java
+class Solution {
+    public int longestkSubstr(String s, int k) {
+        // code here
+        if(k>s.length()) return -1;
+        int i = -1,j=-1,ans = -1;
+        HashMap<Character,Integer>hm = new HashMap<>();
+        while(i<s.length()-1){
+            //acquire
+            while(i<s.length()-1 && hm.size()<=k){
+                i++;
+                char ch = s.charAt(i);
+                int nf = hm.getOrDefault(ch,0)+1;
+                hm.put(ch,nf);
+                if(hm.size() == k){
+                    ans = Math.max(i-j,ans);
+                }
+            }
+            while(j<i && hm.size() != k){
+                j++;
+                char ch = s.charAt(j);
+                int nf = hm.get(ch);
+                if(nf == 1){
+                    hm.remove(ch);
+                }else{
+                    hm.put(ch,nf-1);
+                }
+            }
+        }
+        return ans;
+    }
+}
+```
+  
+</p>
+</details> 
