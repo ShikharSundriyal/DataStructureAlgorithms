@@ -997,6 +997,58 @@ class Solution {
 </p>
 </details> 
 
+23. Count Of Substrings Having All Unique Characters :
+    - You are given a string.
+    - You have to find the count of valid substrings of the given string.
+    - Valid substring is defined as a substring that has all unique characters.
+    - example gfg : ( “g“, “gf“, “gfg”, “f“, “fg“, “g” )  ans = 5
+    - Acquire indefinately , if the element that we acquire is a new character then add number of subarrays ending with char ch will be i-j and if we are encountering the element for the second time then we add the element to the hashmap with increased frequency but we dont make the answer as we are in invalid state and break.
+    - we release indefinately , if the element we get has a frequency as 1 in hashmap then we remove that element from the hashmap and if we get an element whose frequency is more than 1 than we reduce its frequency in hashmap and now we have landed into a valid state and me make our answer here also.
+    - here answer making happens at both acquire and release phase.
 
 
 
+<details><summary>Code</summary>
+<p>
+
+
+```java
+    public static int solution(String s) {
+        // write your code here
+        HashMap<Character,Integer>hm = new HashMap<>();
+        int ans=0,i=-1,j=-1;
+        while(i<s.length()-1){
+            //acquire
+            while(i<s.length()-1){
+                i++;
+                char ch = s.charAt(i);
+                int nf = hm.getOrDefault(ch,0)+1;
+                if(nf == 1){
+                    hm.put(ch,1);
+                    ans+=i-j;
+                }else{
+                    hm.put(ch,nf);
+                    break;
+                }
+            }
+            //release
+            while(j<i){
+                j++;
+                char ch = s.charAt(j);
+                int nf = hm.get(ch);
+                if(nf == 1){
+                    hm.remove(ch);
+                }else{
+                    hm.put(ch,nf-1);
+                    ans+=i-j;
+                    break;
+                }
+            }
+        }
+        
+        return ans;
+    }
+```
+  
+</p>
+</details> 
