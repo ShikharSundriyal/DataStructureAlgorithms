@@ -940,3 +940,63 @@ class Solution {
   
 </p>
 </details> 
+
+
+22. 3 Longest Substring Without Repeating Characters :
+    - Given a string s, find the length of the longest substring without repeating characters.
+    - We will use acquire and release straregy , 
+    - we will acquire indefinately , till the time while acquiring we encounter an element which has come already at that point we break as we have become invalid
+    - we will release indefinately , till the time while releasing we encounter an element whose frequency is greater than 1 then we reduce frequency and break as we are again valid.
+    - answer making will happen at acquiring stage when we are putting an element to the hashmap which is coming for the first time that is a valid substring and that should be counted in the answer.
+
+
+<details><summary>Code</summary>
+<p>
+
+
+```java
+class Solution {
+    public int lengthOfLongestSubstring(String s) {
+        int i =-1,j=-1,ans = 0;
+        HashMap<Character,Integer>hm = new HashMap<>();
+        while(i<s.length()-1){
+            //acquire
+            while(i<s.length()-1 ){
+                i++;
+                char ch = s.charAt(i);
+                
+                if(hm.containsKey(ch)){
+                    hm.put(ch,hm.get(ch)+1);
+                    break;
+                }else{
+                     hm.put(ch,1);
+                    //make answer
+                    ans = Math.max(ans,i-j);
+                }
+            }
+            
+            //release
+            while(j<i){
+                //answer
+                j++;
+                char ch = s.charAt(j);
+                if(hm.getOrDefault(ch,0) == 1){
+                    hm.remove(ch);
+                }else{
+                    hm.put(ch,hm.get(ch)-1);
+                    break;
+                }
+            }
+        }
+        return ans;
+    }
+}
+
+```
+  
+</p>
+</details> 
+
+
+
+
