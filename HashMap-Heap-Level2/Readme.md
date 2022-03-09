@@ -1248,3 +1248,138 @@ class Solution {
   
 </p>
 </details> 
+
+
+27. 485 Max Consecutive Ones :
+    - Given a binary array nums, return the maximum number of consecutive 1's in the array.
+    
+    -  Approach 1 :
+        - iterate over the array , if arr[i] == 1 then increase the count of continuous 1's
+            - if arr[i] == 0 then make your answer by comparing the count of continuous 1's with the previous max and then make the count of continuous 1's as 0 as we have encountered 0.
+
+<details><summary>Code</summary>
+<p>
+
+
+```java
+class Solution {
+    public int findMaxConsecutiveOnes(int[] nums) {
+        int count =0,ans=0;
+        for(int i =0;i<nums.length;i++){
+            if(nums[i]==0){
+                ans = Math.max(ans,count);
+                count =0;
+            }else{
+                count++;
+            }
+        }
+        ans = Math.max(ans,count);
+        return ans;
+    }
+}
+```
+  
+</p>
+</details> 
+
+28. 487 Max Consecutive Ones II :
+    - Given a binary array nums, return the maximum number of consecutive 1's in the array if you can flip at most one 0.
+    - Brute force : 0(n2)
+        - iterate over the array , find 0 and make it to 1 and then find the continuous number of 1's in the modified array and do it for all 0's
+    - Optimised Approach :
+        - Based on acquire adn release
+        - acquire : we will acquire till count of turned 0's is less than or equal to 1.
+        - release : we will keep on releasing while count of turned 0's is not equal to 1.
+        - answer making : we will make the answer at the release phase as when we enter the release phase we have the count of consecutive 1's in a variable when we flipped 1 0 to 1. One additional check will be once we are out of all the loops to compare if the count of 1's is greater than the answer so far.
+
+
+<details><summary>Code</summary>
+<p>
+
+```java
+class Solution {
+    public int findMaxConsecutiveOnes(int[] nums) {
+        int c0=0,c1=0,oans=0,ans=0;
+        int i =-1,j=-1;
+        
+        while(i<nums.length-1){
+            //acquire
+            while(i<nums.length-1 && c0<=1){
+                i++;
+                if(nums[i]==1){
+                    c1++;
+                }else{
+                    if(c0 == 1){
+                        c0++;
+                    }else{
+                        c0++;
+                        c1++;
+                    }
+                }
+                
+            }
+            //release
+            while(j<i && c0!=1){
+                ans = Math.max(c1,ans);
+                j++;
+                if(nums[j] == 1){
+                    c1--;
+                }else{
+                    c0--;
+                }
+            }
+        }
+        ans = Math.max(c1,ans);
+        return ans;
+    }
+}
+```
+  
+</p>
+</details> 
+
+
+29. 1004 Max Consecutive Ones III :
+    - Given a binary array nums and an integer k, return the maximum number of consecutive 1's in the array if you can flip at most k 0's.
+    - Approach 1 :
+        - Same approach as above where we use acquire and release but instead of comparing count of turned 0's to 1 we will compare it with k
+<details><summary>Code</summary>
+<p>
+
+```java
+class Solution {
+    public int longestOnes(int[] nums, int k) {
+        int c0=0, c1=0;
+        int ans =0,i=-1,j=-1;
+        while(i<nums.length-1){
+            while(i<nums.length-1 && c0<=k){
+                i++;
+                if(nums[i]==1){
+                    c1++;
+                }else{
+                    if(c0<k){
+                        c1++;
+                        c0++;
+                    }else{
+                        c0++;
+                    }
+                }
+            }
+            while(j<i && c0!=k){
+                ans = Math.max(ans,c1);
+                j++;
+                if(nums[j]==0){
+                    c0--;
+                }else{
+                    c1--;
+                }
+            }
+        }
+        ans = Math.max(ans,c1);
+        return ans;
+    }
+}
+```
+  
+</p>
+</details> 
