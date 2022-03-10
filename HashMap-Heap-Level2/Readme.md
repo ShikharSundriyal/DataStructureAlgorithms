@@ -1383,3 +1383,52 @@ class Solution {
   
 </p>
 </details> 
+
+30. 340 Longest Substring with At Most K Distinct Characters :
+    - Given a string s and an integer k, return the length of the longest substring of s that contains at most k distinct characters.
+    - Approach 1 :
+        - Acquire : we will acquire till hashmap.size is less than or equal to k
+        - Release : we will release till the hashmap.size not equal to k
+        - answer making : we will make the answer at both acquire and release phase but the actual answer will come from acquire and release answer will always be smaller than the answer that we get from acquire
+
+<details><summary>Code</summary>
+<p>
+
+```java
+class Solution {
+    public int lengthOfLongestSubstringKDistinct(String s, int k) {
+        if(k>s.length()) return s.length();
+        int i = -1,j=-1,ans=0;
+        HashMap<Character,Integer> hm = new HashMap<>();
+        
+        while(i<s.length()-1){
+            //acquire
+            while(i<s.length()-1 && hm.size()<=k){
+                i++;
+                char ch = s.charAt(i);
+                int nf = hm.getOrDefault(ch,0)+1;
+                hm.put(ch,nf);
+                if(hm.size()<=k){
+                    ans = Math.max(ans,i-j);
+                }
+            }
+            //release
+            while(j<i && hm.size()!=k){
+                
+                j++;
+                char ch = s.charAt(j);
+                if(hm.get(ch)==1){
+                    ans = Math.max(ans,i-j);
+                    hm.remove(ch);
+                }else{
+                    hm.put(ch,hm.get(ch)-1);
+                }
+            }
+        }
+        return ans;
+    }
+}
+```
+  
+</p>
+</details> 
