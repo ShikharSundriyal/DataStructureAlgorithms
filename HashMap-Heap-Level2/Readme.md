@@ -1432,3 +1432,58 @@ class Solution {
   
 </p>
 </details> 
+
+
+31. Count Of Substrings Having At Most K Unique Characters :
+	- You are given a string(str) and a number K.
+	You have to find the count of substrings of the given string that contains at most K unique characters.
+	- Input : aabcbcdbca , 2
+	- Output : 23
+	- Approach 1 : (from jth idx to ith idx, number of substrings ending with ith idx will be i-j )
+		- Acquire : We will acquire till the hashmap size is <= k
+		- Release : We will release till the hashmap size > k
+		- Answer making : we will make the answer in both acquire and release phase. In acquire because atmost is given and in release because once after removing an element from hashmap in release we become again valid for that instance.
+	
+	
+<details><summary>Code</summary>
+<p>
+
+```java
+public static int solution(String s, int k) {
+		// write your code here
+		int ans=0,i=-1,j=-1;
+		HashMap<Character,Integer>hm=new HashMap<>();
+		
+		while(i<s.length()-1){
+		    //
+		    while(i<s.length()-1 && hm.size()<=k){
+		        i++;
+		        char ch = s.charAt(i);
+		        hm.put(ch,hm.getOrDefault(ch,0)+1);
+		        if(hm.size()<=k){
+		            ans+=(i-j);
+		        }
+		    }
+		    while(j<i && hm.size() > k){
+		        j++;
+		        char ch = s.charAt(j);
+		        int nf = hm.get(ch)-1;
+		        if(nf == 0){
+		            hm.remove(ch);
+		            ans+=(i-j);
+		        }else{
+		            hm.put(ch,nf);
+		        }
+		    }
+		  
+		}
+		return ans;
+
+	}
+```
+  
+</p>
+</details> 	
+	
+	
+	
