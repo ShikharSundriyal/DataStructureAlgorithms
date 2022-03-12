@@ -941,7 +941,7 @@ class Solution {
 </p>
 </details> 
 
-# Acquire and release Strategy : 
+# Acquire and release Strategy (Used where the window size is not known): 
 
 
 22. 76 Minimum Window Substring :
@@ -1480,6 +1480,110 @@ public static int solution(String s, int k) {
 		return ans;
 
 	}
+```
+  
+</p>
+</details> 	
+	
+	
+32. Count of Substring with exactly k unique character (Leetcode 992) :
+	- Here normal acquire and release approach which we applied in other count questions wont apply because once we acquire k distinct characters in a window then from j to i we dont know exactly how many substring have exactly k unique chracters. But we know how many substrings are present from i to j with atmost k unique chracter so we will use that approach.
+	- count of substring with exactly k unique character = count of substring's with atmost k unique substrings - count of substring with atmost k-1 unique characters	
+
+<details><summary>Code</summary>
+<p>
+
+```java
+class Solution {
+    public int subarrayWithAtMost(int[] nums, int k){
+        int i=-1,j=-1,ans=0;
+        HashMap<Integer,Integer> hm = new HashMap<>();
+        while(i<nums.length-1){
+            while(i<nums.length-1 && hm.size()<=k){
+                i++;
+                hm.put(nums[i],hm.getOrDefault(nums[i],0)+1);
+                if(hm.size()<=k){
+                    ans+=i-j;
+                }
+            }
+            while(j<i && hm.size()>k){
+                j++;
+                if(hm.get(nums[j])==1){
+                    hm.remove(nums[j]);
+                    ans+=i-j;
+                }else{
+                    hm.put(nums[j],hm.get(nums[j])-1);
+                }
+            }
+        }
+        return ans;
+    }
+    public int subarraysWithKDistinct(int[] nums, int k) {
+        
+        return subarrayWithAtMost(nums,k)-subarrayWithAtMost(nums,k-1);
+    }
+}
+```
+  
+</p>
+</details> 	
+
+33. 438 Find All Anagrams in a String :
+	- Given two strings s and p, return an array of all the start indices of p's anagrams in s. You may return the answer in any order.
+	-Input: s = "cbaebabacd", p = "abc" Output: [0,6]
+	- Here we need not apply the traditional acquire and release as the window size is known which will be length of the pattern
+	- Approach :
+		- Create a pattern frequency hashmap
+		- As we know that the window size is pattern.length that means at any given point in out hashmap we should have the size as p.length
+		- we will create a hashmap and travel over the s string from 0 to p.length to acquire the first window
+		- now inorder to create the next window all we have to do is release one character from behind and acquire one character from i. But before doing that we have to check if after acquiring the first window was it a valid anagram or not that we will do by checking if the two hashmap's are equal.
+		- we wil need to check one more time at the end as the last window will be missed otherwise.
+
+<details><summary>Code</summary>
+<p>
+
+```java
+class Solution {
+     
+    public List<Integer> findAnagrams(String s, String p) {
+        List<Integer> res = new ArrayList<>();
+
+        if(p.length()>s.length()) return res;
+        HashMap<Character,Integer>hms= new HashMap<>();
+        HashMap<Character,Integer>hmp= new HashMap<>();
+        for(int i = 0;i<p.length();i++){
+            hmp.put(p.charAt(i),hmp.getOrDefault(p.charAt(i),0)+1);
+        }
+        int j=0,i = 0;
+        for(;i<p.length();i++){
+            hms.put(s.charAt(i),hms.getOrDefault(s.charAt(i),0)+1);
+        }
+       
+        
+        while(i<s.length()){
+            //release
+             if(hms.equals(hmp)){
+                res.add(j);
+                }
+            int f = hms.get(s.charAt(j));
+            if(f==1){
+                hms.remove(s.charAt(j));
+            }else{
+                hms.put(s.charAt(j),f-1);
+            }
+            
+            hms.put(s.charAt(i),hms.getOrDefault(s.charAt(i),0)+1);
+            j++;
+            i++;
+            
+        }
+         if(hms.equals(hmp)){
+                res.add(j);
+                }
+        return res;
+    }
+}
+
 ```
   
 </p>
