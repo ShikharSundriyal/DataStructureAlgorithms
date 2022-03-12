@@ -1590,4 +1590,45 @@ class Solution {
 </details> 	
 	
 	
+34. 395 Longest Substring with At Least K Repeating Characters :
+	- Here we will apply divide and conquer approach 
+	- a character whose frequency is less than k will never come in the answer so it will act as a splitting point
+	- we will iterate over the array and find the first split idx , now we have broken the problem into 2 subproblem
+	- if all the characters in the hashmap have frequency greater than k then legth will be endidx-startidx
+	- one optimization can be applies when we find the first split idx, the second substring should avoid all the consecutive chracters which can never be in answer or whose frequency is less than k 
 	
+<details><summary>Code</summary>
+<p>
+
+```java
+class Solution {
+    public int longestSubstring(String s, int k) {
+        return helper(s,0,s.length(),k);
+        
+    }
+    public int helper(String s, int startidx, int endidx, int k){
+        if(endidx-startidx<k){
+            return 0;
+        }
+        HashMap<Character,Integer>hm= new HashMap<>();
+        for(int i = startidx;i<endidx;i++){
+            hm.put(s.charAt(i),hm.getOrDefault(s.charAt(i),0)+1);
+        }
+        
+        for(int i =startidx;i<endidx;i++){
+            if(hm.get(s.charAt(i))>=k) continue;
+            else{
+                int mid = i;
+                // optimization to remove consecutive characters which cannot be in answer
+				while(mid<endidx && hm.get(s.charAt(mid))<k) mid++;
+                return Math.max(helper(s,startidx,i,k),helper(s,mid+1,endidx,k));
+            }
+        }
+        return endidx-startidx;
+    }
+}
+```
+  
+</p>
+</details> 	
+
