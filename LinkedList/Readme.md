@@ -60,3 +60,45 @@
       - d-- , 
       - while d>=0 Node t = either list1.head or list2.head whichever is bigger in length 
         - for(int i = 0;i<=d;i++){t=t.next} add carry and the node data and add the element to the linked list
+
+8. 206 Reverse Linked List :
+  - Given the head of a singly linked list, reverse the list, and return the reversed list.
+  - Approach : Pointer iterative :
+    - Create two variables ,current = head, prev = null 
+    - start a while loop while current != null
+      - Store the next address of the current in a temp variable
+      - make the curr.next = prev 
+      - move prev = curr 
+      - curr = temp
+<details><summary>Code</summary>
+<p>
+
+```java
+/**
+ * Definition for singly-linked list.
+ * public class ListNode {
+ *     int val;
+ *     ListNode next;
+ *     ListNode() {}
+ *     ListNode(int val) { this.val = val; }
+ *     ListNode(int val, ListNode next) { this.val = val; this.next = next; }
+ * }
+ */
+class Solution {
+    public ListNode reverseList(ListNode head) {
+        
+        ListNode current = head;
+        ListNode prev = null;
+        while(current!=null){
+            ListNode temp = current.next;
+            current.next = prev;
+            prev = current;
+            current = temp;
+        }
+        return prev;
+    }
+}
+```
+  
+</p>
+</details>  	 
