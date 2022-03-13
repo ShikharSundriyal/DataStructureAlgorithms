@@ -26,3 +26,89 @@
       - if node.data > hi then there is no point going to the right as all the nodes to the right will be greater than hi and will fall out of range
       - if node.data < lo , then there is no going to the left as all the nodes to the left will be smaller than lo and will fall out of range
       - if node.data is between lo and hi , from here we can go both left and right side but inbetween the calls we will print the data. 
+
+
+7. 285 Inorder Successor in BST :
+	- Given the root of a binary search tree and a node p in it, return the in-order successor of that node in the BST. If the given node has no in-order successor in the tree, return null.The successor of a node p is the node with the smallest key greater than p.val
+	- Brute Force : 0(N) , 0(N)
+		- get the inorder of the bst in a array and find the exact next element to the element for which the successorr is asked . As the inorder of a BST is sorted. 
+	- Optimised :
+		- If the node for which successor is needed has a right child then the successor will be the , take a right from current node and then find the left most element in that subtree.
+		- If the node does not have a right child then the successor will the ancestor of the current node but the ancestor that is greater than the current value i.e. when we are moving from parent to left child then it can be a possible successor.  
+	
+<details><summary>Code</summary>
+<p>
+
+```java
+
+/**
+ * Definition for a binary tree node.
+ * public class TreeNode {
+ *     int val;
+ *     TreeNode left;
+ *     TreeNode right;
+ *     TreeNode(int x) { val = x; }
+ * }
+ */
+class Solution {
+    
+    TreeNode succ;
+    public void helper(TreeNode root, TreeNode p){
+        if(root.val == p.val){
+            if(root.right == null){
+                succ = succ;
+            }else{
+                TreeNode tmp = root.right;
+                while(tmp.left!=null) tmp = tmp.left;
+                succ= tmp;
+            }
+            
+        }else if(root.val > p.val){
+            succ = root;
+            helper(root.left,p);
+        }else{
+            helper(root.right,p);
+        }
+    }
+	// Recursive solution
+    public TreeNode inorderSuccessor(TreeNode root, TreeNode p) {
+        //one right and extreme left
+        succ=null;
+        helper(root,p);
+        return succ;
+    }
+} 
+
+// Iterative solution
+
+/**
+ * Definition for a binary tree node.
+ * public class TreeNode {
+ *     int val;
+ *     TreeNode left;
+ *     TreeNode right;
+ *     TreeNode(int x) { val = x; }
+ * }
+ */
+class Solution {
+    public TreeNode inorderSuccessor(TreeNode root, TreeNode p) {
+        TreeNode succ = null;
+        while(root!=null){
+            if(root.val>p.val){
+                //as we have to move left we have a possibility that root is succ
+                succ = root;
+                root = root.left;
+            }else{
+                root = root.right;
+            }
+        }
+        return succ;
+    }
+} 
+```
+  
+</p>
+</details>  	
+	
+	
+	
