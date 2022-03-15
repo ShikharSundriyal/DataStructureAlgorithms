@@ -102,3 +102,54 @@ class Solution {
   
 </p>
 </details>  	 
+
+9. 21 Merge Two Sorted Lists :
+	- Make a dummy ListNode node and have a dummy tail pointer which is pointing to dummyhead
+	- Now iterate over both the list and check which node is smaller , whichevever node is smaller make a connection of dummytail pointer with that node and move the dummytail to that node and move to the next element of the list.
+	- at the end if any of the list is still not traversed completely add the dummtail pointer to point to that list and return dummhead.next as the final head of merged linked list
+
+<details><summary>Code</summary>
+<p>
+/**
+ * Definition for singly-linked list.
+ * public class ListNode {
+ *     int val;
+ *     ListNode next;
+ *     ListNode() {}
+ *     ListNode(int val) { this.val = val; }
+ *     ListNode(int val, ListNode next) { this.val = val; this.next = next; }
+ * }
+ */
+class Solution {
+    public ListNode mergeTwoLists(ListNode list1, ListNode list2) {
+        ListNode dh = new ListNode();
+        ListNode dt = dh;
+        while(list1!=null && list2!=null){
+            if(list1.val<=list2.val){
+                dt.next = list1;
+                dt = list1;
+                list1=list1.next;
+            }else{
+                dt.next = list2;
+                dt = list2;
+                list2 = list2.next;
+            }
+            
+        }
+        if(list1!=null){
+            dt.next = list1;
+        }
+        if(list2!=null){
+            dt.next = list2;
+        }
+        return dh.next;
+    }
+}
+```
+  
+</p>
+</details>
+
+
+
+
