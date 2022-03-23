@@ -475,6 +475,7 @@ class Solution {
 <details><summary>Code</summary>
 <p>
 
+```java
 /**
  * Definition for singly-linked list.
  * public class ListNode {
@@ -509,3 +510,233 @@ class Solution {
   
 </p>
 </details>
+
+15. 138 Copy List with Random Pointer :
+    - A linked list of length n is given such that each node contains an additional random pointer, which could point to any node in the list, or null.Construct a deep copy of the list. The deep copy should consist of exactly n brand new nodes, where each new node has its value set to the value of its corresponding original node. Both the next and random pointer of the new nodes should point to new nodes in the copied list such that the pointers in the original list and copied list represent the same list state. None of the pointers in the new list should point to nodes in the original list.
+    - Approach 1 : Time 0(n), Space 0(n)
+        - we will first create a deep copy of the LL with only next pointers
+        - while doing so we will create a hashmap which stores original node location vs new node location
+        - then we will travel over the new linked list and try to fit the random pointer. We will query the hashmap with head.random which will give us the node location of random pointer in new linked list .
+    - Approach 2 : Time 0(n), Space 0(1)
+        - we insert each new node between the element and the next element and adjust the connections such that it becomes a single list
+        - we then fit the random pointers to the new elements added
+        - now we divide the ll to 2 individual linked lists
+<details><summary>Code</summary>
+<p>
+
+```java
+/*
+// Definition for a Node.
+class Node {
+    int val;
+    Node next;
+    Node random;
+
+    public Node(int val) {
+        this.val = val;
+        this.next = null;
+        this.random = null;
+    }
+}
+*/
+
+class Solution {
+    //with hashmap
+    public Node copyRandomList(Node head) {
+        Node h = head;
+        Node dummyhead =  new Node(-1);
+        Node dummytail = dummyhead;
+        HashMap<Node,Node>hm = new HashMap<>(); //original location vs new location
+        while(h!=null){
+            Node nn = new Node(h.val);
+            hm.put(h,nn);
+            dummytail.next = nn;
+            dummytail = dummytail.next;
+            h = h.next;
+        }
+        Node dh = dummyhead.next;
+        while(dh!=null){
+            dh.random = head.random!=null ? hm.get(head.random):null;
+            dh = dh.next;
+            head = head.next;
+        }
+        return dummyhead.next;
+    }
+    //without hashmap
+    public Node copyRandomList(Node head) {
+        if(head == null) return null;
+        Node dh = head;
+        while(dh!=null){
+            Node nn = new Node(dh.val);
+            Node tmp = dh.next;
+            dh.next = nn;
+            nn.next = tmp;
+            dh = tmp;
+        }
+        //fix random pointer
+        Node t = head;
+        while(t!=null){
+            t.next.random = t.random==null ? null:t.random.next;
+            t = t.next.next;
+        }
+        Node c1 = head;
+        Node c2 = head.next;
+        Node ans = c2;
+        while(c1!=null && c2!=null){
+            c1.next = c1.next==null?null:c1.next.next;
+            c2.next = c2.next==null?null:c2.next.next;
+            c1 = c1.next;
+            c2 = c2.next;
+        }
+        return ans;
+    }
+}
+```
+  
+</p>
+</details>
+
+16. 25 Reverse Nodes in k-Group :
+    - Given the head of a linked list, reverse the nodes of the list k at a time, and return the modified list.
+    k is a positive integer and is less than or equal to the length of the linked list. If the number of nodes is not a multiple of k then left-out nodes, in the end, should remain as it is.
+    You may not alter the values in the list's nodes, only nodes themselves may be changed.
+    - Calculate the size of the linked list 
+    - create two linked list head and tail, one original head and original tail and simialrly dummyhead and dummtail
+    - now while size>=k
+        - for i =0 to k
+            - add the elements in reverse order to dummy linked list
+        - once you have the dummy linked list which is in reverse order , we check if original head is null or not if null then make the dummyhead as original head and dummytail as originaltail . if not then add the dummyhead to original tails next
+
+
+<details><summary>Code</summary>
+<p>
+
+```java
+/**
+ * Definition for singly-linked list.
+ * public class ListNode {
+ *     int val;
+ *     ListNode next;
+ *     ListNode() {}
+ *     ListNode(int val) { this.val = val; }
+ *     ListNode(int val, ListNode next) { this.val = val; this.next = next; }
+ * }
+ */
+class Solution {
+    public int getSize(ListNode head){
+        int len = 0;
+        ListNode curr = head;
+        while(curr!=null){
+            len++;
+            curr = curr.next;
+        }
+        return len;
+    }
+    public ListNode reverseKGroup(ListNode head, int k) {
+        
+        ListNode oh = null;
+        ListNode ot = oh;
+        ListNode th = null;
+        ListNode tt = th;
+        ListNode itr = head;
+        int tempsize = getSize(head);
+        while(tempsize>=k){
+            for(int i =0;i<k;i++){
+                if(th == null){
+                    th = itr;
+                    tt = itr;
+                    itr = itr.next;
+                }else{
+                    ListNode pre = itr.next;
+                    itr.next = th;
+                    th = itr;
+                    itr = pre;
+                }
+                
+            }
+            tempsize-=k;
+            if(oh == null){
+                oh = th;
+                ot = tt;
+            }else{
+                ot.next = th;
+                ot = tt;
+            }
+            th = null;
+            tt = null;
+        }
+        ot.next = itr;
+        return oh;
+    }
+}
+
+```
+  
+</p>
+</details>
+
+
+
+17. 92 Reverse Linked List II :
+    - Given the head of a singly linked list and two integers left and right where left <= right, reverse the nodes of the list from position left to position right, and return the reversed list.
+    - Approach 1 : 
+        - We keep two pointer, current=head and previous=null
+        - iterate from 1 to left(left excluded) and move current to current.next and previous follows current 
+        - Now make a dummy pointer named end which will become tail of reversed list and later we need to attach  end.next to current.
+        - now iterate over 1 to right-left+1 (inclusive)
+            - now reverse the list
+        - now current will be sitting at somewhat the later half of linkedlist which needs to be attached and prev1 will be sitting at the head
+        - if left == 1 that means head needs to be rearranged where the prev1 will become the head
+
+
+<details><summary>Code</summary>
+<p>
+
+```java
+/**
+ * Definition for singly-linked list.
+ * public class ListNode {
+ *     int val;
+ *     ListNode next;
+ *     ListNode() {}
+ *     ListNode(int val) { this.val = val; }
+ *     ListNode(int val, ListNode next) { this.val = val; this.next = next; }
+ * }
+ */
+class Solution {
+    public ListNode reverseBetween(ListNode head, int left, int right) {
+        
+        if(head.next == null || head == null || left==right) return head;
+        ListNode curr = head;
+        ListNode prev = null;
+        for(int i = 1;i<left;i++){
+            prev = curr;
+            curr = curr.next;
+        }
+        
+        ListNode x = prev!=null?prev.next:null ;
+        
+        ListNode prev1 = null;
+        for(int i = 1;i<=right-left+1;i++){
+            ListNode tmp = curr.next;
+            curr.next = prev1;
+            prev1 = curr;
+            curr = tmp;
+        }
+        if(left == 1){
+            head.next = curr;
+            head = prev1;
+        }else if(prev != null){
+            prev.next = prev1;
+            x.next = curr;
+        }
+     
+        return head;
+    }
+}
+```
+  
+</p>
+</details>
+
+
