@@ -110,5 +110,72 @@ class Solution {
 </p>
 </details>  	
 	
-	
+897. Increasing Order Search Tree
+	- Given the root of a binary search tree, rearrange the tree in in-order so that the leftmost node in the tree is now the root of the tree, and every node has no left child and only one right child.
+	- Approach 1 : Time 0(N) , Space 0(N)
+		- create a dummy root and preserve it in a different variable
+		- travel the given tree in inorder traversal and while in inorder create a new TreeNode and add to the dummy root's next and keep on moving the dummy root to current nodes right
+		- at the end return the dummy root right which was preseverned in a variable
+	- Approach 2 : Time 0(N), Space 0(1)
+		- Create a dummy root and preserve it in a different variable
+		- now travel the tree in inorder traversal
+		- in inorder step , break the connection of the current node's left and add it to the dumm heads right 
+		- at the end return the dummy root right which was preseverned in a variable
+
+<details><summary>Code</summary>
+<p>
+
+```java
+
+/**
+ * Definition for a binary tree node.
+ * public class TreeNode {
+ *     int val;
+ *     TreeNode left;
+ *     TreeNode right;
+ *     TreeNode() {}
+ *     TreeNode(int val) { this.val = val; }
+ *     TreeNode(int val, TreeNode left, TreeNode right) {
+ *         this.val = val;
+ *         this.left = left;
+ *         this.right = right;
+ *     }
+ * }
+ */
+class Solution {
+    
+// Approach 1
+    public void helper1(TreeNode node){
+        if(node == null) return;
+        helper(node.left);
+        res.right = new TreeNode(node.val);
+        res = res.right;
+        helper(node.right);
+        
+    }	
+// Approach 2
+    public void helper(TreeNode node){
+        if(node == null) return;
+        helper(node.left);
+        node.left = null; // breaking connection
+        res.right = node; // attaching node
+        res = res.right; // move the dummy head
+        helper(node.right);
+        
+    }
+    TreeNode res;
+    // TreeNode temp;
+    public TreeNode increasingBST(TreeNode root) {
+        
+        res = new TreeNode(Integer.MIN_VALUE);
+        TreeNode temp = res;
+        helper(root);
+        res.right = null;
+        return temp.right;
+    }
+}
+```
+  
+</p>
+</details> 	
 	
