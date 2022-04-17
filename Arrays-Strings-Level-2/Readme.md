@@ -1742,4 +1742,48 @@ public int nextGreaterElement(int n) {
   
 </p>
 </details>  
-                                                                                            
+
+  
+38. Count and Say :
+  - Time 0(N), Space 0(N)
+  
+<details><summary>Code</summary>
+<p> 
+    
+```java  
+  
+  class Solution {
+    public String helper(String s){
+        //"11211"
+        StringBuilder sb = new StringBuilder();
+        int i = 0;
+        while(i<s.length()){
+            int count = 1;
+            while(i+1 < s.length() && s.charAt(i) == s.charAt(i+1)){
+                count++;
+                i++;
+            }
+            sb.append(count+""+s.charAt(i));
+            i++;
+        }
+        return sb.toString();
+        
+    }
+    public String countAndSay(int n) {
+        if(n == 1){
+            return "1";
+        }
+        
+        String a = countAndSay(n-1);
+        
+        String ans = helper(a);
+        return ans;
+        
+    }
+}
+  
+```
+    
+  
+</p>
+</details> 
