@@ -178,4 +178,60 @@ class Solution {
   
 </p>
 </details> 	
+
+230. Kth Smallest Element in a BST :
+	- Given the root of a binary search tree, and an integer k, return the kth smallest value (1-indexed) of all the values of the nodes in the tree.
+	- Brute Force, 
+		- travel the BST in in-order traversal and fill the elements into an arraylist 
+		- and then once we have the arraylist we will get arraylist.get(k-1)
+	- Approch 2 : 
+		- Travel in inorder traversal , maintain a global level variable which is increased in inorder and check if level == k then set your answer in a variable 
+
 	
+<details><summary>Code</summary>
+<p>
+
+```java
+
+/**
+ * Definition for a binary tree node.
+ * public class TreeNode {
+ *     int val;
+ *     TreeNode left;
+ *     TreeNode right;
+ *     TreeNode() {}
+ *     TreeNode(int val) { this.val = val; }
+ *     TreeNode(int val, TreeNode left, TreeNode right) {
+ *         this.val = val;
+ *         this.left = left;
+ *         this.right = right;
+ *     }
+ * }
+ */
+class Solution {
+    
+    int t;
+    int ans;
+    public void helper(TreeNode node,int k){
+        if(node == null) return ;
+        helper(node.left,k);
+        if(t == k){
+            ans = node.val;
+        }
+        t++;
+        helper(node.right,k);
+        // return -1;
+    }
+    public int kthSmallest(TreeNode root, int k) {
+        
+        t = 1;
+        ans = 0;
+        helper(root,k);
+        return ans;
+    }
+}
+	
+```
+  
+</p>
+</details> 
