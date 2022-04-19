@@ -235,3 +235,83 @@ class Solution {
   
 </p>
 </details> 
+
+99. Recover Binary Search Tree
+	- You are given the root of a binary search tree (BST), where the values of exactly two nodes of the tree were swapped by mistake. Recover the tree without changing its structure.
+	- Approach 1 : T(NlogN) , Space 0(N)
+		-  Fill the inorder of the tree in the arraylist
+		-  sort the arraylist and then again travel over BST and change the node value as in arraylist 
+	- Approach 2 : T(N), S 0(N)
+		- Instead of sorting the entire array, find the two elements in the arraylist which are at wrong position (this can be done in 0(N))
+		- Now trvel over the BST and swap the appropriate nodes
+
+<details><summary>Code</summary>
+<p>
+
+```java
+
+/**
+ * Definition for a binary tree node.
+ * public class TreeNode {
+ *     int val;
+ *     TreeNode left;
+ *     TreeNode right;
+ *     TreeNode() {}
+ *     TreeNode(int val) { this.val = val; }
+ *     TreeNode(int val, TreeNode left, TreeNode right) {
+ *         this.val = val;
+ *         this.left = left;
+ *         this.right = right;
+ *     }
+ * }
+ */
+class Solution {
+	
+    public int[] twoSwappedElement(ArrayList<Integer>al){
+	int[] arr = new int[2];
+	
+	//travel from right to left and find 1st wrong element
+	for(int i = al.size()-1;i>=0;i--){
+		
+	if( al.get(i) < al.get(i-1) )
+		{	// found the first wrong element
+			arr[0] = al.get(i);
+			int j = i-1;
+			// find the next wrong element, now we will try to find the right position for the ith element which is at wrong position 
+			while(j>=0 && al.get(i)<al.get(j))
+				{
+					j--;			    
+				}
+			// ith element which was at wrong position should have been at j+1 position so , currently whichever element is at j+1 element would be 2nd wrong element
+			arr[1] = al.get(j+1);
+			break;
+		}
+	}
+	return arr;
+	}
+    public void travel(TreeNode node,ArrayList<Integer>al){
+        if(node == null) return;
+        travel(node.left,al);
+        al.add(node.val);
+        travel(node.right,al);
+    }
+    int i;
+    public void recoverTree(TreeNode root) {
+        int i = 0;
+        ArrayList<Integer>al = new ArrayList<>();
+        travel(root,al);
+        Collections.sort(al);
+        fill(root,al);
+    }
+    public void fill(TreeNode node,ArrayList<Integer>al){
+        if(node == null) return;
+        fill(node.left,al);
+        node.val = al.get(i);
+        i++;
+        fill(node.right,al);
+    }
+}
+```
+  
+</p>
+</details> 
